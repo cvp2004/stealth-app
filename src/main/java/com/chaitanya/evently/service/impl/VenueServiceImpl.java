@@ -6,6 +6,8 @@ import com.chaitanya.evently.dto.PaginationResponse.PageMeta;
 import com.chaitanya.evently.dto.PaginationResponse.SortMeta;
 import com.chaitanya.evently.dto.venue.VenueDtos.VenueRequest;
 import com.chaitanya.evently.dto.venue.VenueDtos.VenueResponse;
+import com.chaitanya.evently.exception.types.ConflictException;
+import com.chaitanya.evently.exception.types.NotFoundException;
 import com.chaitanya.evently.model.Venue;
 import com.chaitanya.evently.repository.VenueRepository;
 import com.chaitanya.evently.service.VenueService;
@@ -28,7 +30,7 @@ public class VenueServiceImpl implements VenueService {
     @Transactional
     public VenueResponse create(VenueRequest request) {
         if (venueRepository.existsByNameIgnoreCase(request.getName())) {
-            throw new IllegalArgumentException("Venue with this name already exists");
+            throw new ConflictException("Venue with name '" + request.getName() + "' already exists");
         }
         Venue venue = new Venue();
         venue.setName(request.getName());
@@ -42,10 +44,10 @@ public class VenueServiceImpl implements VenueService {
     @Transactional
     public VenueResponse update(Long id, VenueRequest request) {
         Venue venue = venueRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Venue not found"));
+                .orElseThrow(() -> new NotFoundException("Venue with id=" + id + " not found"));
         if (!venue.getName().equalsIgnoreCase(request.getName()) &&
                 venueRepository.existsByNameIgnoreCase(request.getName())) {
-            throw new IllegalArgumentException("Venue with this name already exists");
+            throw new ConflictException("Venue with name '" + request.getName() + "' already exists");
         }
         venue.setName(request.getName());
         venue.setAddress(request.getAddress());
@@ -66,7 +68,7 @@ public class VenueServiceImpl implements VenueService {
     @Transactional
     public void delete(Long id) {
         if (!venueRepository.existsById(id)) {
-            throw new IllegalArgumentException("Venue not found");
+            throw new NotFoundException("Venue with id=" + id + " not found");
         }
         venueRepository.deleteById(id);
     }
