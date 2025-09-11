@@ -1,8 +1,9 @@
 package com.chaitanya.evently.service;
 
 import com.chaitanya.evently.dto.PaginationResponse;
-import com.chaitanya.evently.dto.venue.VenueDtos.VenueRequest;
-import com.chaitanya.evently.dto.venue.VenueDtos.VenueResponse;
+import com.chaitanya.evently.dto.venue.VenueRequest;
+import com.chaitanya.evently.dto.venue.VenueResponse;
+
 import org.springframework.data.domain.Pageable;
 
 public interface VenueService {

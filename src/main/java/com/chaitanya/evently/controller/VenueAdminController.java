@@ -1,11 +1,16 @@
 package com.chaitanya.evently.controller;
 
-import com.chaitanya.evently.dto.PaginationResponse;
 import com.chaitanya.evently.util.SortParameterValidator;
-import com.chaitanya.evently.dto.venue.VenueDtos.VenueRequest;
-import com.chaitanya.evently.dto.venue.VenueDtos.VenueResponse;
+import com.chaitanya.evently.dto.PaginationResponse;
+import com.chaitanya.evently.dto.venue.VenueRequest;
+import com.chaitanya.evently.dto.venue.VenueResponse;
+import com.chaitanya.evently.dto.seat.BulkSeatCreationResponse;
+import com.chaitanya.evently.dto.seat.SectionDefinition;
 import com.chaitanya.evently.service.VenueService;
+import com.chaitanya.evently.service.SeatService;
+import com.chaitanya.evently.model.Seat;
 import lombok.RequiredArgsConstructor;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.data.domain.PageRequest;
@@ -30,8 +35,11 @@ import org.springframework.web.bind.annotation.RestController;
 @Validated
 public class VenueAdminController {
 
-    private final VenueService venueService;
     private final SortParameterValidator sortResolver;
+
+    private final VenueService venueService;
+    private final SeatService seatService;
+
     @Value("${app.pagination.default-page-size:50}")
     private int defaultPageSize;
 
@@ -83,5 +91,25 @@ public class VenueAdminController {
         PaginationResponse<VenueResponse> response = venueService.list(pageable, resolvedSortParam,
                 page != null || size != null);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/{venueId}/seats")
+    public ResponseEntity<BulkSeatCreationResponse> createSeats(
+            @PathVariable Long venueId,
+            @Valid @RequestBody List<SectionDefinition> sections) {
+        int created = seatService.createByMap(venueId, sections);
+        var venue = venueService.get(venueId);
+        BulkSeatCreationResponse body = BulkSeatCreationResponse.builder()
+                .seatCount(created)
+                .venueName(venue.getName())
+                .totalCapacity(venue.getCapacity())
+                .sectionCount(sections != null ? sections.size() : 0)
+                .build();
+        return ResponseEntity.status(HttpStatus.CREATED).body(body);
+    }
+
+    @GetMapping("/{venueId}/seats")
+    public ResponseEntity<java.util.List<Seat>> listSeats(@PathVariable Long venueId) {
+        return ResponseEntity.ok(seatService.listByVenue(venueId));
     }
 }
