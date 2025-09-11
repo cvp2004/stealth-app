@@ -1,0 +1,7 @@
+sort:
+  endpoints:
+    venues:
+      allowed:
+        - id
+        - name
+        - capacity
