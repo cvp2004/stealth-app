@@ -14,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -61,8 +62,7 @@ public class VenueAdminController {
             @RequestParam(value = "page", required = false) Integer page,
             @RequestParam(value = "size", required = false) Integer size,
             @RequestParam(value = "sort", required = false) String sort,
-            @jakarta.validation.constraints.Pattern(regexp = "(?i)asc|desc", message = "direction must be 'asc' or 'desc'", flags = {}) 
-            @RequestParam(value = "direction", required = false) String direction) {
+            @Pattern(regexp = "(?i)asc|desc", message = "direction must be 'asc' or 'desc'", flags = {}) @RequestParam(value = "direction", required = false) String direction) {
 
         String resolvedSortParam = sort;
         if (direction != null && !direction.isBlank()) {
