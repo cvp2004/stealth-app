@@ -4,13 +4,10 @@ import com.chaitanya.evently.util.SortParameterValidator;
 import com.chaitanya.evently.dto.PaginationResponse;
 import com.chaitanya.evently.dto.venue.VenueRequest;
 import com.chaitanya.evently.dto.venue.VenueResponse;
-import com.chaitanya.evently.dto.seat.BulkSeatCreationResponse;
-import com.chaitanya.evently.dto.seat.SectionDefinition;
 import com.chaitanya.evently.service.VenueService;
-import com.chaitanya.evently.service.SeatService;
-import com.chaitanya.evently.model.Seat;
 import lombok.RequiredArgsConstructor;
-import java.util.List;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.data.domain.PageRequest;
@@ -18,8 +15,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Pattern;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,12 +28,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/venues")
 @Validated
-public class VenueAdminController {
+public class AdminVenueController {
 
     private final SortParameterValidator sortResolver;
 
     private final VenueService venueService;
-    private final SeatService seatService;
 
     @Value("${app.pagination.default-page-size:50}")
     private int defaultPageSize;
@@ -91,25 +85,5 @@ public class VenueAdminController {
         PaginationResponse<VenueResponse> response = venueService.list(pageable, resolvedSortParam,
                 page != null || size != null);
         return ResponseEntity.ok(response);
-    }
-
-    @PostMapping("/{venueId}/seats")
-    public ResponseEntity<BulkSeatCreationResponse> createSeats(
-            @PathVariable Long venueId,
-            @Valid @RequestBody List<SectionDefinition> sections) {
-        int created = seatService.createByMap(venueId, sections);
-        var venue = venueService.get(venueId);
-        BulkSeatCreationResponse body = BulkSeatCreationResponse.builder()
-                .seatCount(created)
-                .venueName(venue.getName())
-                .totalCapacity(venue.getCapacity())
-                .sectionCount(sections != null ? sections.size() : 0)
-                .build();
-        return ResponseEntity.status(HttpStatus.CREATED).body(body);
-    }
-
-    @GetMapping("/{venueId}/seats")
-    public ResponseEntity<java.util.List<Seat>> listSeats(@PathVariable Long venueId) {
-        return ResponseEntity.ok(seatService.listByVenue(venueId));
     }
 }

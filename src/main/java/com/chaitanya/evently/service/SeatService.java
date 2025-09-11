@@ -1,11 +1,14 @@
 package com.chaitanya.evently.service;
 
-import com.chaitanya.evently.dto.seat.SectionDefinition;
-import com.chaitanya.evently.model.Seat;
+import com.chaitanya.evently.dto.seat.map.SeatMapRequest;
+import com.chaitanya.evently.dto.seat.map.SeatMapResponse;
+import com.chaitanya.evently.dto.seat.SeatResponse;
 import java.util.List;
 
 public interface SeatService {
-    List<Seat> listByVenue(Long venueId);
+    List<SeatResponse> listByVenue(Long venueId);
 
-    int createByMap(Long venueId, List<SectionDefinition> sections);
+    SeatMapResponse getSeatMap(Long venueId);
+
+    int createByMap(Long venueId, SeatMapRequest request);
 }

@@ -47,7 +47,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleGeneric(Exception ex, WebRequest request) {
-        return build(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", ex.getMessage(), path(request), null);
+        return build(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", "", path(request), null);
     }
 
     private ResponseEntity<ErrorResponse> build(HttpStatus status, String error, String message, String path,
