@@ -23,12 +23,3 @@ spring:
     # Optional: set schema(s) if you don't use the default search_path
     # Accepts comma-separated list
     # schemas: ${FLYWAY_SCHEMAS:}
-
-logging:
-  level:
-    org.flywaydb: ${FLYWAY_LOG_LEVEL:INFO}
-    org.springframework: ${SPRING_LOG_LEVEL:INFO}
-
-app:
-  pagination:
-    default-page-size: ${DEFAULT_PAGE_SIZE:50}
