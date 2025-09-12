@@ -5,3 +5,9 @@ sort:
         - id
         - name
         - capacity
+    events:
+      allowed:
+        - id
+        - title
+        - category
+        - status

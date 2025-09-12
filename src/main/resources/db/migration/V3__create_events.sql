@@ -2,7 +2,7 @@
 -- Aligned with planned Event entity and BaseEntity timestamps
 CREATE TABLE IF NOT EXISTS events (
     id BIGSERIAL PRIMARY KEY,
-    title TEXT NOT NULL,
+    title TEXT NOT NULL UNIQUE,
     description TEXT,
     category TEXT,
     status TEXT NOT NULL DEFAULT 'CREATED',
