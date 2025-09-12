@@ -9,6 +9,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -27,4 +29,7 @@ public class Venue extends BaseEntity {
 
     @Column(name = "capacity", nullable = false)
     private Integer capacity;
+
+    @OneToMany(mappedBy = "venue", cascade = CascadeType.REMOVE, orphanRemoval = true)
+    private List<Seat> seats = new ArrayList<>();
 }

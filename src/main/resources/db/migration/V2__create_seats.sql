@@ -2,7 +2,7 @@
 -- Aligned with model Seat.java and docs/schema.md; includes timestamps to match BaseEntity
 CREATE TABLE IF NOT EXISTS seats (
     id BIGSERIAL PRIMARY KEY,
-    venue_id BIGINT NOT NULL REFERENCES venues(id),
+    venue_id BIGINT NOT NULL REFERENCES venues(id) ON DELETE CASCADE,
     section TEXT,
     row TEXT,
     seat_number TEXT,
