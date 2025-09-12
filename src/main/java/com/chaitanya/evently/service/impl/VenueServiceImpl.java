@@ -35,7 +35,7 @@ public class VenueServiceImpl implements VenueService {
         Venue venue = new Venue();
         venue.setName(request.getName());
         venue.setAddress(request.getAddress());
-        venue.setCapacity(request.getCapacity());
+        venue.setCapacity(0);
         Venue saved = venueRepository.save(venue);
         return toResponse(saved);
     }
@@ -51,7 +51,6 @@ public class VenueServiceImpl implements VenueService {
         }
         venue.setName(request.getName());
         venue.setAddress(request.getAddress());
-        venue.setCapacity(request.getCapacity());
         Venue saved = venueRepository.save(venue);
         return toResponse(saved);
     }

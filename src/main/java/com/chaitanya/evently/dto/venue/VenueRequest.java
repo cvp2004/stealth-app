@@ -1,8 +1,6 @@
 package com.chaitanya.evently.dto.venue;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,7 +21,4 @@ public class VenueRequest {
     @Size(max = 1000, message = "address must be at most 1000 chars")
     private String address;
 
-    @NotNull(message = "capacity is required")
-    @Positive(message = "capacity must be a positive integer")
-    private Integer capacity;
 }
