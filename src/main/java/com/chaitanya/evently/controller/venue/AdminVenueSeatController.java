@@ -1,4 +1,4 @@
-package com.chaitanya.evently.controller;
+package com.chaitanya.evently.controller.venue;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

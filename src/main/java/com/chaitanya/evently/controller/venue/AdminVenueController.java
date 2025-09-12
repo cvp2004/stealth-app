@@ -1,4 +1,4 @@
-package com.chaitanya.evently.controller;
+package com.chaitanya.evently.controller.venue;
 
 import com.chaitanya.evently.util.SortParameterValidator;
 import com.chaitanya.evently.dto.PaginationResponse;
