@@ -2,7 +2,7 @@
 
 ## Overview
 
-Evently is a Spring Boot application that provides APIs for managing events, venues, and seat configurations. The API follows RESTful principles and uses JSON for data exchange.
+Evently is a Spring Boot application that provides APIs for managing events, venues, shows, and seat configurations. The API follows RESTful principles and uses JSON for data exchange.
 
 **Base URL:** `http://localhost:8080/api/v1`
 
@@ -134,7 +134,166 @@ All error responses follow this structure:
 }
 ```
 
-### 2. Venues Management
+### 2. Shows Management
+
+#### Base Path: `/api/v1/shows`
+
+| Method | Endpoint | Description            | Request Body                     | Response                               |
+| ------ | -------- | ---------------------- | -------------------------------- | -------------------------------------- |
+| POST   | `/`      | Create a new show      | ShowRequest                      | ShowResponse (201)                     |
+| GET    | `/`      | List shows (paginated) | Query params + ShowFilterRequest | PaginationResponse<ShowResponse> (200) |
+| GET    | `/{id}`  | Get show by ID         | -                                | ShowResponse (200)                     |
+| PUT    | `/{id}`  | Update show by ID      | ShowRequest                      | ShowResponse (200)                     |
+| DELETE | `/{id}`  | Delete show by ID      | -                                | No Content (204)                       |
+
+#### List Shows (GET /)
+
+The list endpoint uses query parameters for pagination and an optional request body for filtering:
+
+**Query Parameters (Required for pagination):**
+
+- `page` (optional): Page number (default: 0)
+- `size` (optional): Page size (default: 50)
+- `sort` (optional): Sort property (default: "startTimestamp,asc")
+
+**Request Body (Optional for filtering):**
+
+```json
+{
+  "venueId": "number (optional)",
+  "eventId": "number (optional)",
+  "date": "string (optional, ISO format)",
+  "fromDate": "string (optional, ISO format)",
+  "toDate": "string (optional, ISO format)"
+}
+```
+
+**Note**:
+
+- Request body is optional - if not provided, no filtering is applied
+- If request body is provided, at least one filter field must be set
+- `date` and `fromDate`/`toDate` are mutually exclusive
+- Query parameters are always used for pagination and sorting
+
+#### ShowRequest
+
+```json
+{
+  "venueId": "number (required)",
+  "eventId": "number (required)",
+  "startTimestamp": "string (required, ISO format, future date)",
+  "durationMinutes": "number (required, minimum 1)"
+}
+```
+
+**Note**: Title and description are automatically inherited from the event specified by `eventId`.
+
+#### ShowResponse
+
+```json
+{
+  "id": "number",
+  "refId": "string",
+  "title": "string",
+  "description": "string",
+  "startTimestamp": "string (ISO format)",
+  "date": "string (YYYY-MM-DD format)",
+  "startTime": "string (HH:MM:SS format)",
+  "durationMinutes": "number",
+  "venue": {
+    "id": "number",
+    "name": "string",
+    "address": "string"
+  },
+  "event": {
+    "id": "number",
+    "title": "string",
+    "category": "string"
+  },
+  "createdAt": "string (ISO format)",
+  "updatedAt": "string (ISO format)"
+}
+```
+
+#### Example API Calls
+
+**Create a show:**
+
+```bash
+POST /api/v1/shows
+{
+  "venueId": 1,
+  "eventId": 5,
+  "startTimestamp": "2024-12-25T19:00:00Z",
+  "durationMinutes": 180
+}
+```
+
+**Note**: The title and description will be automatically inherited from the event with ID 5.
+
+**List all shows (simple with query params only):**
+
+```bash
+GET /api/v1/shows?page=0&size=20&sort=startTimestamp,asc
+```
+
+**List shows with filtering (query params + request body):**
+
+```bash
+GET /api/v1/shows?page=0&size=20&sort=startTimestamp,asc
+Content-Type: application/json
+
+{
+  "venueId": 1
+}
+```
+
+**List shows by date range:**
+
+```bash
+GET /api/v1/shows?page=0&size=50
+Content-Type: application/json
+
+{
+  "fromDate": "2024-12-01T00:00:00Z",
+  "toDate": "2024-12-31T23:59:59Z"
+}
+```
+
+**List shows by venue and event:**
+
+```bash
+GET /api/v1/shows?page=0&size=10&sort=startTimestamp,desc
+Content-Type: application/json
+
+{
+  "venueId": 1,
+  "eventId": 5
+}
+```
+
+**Invalid request (empty request body):**
+
+```bash
+GET /api/v1/shows?page=0&size=10
+Content-Type: application/json
+
+{}
+```
+
+**Response: 400 Bad Request**
+
+```json
+{
+  "timestamp": "2024-01-01T00:00:00Z",
+  "status": 400,
+  "error": "Bad Request",
+  "message": "At least one filter field must be provided",
+  "path": "/api/v1/shows"
+}
+```
+
+### 3. Venues Management
 
 #### Base Path: `/api/v1/venues`
 
@@ -263,6 +422,15 @@ All error responses follow this structure:
 - **title**: Required, maximum 255 characters
 - **description**: Optional, maximum 2000 characters
 - **category**: Optional, maximum 100 characters
+
+### Show Validation
+
+- **venueId**: Required, must reference existing venue
+- **eventId**: Required, must reference existing event
+- **startTimestamp**: Required, must be in the future, ISO format
+- **durationMinutes**: Required, must be at least 1 minute
+- **title**: Automatically inherited from event
+- **description**: Automatically inherited from event
 
 ### Venue Validation
 

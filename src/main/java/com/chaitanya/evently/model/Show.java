@@ -25,17 +25,21 @@ public class Show extends BaseEntity {
     @JoinColumn(name = "venue_id", nullable = false)
     private Venue venue;
 
+    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", nullable = true)
+    private Event event;
+
     @Column(name = "title", nullable = false)
     private String title;
 
     @Column(name = "description")
     private String description;
 
-    @Column(name = "start_time", nullable = false)
-    private Instant startTime;
+    @Column(name = "start_timestamp", nullable = false)
+    private Instant startTimestamp;
 
-    @Column(name = "end_time", nullable = false)
-    private Instant endTime;
+    @Column(name = "duration_minutes", nullable = false)
+    private Integer durationMinutes;
 
     // created_at and updated_at handled by BaseEntity
 }
