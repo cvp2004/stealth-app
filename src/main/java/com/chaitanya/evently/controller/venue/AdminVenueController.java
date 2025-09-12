@@ -7,7 +7,6 @@ import com.chaitanya.evently.dto.venue.VenueResponse;
 import com.chaitanya.evently.service.VenueService;
 import lombok.RequiredArgsConstructor;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Pattern;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.data.domain.PageRequest;

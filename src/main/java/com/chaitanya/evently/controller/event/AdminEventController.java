@@ -8,7 +8,6 @@ import com.chaitanya.evently.dto.event.response.EventStatusResponse;
 import com.chaitanya.evently.service.EventService;
 import com.chaitanya.evently.util.SortParameterValidator;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.PageRequest;
