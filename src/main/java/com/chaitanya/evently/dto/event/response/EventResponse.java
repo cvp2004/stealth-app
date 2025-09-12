@@ -1,7 +1,6 @@
 package com.chaitanya.evently.dto.event.response;
 
 import com.chaitanya.evently.model.status.EventStatus;
-import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,6 +19,4 @@ public class EventResponse {
     private String description;
     private String category;
     private EventStatus status;
-    private Instant createdAt;
-    private Instant updatedAt;
 }

@@ -67,14 +67,11 @@ public class AdminEventController {
     public ResponseEntity<PaginationResponse<EventResponse>> list(
             @RequestParam(value = "page", required = false) Integer page,
             @RequestParam(value = "size", required = false) Integer size,
-            @RequestParam(value = "sort", required = false) String sort,
-            @Pattern(regexp = "(?i)asc|desc", message = "direction must be 'asc' or 'desc'", flags = {}) @RequestParam(value = "direction", required = false) String direction) {
+            @RequestParam(value = "sort", required = false) String sort) {
 
         String resolvedSortParam = sort;
-        if (direction != null && !direction.isBlank()) {
-            String dir = direction.toLowerCase();
-            String property = (sort == null || sort.isBlank()) ? "id" : sort;
-            resolvedSortParam = property + "," + dir;
+        if (resolvedSortParam == null || resolvedSortParam.isBlank()) {
+            resolvedSortParam = "id,asc";
         }
 
         Pageable pageable;

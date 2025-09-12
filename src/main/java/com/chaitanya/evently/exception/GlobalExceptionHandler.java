@@ -1,12 +1,17 @@
 package com.chaitanya.evently.exception;
 
+import com.chaitanya.evently.dto.ErrorResponse;
 import com.chaitanya.evently.exception.types.BadRequestException;
 import com.chaitanya.evently.exception.types.ConflictException;
 import com.chaitanya.evently.exception.types.NotFoundException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import java.io.IOException;
 import java.time.Instant;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -43,6 +48,28 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<ErrorResponse> handleIllegalArgument(IllegalArgumentException ex, WebRequest request) {
         return build(HttpStatus.BAD_REQUEST, "Bad Request", ex.getMessage(), path(request), null);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ErrorResponse> handleJsonParseError(HttpMessageNotReadableException ex, WebRequest request) {
+        String message = "Invalid JSON format";
+        if (ex.getCause() instanceof JsonMappingException) {
+            message = "JSON mapping error: " + ex.getCause().getMessage();
+        } else if (ex.getCause() instanceof JsonProcessingException) {
+            message = "JSON processing error: " + ex.getCause().getMessage();
+        }
+
+        // Log the received body for debugging
+        if (request instanceof ServletWebRequest swr) {
+            try {
+                String body = new String(swr.getRequest().getInputStream().readAllBytes());
+                System.err.println("Received request body: " + body);
+            } catch (IOException e) {
+                System.err.println("Could not read request body: " + e.getMessage());
+            }
+        }
+
+        return build(HttpStatus.BAD_REQUEST, "Bad Request", message, path(request), null);
     }
 
     @ExceptionHandler(Exception.class)

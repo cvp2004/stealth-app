@@ -1,4 +1,4 @@
-package com.chaitanya.evently.exception;
+package com.chaitanya.evently.dto;
 
 import java.time.Instant;
 import java.util.List;

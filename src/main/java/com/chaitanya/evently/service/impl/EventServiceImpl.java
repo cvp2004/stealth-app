@@ -18,7 +18,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -118,10 +122,33 @@ public class EventServiceImpl implements EventService {
                         .build());
 
         if (sortParam != null && !sortParam.isBlank()) {
-            String[] parts = sortParam.split(",");
-            String property = parts[0];
-            String direction = parts.length > 1 ? parts[1] : "asc";
-            builder.sort(PaginationResponse.SortMeta.builder().property(property).direction(direction).build());
+            List<PaginationResponse.SortMeta.SortField> sortFields = Arrays.stream(sortParam.split(";"))
+                    .map(field -> {
+                        String[] parts = field.trim().split(",");
+                        String property = parts[0].trim();
+                        String direction = parts.length > 1 ? parts[1].trim() : "asc";
+                        return PaginationResponse.SortMeta.SortField.builder()
+                                .property(property)
+                                .direction(direction)
+                                .build();
+                    })
+                    .collect(Collectors.toList());
+
+            builder.sort(PaginationResponse.SortMeta.builder().fields(sortFields).build());
+        }
+
+        // Only add links for paginated responses
+        if (isPaginated) {
+            final String BASE = "/api/v1/events?page=";
+            final String SIZE = "&size=";
+            PaginationResponse.Links links = PaginationResponse.Links.builder()
+                    .self(BASE + page.getNumber() + SIZE + page.getSize())
+                    .first(BASE + 0 + SIZE + page.getSize())
+                    .last(BASE + Math.max(page.getTotalPages() - 1, 0) + SIZE + page.getSize())
+                    .next(page.hasNext() ? BASE + (page.getNumber() + 1) + SIZE + page.getSize() : null)
+                    .prev(page.hasPrevious() ? BASE + (page.getNumber() - 1) + SIZE + page.getSize() : null)
+                    .build();
+            builder.links(links);
         }
 
         return builder.build();
@@ -140,18 +167,21 @@ public class EventServiceImpl implements EventService {
         if (Objects.equals(from, to)) {
             throw new BadRequestException("Event is already in status: " + to);
         }
-        switch (from) {
-            case CREATED -> {
-                if (!(to == EventStatus.LIVE || to == EventStatus.CANCELLED)) {
-                    throw new BadRequestException("Invalid transition from CREATED to " + to);
-                }
-            }
-            case LIVE -> {
-                if (!(to == EventStatus.CLOSED || to == EventStatus.CANCELLED)) {
-                    throw new BadRequestException("Invalid transition from LIVE to " + to);
-                }
-            }
-            default -> throw new BadRequestException("No transitions allowed from " + from);
+
+        Map<EventStatus, List<EventStatus>> validTransitions = Map.of(
+                EventStatus.CREATED, List.of(EventStatus.LIVE, EventStatus.CANCELLED),
+                EventStatus.LIVE, List.of(EventStatus.CLOSED, EventStatus.CANCELLED));
+
+        List<EventStatus> allowedTransitions = validTransitions.get(from);
+        if (allowedTransitions == null || !allowedTransitions.contains(to)) {
+            String allowedStatuses = allowedTransitions != null
+                    ? allowedTransitions.stream()
+                            .map(Enum::name)
+                            .collect(Collectors.joining(", "))
+                    : "none";
+            throw new BadRequestException(
+                    String.format("Invalid transition from %s to %s. Allowed transitions: %s",
+                            from, to, allowedStatuses));
         }
     }
 
@@ -164,8 +194,6 @@ public class EventServiceImpl implements EventService {
                 .description(entity.getDescription())
                 .category(entity.getCategory())
                 .status(entity.getStatus())
-                .createdAt(entity.getCreatedAt())
-                .updatedAt(entity.getUpdatedAt())
                 .build();
     }
 }

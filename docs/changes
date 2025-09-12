@@ -1,0 +1,23 @@
+1. For Success message only use following Response codes :- 200 (Success)(GET, PUT, DELETE), 201(Created)(POST)
+
+2. For Error message only use following Response codes :- 400 (Bad Request), 404 (Not Found), 409 (Conflict), 500 (Internal Server Error)
+
+3. For failed validations for field, send 400 response with appropriate message containing field name, message and current value
+
+4. Don't return created at and updated at in the response
+
+5. Handle JSON Parser error in global error handling as well. Print the received body in the request.
+
+6. Don't send links in response (like HATEOAS) unless it's a paginated response.
+
+7. Apply strict validations for all Request DTOs.
+
+8. Rather than writing DB querying logic logic in code manually, prefer to define methods in repository interfaces.
+
+9. For sorting, allow specifying multiple fields for sorting.
+
+10. run new migration for each DB schema change needed. No changes to old migrations.
+
+11. extensive and deep use of stream and collections API. try to write code like a fluent API.
+
+12. for each section such as - model, controller, repository, dto, service, etc. - it should have a separate package for particular entity as well.

@@ -37,8 +37,17 @@ public class PaginationResponse<T> {
     @AllArgsConstructor
     @Builder
     public static class SortMeta {
-        private String property;
-        private String direction;
+        private List<SortField> fields;
+
+        @Getter
+        @Setter
+        @NoArgsConstructor
+        @AllArgsConstructor
+        @Builder
+        public static class SortField {
+            private String property;
+            private String direction;
+        }
     }
 
     @Getter

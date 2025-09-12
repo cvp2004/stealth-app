@@ -4,6 +4,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +19,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class SeatMapRequest {
-    @NotEmpty(message = "sections are required")
+    @NotNull(message = "sections are required")
+    @NotEmpty(message = "sections cannot be empty")
     @Valid
     private List<Section> sections;
 
@@ -27,10 +30,13 @@ public class SeatMapRequest {
     @AllArgsConstructor
     @Builder
     public static class Section {
-        @NotBlank(message = "sectionId is required")
+        @NotNull(message = "sectionId is required")
+        @NotBlank(message = "sectionId cannot be blank")
+        @Size(min = 1, max = 50, message = "sectionId must be between 1 and 50 characters")
         private String sectionId;
 
-        @NotEmpty(message = "rows are required")
+        @NotNull(message = "rows are required")
+        @NotEmpty(message = "rows cannot be empty")
         @Valid
         private List<Row> rows;
     }
@@ -41,10 +47,13 @@ public class SeatMapRequest {
     @AllArgsConstructor
     @Builder
     public static class Row {
-        @NotBlank(message = "rowId is required")
+        @NotNull(message = "rowId is required")
+        @NotBlank(message = "rowId cannot be blank")
+        @Size(min = 1, max = 20, message = "rowId must be between 1 and 20 characters")
         private String rowId;
 
+        @NotNull(message = "seatCount is required")
         @Min(value = 1, message = "seatCount must be at least 1")
-        private int seatCount;
+        private Integer seatCount;
     }
 }

@@ -13,6 +13,7 @@ import com.chaitanya.evently.repository.VenueRepository;
 import com.chaitanya.evently.service.VenueService;
 import com.chaitanya.evently.util.ReferenceIdFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -59,7 +60,7 @@ public class VenueServiceImpl implements VenueService {
     @Transactional(readOnly = true)
     public VenueResponse get(Long id) {
         Venue venue = venueRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Venue not found"));
+                .orElseThrow(() -> new NotFoundException("Venue with id=" + id + " not found"));
         return toResponse(venue);
     }
 
@@ -88,11 +89,15 @@ public class VenueServiceImpl implements VenueService {
                 .totalPages(page.getTotalPages())
                 .build();
 
+        List<SortMeta.SortField> sortFields = pageable.getSort().stream()
+                .map(order -> SortMeta.SortField.builder()
+                        .property(order.getProperty())
+                        .direction(order.getDirection().name().toLowerCase())
+                        .build())
+                .collect(Collectors.toList());
+
         SortMeta sortMeta = SortMeta.builder()
-                .property(pageable.getSort().stream().findFirst()
-                        .map(org.springframework.data.domain.Sort.Order::getProperty).orElse(null))
-                .direction(pageable.getSort().stream().findFirst().map(o -> o.getDirection().name().toLowerCase())
-                        .orElse(null))
+                .fields(sortFields)
                 .build();
 
         final String BASE = "/api/v1/venues?page=";
@@ -105,13 +110,19 @@ public class VenueServiceImpl implements VenueService {
                 .prev(page.hasPrevious() ? BASE + (page.getNumber() - 1) + SIZE + page.getSize() : null)
                 .build();
 
-        return PaginationResponse.<VenueResponse>builder()
+        PaginationResponse.PaginationResponseBuilder<VenueResponse> builder = PaginationResponse
+                .<VenueResponse>builder()
                 .isPaginated(isPaginated)
                 .content(content)
                 .page(pageMeta)
-                .sort(sortMeta)
-                .links(links)
-                .build();
+                .sort(sortMeta);
+
+        // Only add links for paginated responses
+        if (isPaginated) {
+            builder.links(links);
+        }
+
+        return builder.build();
     }
 
     private VenueResponse toResponse(Venue venue) {
@@ -122,11 +133,6 @@ public class VenueServiceImpl implements VenueService {
                 .name(venue.getName())
                 .address(venue.getAddress())
                 .capacity(venue.getCapacity())
-                .createdAt(venue.getCreatedAt() != null ? venue.getCreatedAt().toString() : null)
-                .links(VenueResponse.Links.builder()
-                        .self("/api/v1/venues/" + venue.getId())
-                        .shows("/api/v1/venues/" + venue.getId() + "/shows")
-                        .build())
                 .build();
     }
 }

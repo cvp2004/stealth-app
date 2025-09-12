@@ -7,10 +7,9 @@ import com.chaitanya.evently.exception.types.NotFoundException;
 import com.chaitanya.evently.model.Seat;
 import com.chaitanya.evently.model.Venue;
 import com.chaitanya.evently.repository.SeatRepository;
-import com.chaitanya.evently.repository.projection.SeatFlatProjection;
 import com.chaitanya.evently.repository.VenueRepository;
 import com.chaitanya.evently.service.SeatService;
-import java.util.ArrayList;
+import com.chaitanya.evently.util.SeatMapBuilder;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -43,20 +42,19 @@ public class SeatServiceImpl implements SeatService {
         Venue venue = venueRepository.findById(venueId)
                 .orElseThrow(() -> new NotFoundException("Venue with id=" + venueId + " not found"));
 
-        List<Seat> toCreate = new ArrayList<>();
-        for (SeatMapRequest.Section section : request.getSections()) {
-            for (SeatMapRequest.Row row : section.getRows()) {
-                int count = row.getSeatCount();
-                for (int i = 1; i <= count; i++) {
-                    Seat seat = new Seat();
-                    seat.setVenue(venue);
-                    seat.setSection(section.getSectionId());
-                    seat.setRow(row.getRowId());
-                    seat.setSeatNumber(String.valueOf(i));
-                    toCreate.add(seat);
-                }
-            }
-        }
+        List<Seat> toCreate = request.getSections().stream()
+                .flatMap(section -> section.getRows().stream()
+                        .flatMap(row -> java.util.stream.IntStream.rangeClosed(1, row.getSeatCount())
+                                .mapToObj(i -> {
+                                    Seat seat = new Seat();
+                                    seat.setVenue(venue);
+                                    seat.setSection(section.getSectionId());
+                                    seat.setRow(row.getRowId());
+                                    seat.setSeatNumber(String.valueOf(i));
+                                    return seat;
+                                })))
+                .collect(Collectors.toList());
+
         seatRepository.saveAll(toCreate);
         return toCreate.size();
     }
@@ -68,25 +66,7 @@ public class SeatServiceImpl implements SeatService {
                 .orElseThrow(() -> new NotFoundException("Venue with id=" + venueId + " not found"));
 
         var seats = seatRepository.findByVenue_IdOrderBySectionAscRowAscSeatNumberAsc(venueId);
-        var sectionsGrouped = seats.stream()
-                .collect(Collectors.groupingBy(SeatFlatProjection::section, Collectors.groupingBy(SeatFlatProjection::row)));
-
-        List<SeatMapResponse.Section> sections = new ArrayList<>();
-        for (var secEntry : sectionsGrouped.entrySet()) {
-            List<SeatMapResponse.Row> rows = new ArrayList<>();
-            for (var rowEntry : secEntry.getValue().entrySet()) {
-                List<SeatResponse> seatDtos = rowEntry.getValue().stream()
-                        .map(s -> SeatResponse.builder()
-                                .id(s.id())
-                                .section(s.section())
-                                .row(s.row())
-                                .seatNumber(s.seatNumber())
-                                .build())
-                        .toList();
-                rows.add(SeatMapResponse.Row.builder().rowId(rowEntry.getKey()).seats(seatDtos).build());
-            }
-            sections.add(SeatMapResponse.Section.builder().sectionId(secEntry.getKey()).rows(rows).build());
-        }
+        List<SeatMapResponse.Section> sections = SeatMapBuilder.buildSections(seats);
 
         return SeatMapResponse.builder()
                 .venueName(venue.getName())

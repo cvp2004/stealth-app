@@ -18,16 +18,4 @@ public class VenueResponse {
     private String name;
     private String address;
     private Integer capacity;
-    private String createdAt;
-    private Links links;
-
-    @Getter
-    @Setter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    @Builder
-    public static class Links {
-        private String self;
-        private String shows;
-    }
 }
