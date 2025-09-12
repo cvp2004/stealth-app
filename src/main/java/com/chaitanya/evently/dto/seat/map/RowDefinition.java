@@ -1,4 +1,4 @@
-package com.chaitanya.evently.dto.seat;
+package com.chaitanya.evently.dto.seat.map;
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
