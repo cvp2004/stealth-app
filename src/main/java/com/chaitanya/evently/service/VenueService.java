@@ -10,6 +10,7 @@ import com.chaitanya.evently.exception.types.NotFoundException;
 import com.chaitanya.evently.model.Seat;
 import com.chaitanya.evently.model.Venue;
 import com.chaitanya.evently.repository.SeatRepository;
+import com.chaitanya.evently.repository.ShowRepository;
 import com.chaitanya.evently.repository.VenueRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ public class VenueService {
 
     private final VenueRepository venueRepository;
     private final SeatRepository seatRepository;
+    private final ShowRepository showRepository;
 
     @Transactional(readOnly = true)
     public VenueResponse getVenueById(Long id) {
@@ -93,6 +95,9 @@ public class VenueService {
         Venue venue = venueRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Venue not found with id: " + id));
 
+        // Delete all shows first
+        showRepository.deleteByVenueId(id);
+
         // Delete all seats first (this will trigger cascade delete)
         seatRepository.deleteByVenueId(id);
 
@@ -101,7 +106,8 @@ public class VenueService {
         venueRepository.save(venue);
 
         venueRepository.delete(venue);
-        log.info("Deleted venue with id: {} and name: {}", venue.getId(), venue.getName());
+        log.info("Deleted venue with id: {} and name: {} along with all associated shows and seats", venue.getId(),
+                venue.getName());
     }
 
     @Transactional(readOnly = true)

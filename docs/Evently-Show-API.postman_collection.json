@@ -1,0 +1,887 @@
+{
+    "info": {
+        "_postman_id": "evently-show-api",
+        "name": "Evently Show API",
+        "description": "Complete API collection for Show management including admin and user endpoints with filtering and pagination",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Admin Show Management",
+            "item": [
+                {
+                    "name": "Create Show",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"venueId\": 1,\n    \"eventId\": 1,\n    \"startTimestamp\": \"2024-12-25T19:00:00Z\",\n    \"durationMinutes\": 180\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows"
+                            ]
+                        },
+                        "description": "Create a new show (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Shows (Admin)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows"
+                            ]
+                        },
+                        "description": "Get all shows with pagination (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Shows by Venue (Admin)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows?venueId=1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows"
+                            ],
+                            "query": [
+                                {
+                                    "key": "venueId",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        "description": "Get shows filtered by venue ID (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Shows by Event (Admin)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows?eventId=1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows"
+                            ],
+                            "query": [
+                                {
+                                    "key": "eventId",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        "description": "Get shows filtered by event ID (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Shows by Date (Admin)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows?date=2024-12-25T00:00:00Z",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows"
+                            ],
+                            "query": [
+                                {
+                                    "key": "date",
+                                    "value": "2024-12-25T00:00:00Z"
+                                }
+                            ]
+                        },
+                        "description": "Get shows filtered by specific date (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Shows by Date Range (Admin)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows?fromDate=2024-12-01T00:00:00Z&toDate=2024-12-31T23:59:59Z",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fromDate",
+                                    "value": "2024-12-01T00:00:00Z"
+                                },
+                                {
+                                    "key": "toDate",
+                                    "value": "2024-12-31T23:59:59Z"
+                                }
+                            ]
+                        },
+                        "description": "Get shows filtered by date range (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Show by ID (Admin)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows",
+                                "1"
+                            ]
+                        },
+                        "description": "Get a specific show by ID (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Show",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"venueId\": 1,\n    \"eventId\": 1,\n    \"startTimestamp\": \"2024-12-25T20:00:00Z\",\n    \"durationMinutes\": 150\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows",
+                                "1"
+                            ]
+                        },
+                        "description": "Update an existing show (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Set Show Status - LIVE to CLOSED",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"CLOSED\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows/1/status",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows",
+                                "1",
+                                "status"
+                            ]
+                        },
+                        "description": "Set show status from LIVE to CLOSED (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Set Show Status - LIVE to CANCELLED",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"CANCELLED\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows/1/status",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows",
+                                "1",
+                                "status"
+                            ]
+                        },
+                        "description": "Set show status from LIVE to CANCELLED (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Delete Show",
+                    "request": {
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows",
+                                "1"
+                            ]
+                        },
+                        "description": "Delete a show by ID (Admin only)"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "User Show Management",
+            "item": [
+                {
+                    "name": "Get All Shows (User)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/shows",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "shows"
+                            ]
+                        },
+                        "description": "Get all shows with pagination (User access)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Shows by Venue (User)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/shows?venueId=1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "shows"
+                            ],
+                            "query": [
+                                {
+                                    "key": "venueId",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        "description": "Get shows filtered by venue ID (User access)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Shows by Event (User)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/shows?eventId=1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "shows"
+                            ],
+                            "query": [
+                                {
+                                    "key": "eventId",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        "description": "Get shows filtered by event ID (User access)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Shows by Date (User)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/shows?date=2024-12-25T00:00:00Z",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "shows"
+                            ],
+                            "query": [
+                                {
+                                    "key": "date",
+                                    "value": "2024-12-25T00:00:00Z"
+                                }
+                            ]
+                        },
+                        "description": "Get shows filtered by specific date (User access)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Shows by Date Range (User)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/shows?fromDate=2024-12-01T00:00:00Z&toDate=2024-12-31T23:59:59Z",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "shows"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fromDate",
+                                    "value": "2024-12-01T00:00:00Z"
+                                },
+                                {
+                                    "key": "toDate",
+                                    "value": "2024-12-31T23:59:59Z"
+                                }
+                            ]
+                        },
+                        "description": "Get shows filtered by date range (User access)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Show by ID (User)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/shows/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "shows",
+                                "1"
+                            ]
+                        },
+                        "description": "Get a specific show by ID (User access)"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Complex Filtering Examples",
+            "item": [
+                {
+                    "name": "Get Shows by Venue and Event",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/shows?venueId=1&eventId=1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "shows"
+                            ],
+                            "query": [
+                                {
+                                    "key": "venueId",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "eventId",
+                                    "value": "1"
+                                }
+                            ]
+                        },
+                        "description": "Get shows filtered by both venue and event"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Shows by Venue and Date Range",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/shows?venueId=1&fromDate=2024-12-01T00:00:00Z&toDate=2024-12-31T23:59:59Z",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "shows"
+                            ],
+                            "query": [
+                                {
+                                    "key": "venueId",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "fromDate",
+                                    "value": "2024-12-01T00:00:00Z"
+                                },
+                                {
+                                    "key": "toDate",
+                                    "value": "2024-12-31T23:59:59Z"
+                                }
+                            ]
+                        },
+                        "description": "Get shows filtered by venue and date range"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Shows by Event and Date",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"startTimestamp\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/shows?eventId=1&date=2024-12-25T00:00:00Z",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "shows"
+                            ],
+                            "query": [
+                                {
+                                    "key": "eventId",
+                                    "value": "1"
+                                },
+                                {
+                                    "key": "date",
+                                    "value": "2024-12-25T00:00:00Z"
+                                }
+                            ]
+                        },
+                        "description": "Get shows filtered by event and specific date"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Error Handling Tests",
+            "item": [
+                {
+                    "name": "Create Show with Overlapping Time",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"venueId\": 1,\n    \"eventId\": 1,\n    \"startTimestamp\": \"2024-12-25T19:00:00Z\",\n    \"durationMinutes\": 180\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows"
+                            ]
+                        },
+                        "description": "Test creating show with overlapping time (should return 409 Conflict)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Invalid Show Status Transition",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"LIVE\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/shows/1/status",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "shows",
+                                "1",
+                                "status"
+                            ]
+                        },
+                        "description": "Test invalid status transition (should return 400 Bad Request)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Non-existent Show",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/shows/99999",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "shows",
+                                "99999"
+                            ]
+                        },
+                        "description": "Test getting a non-existent show (should return 404)"
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
+}

@@ -63,4 +63,11 @@ public class AdminEventController {
         EventResponse event = eventService.updateEventStatus(id, request);
         return ResponseEntity.ok(event);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
+        log.info("Admin deleting event with id: {}", id);
+        eventService.deleteEvent(id);
+        return ResponseEntity.noContent().build();
+    }
 }

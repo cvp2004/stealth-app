@@ -11,6 +11,7 @@ import com.chaitanya.evently.exception.types.NotFoundException;
 import com.chaitanya.evently.model.Event;
 import com.chaitanya.evently.model.status.EventStatus;
 import com.chaitanya.evently.repository.EventRepository;
+import com.chaitanya.evently.repository.ShowRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -26,6 +27,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class EventService {
 
     private final EventRepository eventRepository;
+    private final ShowRepository showRepository;
 
     @Transactional(readOnly = true)
     public EventResponse getEventById(Long id) {
@@ -102,6 +104,17 @@ public class EventService {
 
         event.setStatus(newStatus);
         Event updatedEvent = eventRepository.save(event);
+
+        // If event status is changed to CLOSED, cancel all LIVE shows for this event
+        if (newStatus == EventStatus.CLOSED) {
+            showRepository.findByEventIdAndStatus(id, com.chaitanya.evently.model.status.ShowStatus.LIVE)
+                    .forEach(show -> {
+                        show.setStatus(com.chaitanya.evently.model.status.ShowStatus.CANCELLED);
+                        showRepository.save(show);
+                    });
+            log.info("Cancelled all LIVE shows for event with id: {} due to event status change to CLOSED", id);
+        }
+
         log.info("Updated event status from {} to {} for event with id: {}",
                 currentStatus, newStatus, updatedEvent.getId());
 
@@ -113,6 +126,19 @@ public class EventService {
             String baseUrl) {
         // Admin can see all events regardless of status
         return getEvents(category, paginationRequest, baseUrl);
+    }
+
+    @Transactional
+    public void deleteEvent(Long id) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Event not found with id: " + id));
+
+        // Delete all shows first
+        showRepository.deleteByEventId(id);
+
+        eventRepository.delete(event);
+        log.info("Deleted event with id: {} and title: {} along with all associated shows", event.getId(),
+                event.getTitle());
     }
 
     private void validateStateTransition(EventStatus currentStatus, EventStatus newStatus) {
