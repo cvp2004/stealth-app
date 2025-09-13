@@ -47,10 +47,10 @@ public interface ShowRepository extends JpaRepository<Show, Long>, JpaSpecificat
             Pageable pageable);
 
     // Check for time conflicts
-    @Query("SELECT COUNT(s) > 0 FROM Show s WHERE " +
-            "s.venue.id = :venueId AND " +
+    @Query(value = "SELECT COUNT(s) > 0 FROM shows s WHERE " +
+            "s.venue_id = :venueId AND " +
             "s.id != :excludeId AND " +
-            "((s.startTimestamp < :endTime AND (s.startTimestamp + INTERVAL '1 minute' * s.durationMinutes) > :startTime))")
+            "((s.start_timestamp < :endTime AND (s.start_timestamp + INTERVAL '1 minute' * s.duration_minutes) > :startTime))", nativeQuery = true)
     boolean hasTimeConflict(
             @Param("venueId") Long venueId,
             @Param("startTime") Instant startTime,
