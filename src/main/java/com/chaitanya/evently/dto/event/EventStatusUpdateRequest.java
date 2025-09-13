@@ -1,6 +1,7 @@
-package com.chaitanya.evently.dto.event.response;
+package com.chaitanya.evently.dto.event;
 
 import com.chaitanya.evently.model.status.EventStatus;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,9 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EventStatusResponse {
-    private Long id;
-    private String refId;
-    private String title;
+public class EventStatusUpdateRequest {
+
+    @NotNull(message = "Event status is required")
     private EventStatus status;
 }

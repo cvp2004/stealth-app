@@ -21,10 +21,6 @@ public class RowDefinition {
     @Size(max = 50, message = "rowNo must be at most 50 chars")
     private String rowNo;
 
-    @NotNull(message = "seatNoStart is required")
-    @Positive(message = "seatNoStart must be positive")
-    private Integer seatNoStart;
-
     @NotNull(message = "seatCount is required")
     @Min(value = 1, message = "seatCount must be at least 1")
     private Integer seatCount;

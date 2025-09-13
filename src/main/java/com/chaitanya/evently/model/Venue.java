@@ -4,7 +4,7 @@ import com.chaitanya.evently.model.base.BaseEntity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@Builder
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "venues")
 public class Venue extends BaseEntity {
@@ -28,8 +29,6 @@ public class Venue extends BaseEntity {
     private String address;
 
     @Column(name = "capacity", nullable = false)
-    private Integer capacity;
-
-    @OneToMany(mappedBy = "venue", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<Seat> seats = new ArrayList<>();
+    @Builder.Default
+    private Integer capacity = 0;
 }

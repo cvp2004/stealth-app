@@ -2,8 +2,11 @@ package com.chaitanya.evently.model;
 
 import jakarta.persistence.*;
 import java.time.Instant;
+import java.util.List;
+import java.util.ArrayList;
 
 import com.chaitanya.evently.model.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 
@@ -16,7 +19,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "shows")
 public class Show extends BaseEntity {
@@ -29,17 +32,10 @@ public class Show extends BaseEntity {
     @JoinColumn(name = "event_id", nullable = true)
     private Event event;
 
-    @Column(name = "title", nullable = false)
-    private String title;
-
-    @Column(name = "description")
-    private String description;
-
     @Column(name = "start_timestamp", nullable = false)
     private Instant startTimestamp;
 
     @Column(name = "duration_minutes", nullable = false)
     private Integer durationMinutes;
 
-    // created_at and updated_at handled by BaseEntity
 }

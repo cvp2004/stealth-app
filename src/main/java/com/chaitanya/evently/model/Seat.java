@@ -3,8 +3,10 @@ package com.chaitanya.evently.model;
 import com.chaitanya.evently.model.base.BaseEntity;
 
 import jakarta.persistence.*;
+import java.util.List;
+import java.util.ArrayList;
 import lombok.AllArgsConstructor;
-
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +16,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@Builder
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "seats", uniqueConstraints = {
         @UniqueConstraint(name = "uk_seat_unique", columnNames = { "venue_id", "section", "row", "seat_number" })

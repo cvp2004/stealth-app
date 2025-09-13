@@ -1,14 +1,24 @@
 package com.chaitanya.evently.repository;
 
 import com.chaitanya.evently.model.Seat;
-import com.chaitanya.evently.repository.projection.SeatFlatProjection;
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Long> {
-    List<Seat> findByVenue_Id(Long venueId);
 
-    List<SeatFlatProjection> findByVenue_IdOrderBySectionAscRowAscSeatNumberAsc(Long venueId);
+    List<Seat> findByVenueId(Long venueId);
+
+    @Query("SELECT s FROM Seat s WHERE s.venue.id = :venueId ORDER BY s.section, s.row, s.seatNumber")
+    List<Seat> findByVenueIdOrdered(@Param("venueId") Long venueId);
+
+    boolean existsByVenueIdAndSectionAndRowAndSeatNumber(Long venueId, String section, String row, String seatNumber);
+
+    void deleteByVenueId(Long venueId);
+
+    long countByVenueId(Long venueId);
 }

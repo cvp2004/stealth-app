@@ -1,0 +1,653 @@
+{
+    "info": {
+        "_postman_id": "evently-event-api",
+        "name": "Evently Event API",
+        "description": "Complete API collection for Event management including admin and user endpoints with pagination",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "Admin Event Management",
+            "item": [
+                {
+                    "name": "Create Event",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Music Festival 2024\",\n    \"description\": \"Annual music festival featuring top artists\",\n    \"category\": \"Music\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/events",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "events"
+                            ]
+                        },
+                        "description": "Create a new event (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get All Events (Admin)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"createdAt\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/events",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "events"
+                            ]
+                        },
+                        "description": "Get all events with pagination (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Events by Category (Admin)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"createdAt\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/events?category=Music",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "events"
+                            ],
+                            "query": [
+                                {
+                                    "key": "category",
+                                    "value": "Music"
+                                }
+                            ]
+                        },
+                        "description": "Get events filtered by category with pagination (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Event by ID (Admin)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/events/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "events",
+                                "1"
+                            ]
+                        },
+                        "description": "Get a specific event by ID (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Update Event",
+                    "request": {
+                        "method": "PUT",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Music Festival 2024 - Updated\",\n    \"description\": \"Annual music festival featuring top artists - Updated description\",\n    \"category\": \"Music & Entertainment\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/events/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "events",
+                                "1"
+                            ]
+                        },
+                        "description": "Update an existing event (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Set Event Status - CREATED to LIVE",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"LIVE\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/events/1/status",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "events",
+                                "1",
+                                "status"
+                            ]
+                        },
+                        "description": "Set event status from CREATED to LIVE (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Set Event Status - LIVE to CLOSED",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"CLOSED\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/events/1/status",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "events",
+                                "1",
+                                "status"
+                            ]
+                        },
+                        "description": "Set event status from LIVE to CLOSED (Admin only)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Invalid Status Transition Test",
+                    "request": {
+                        "method": "PATCH",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"status\": \"CREATED\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/events/1/status",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "events",
+                                "1",
+                                "status"
+                            ]
+                        },
+                        "description": "Test invalid status transition (should return error)"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "User Event Management",
+            "item": [
+                {
+                    "name": "Get All Events (User)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"createdAt\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/events",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "events"
+                            ]
+                        },
+                        "description": "Get all events with pagination (User access)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Events by Category (User)",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 10,\n    \"sort\": \"createdAt\",\n    \"direction\": \"desc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/events?category=Music",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "events"
+                            ],
+                            "query": [
+                                {
+                                    "key": "category",
+                                    "value": "Music"
+                                }
+                            ]
+                        },
+                        "description": "Get events filtered by category with pagination (User access)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Event by ID (User)",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/events/1",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "events",
+                                "1"
+                            ]
+                        },
+                        "description": "Get a specific event by ID (User access)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Get Events with Different Categories",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 5,\n    \"sort\": \"createdAt\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/events?category=Sports",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "events"
+                            ],
+                            "query": [
+                                {
+                                    "key": "category",
+                                    "value": "Sports"
+                                }
+                            ]
+                        },
+                        "description": "Get events filtered by Sports category (User access)"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Pagination Examples",
+            "item": [
+                {
+                    "name": "First Page - Small Size",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 5,\n    \"sort\": \"createdAt\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/events",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "events"
+                            ]
+                        },
+                        "description": "Get first page with 5 items per page"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Second Page - Medium Size",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 1,\n    \"size\": 10,\n    \"sort\": \"createdAt\",\n    \"direction\": \"desc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/events",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "events"
+                            ]
+                        },
+                        "description": "Get second page with 10 items per page, sorted by creation date descending"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Large Page Size",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": 0,\n    \"size\": 20,\n    \"sort\": \"createdAt\",\n    \"direction\": \"asc\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/events",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "events"
+                            ]
+                        },
+                        "description": "Get first page with 20 items per page"
+                    },
+                    "response": []
+                }
+            ]
+        },
+        {
+            "name": "Error Handling Tests",
+            "item": [
+                {
+                    "name": "Get Non-existent Event",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/events/99999",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "events",
+                                "99999"
+                            ]
+                        },
+                        "description": "Test getting a non-existent event (should return 404)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Event with Duplicate Title",
+                    "request": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"title\": \"Music Festival 2024\",\n    \"description\": \"Another event with same title\",\n    \"category\": \"Music\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/admin/events",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "admin",
+                                "events"
+                            ]
+                        },
+                        "description": "Test creating event with duplicate title (should return 409 Conflict)"
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Invalid Pagination Request",
+                    "request": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\n    \"page\": -1,\n    \"size\": 101,\n    \"sort\": \"invalidField\",\n    \"direction\": \"invalid\"\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/api/v1/user/events",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "v1",
+                                "user",
+                                "events"
+                            ]
+                        },
+                        "description": "Test invalid pagination parameters (should return 400 Bad Request)"
+                    },
+                    "response": []
+                }
+            ]
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8080",
+            "type": "string"
+        }
+    ]
+}

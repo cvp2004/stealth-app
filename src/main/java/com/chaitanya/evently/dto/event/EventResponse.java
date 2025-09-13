@@ -1,19 +1,24 @@
-package com.chaitanya.evently.dto.event.request;
+package com.chaitanya.evently.dto.event;
 
 import com.chaitanya.evently.model.status.EventStatus;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class EventStatusChangeRequest {
-    @NotNull(message = "status is required")
+public class EventResponse {
+
+    private Long id;
+    private String title;
+    private String description;
+    private String category;
     private EventStatus status;
 }

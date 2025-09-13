@@ -2,6 +2,7 @@ package com.chaitanya.evently.model;
 
 import com.chaitanya.evently.model.base.BaseEntity;
 import com.chaitanya.evently.model.status.PaymentStatus;
+
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
@@ -15,32 +16,20 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "payments", uniqueConstraints = {
-        @UniqueConstraint(name = "uk_provider_payment_id", columnNames = { "provider_payment_id" })
-})
+@Table(name = "payments")
 public class Payment extends BaseEntity {
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
-
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "show_id", nullable = false)
-    private Show show;
+    @OneToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id", nullable = false)
+    private Booking booking;
 
     @Column(name = "amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal amount;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "status", nullable = false)
-    private PaymentStatus status = PaymentStatus.PENDING;
-
-    @Column(name = "provider")
-    private String provider;
-
-    @Column(name = "provider_payment_id", unique = true)
-    private String providerPaymentId;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "staus", nullable = false)
+    private PaymentStatus status;
 
 }

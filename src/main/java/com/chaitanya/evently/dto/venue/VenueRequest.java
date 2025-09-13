@@ -1,7 +1,6 @@
 package com.chaitanya.evently.dto.venue;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,11 +14,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class VenueRequest {
-    @NotNull(message = "name is required")
-    @NotBlank(message = "name cannot be blank")
-    @Size(min = 1, max = 255, message = "name must be between 1 and 255 characters")
+
+    @NotBlank(message = "Venue name is required")
+    @Size(min = 2, max = 100, message = "Venue name must be between 2 and 100 characters")
     private String name;
 
-    @Size(max = 1000, message = "address must be at most 1000 characters")
+    @Size(max = 500, message = "Address must not exceed 500 characters")
     private String address;
 }

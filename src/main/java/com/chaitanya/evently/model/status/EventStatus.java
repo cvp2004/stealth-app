@@ -6,6 +6,5 @@ package com.chaitanya.evently.model.status;
 public enum EventStatus {
     CREATED,
     LIVE,
-    CLOSED,
-    CANCELLED
+    CLOSED
 }

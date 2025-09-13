@@ -4,6 +4,9 @@ import com.chaitanya.evently.model.base.BaseEntity;
 import com.chaitanya.evently.model.status.BookingStatus;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 
 import lombok.EqualsAndHashCode;
@@ -15,7 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "bookings")
 public class Booking extends BaseEntity {
@@ -34,11 +37,4 @@ public class Booking extends BaseEntity {
 
     @Column(name = "total_amount", nullable = false, precision = 10, scale = 2)
     private BigDecimal totalAmount;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "payment_id")
-    private Payment payment;
-
-    // created_at and updated_at handled by BaseEntity
-
 }

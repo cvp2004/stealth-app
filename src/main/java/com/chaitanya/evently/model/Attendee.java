@@ -15,14 +15,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(callSuper = true, onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "attendees")
 public class Attendee extends BaseEntity {
 
     @OneToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "booked_seat_id", nullable = false, unique = true)
-    private BookedSeat bookedSeat;
+    @JoinColumn(name = "ticket_id", nullable = false, unique = true)
+    private Ticket ticket;
 
     @Column(name = "full_name", nullable = false)
     private String fullName;
@@ -32,7 +32,5 @@ public class Attendee extends BaseEntity {
 
     @Column(name = "phone")
     private String phone;
-
-    @Column(name = "age")
-    private Integer age;
+    
 }

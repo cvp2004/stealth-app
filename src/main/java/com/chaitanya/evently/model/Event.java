@@ -1,7 +1,9 @@
 package com.chaitanya.evently.model;
 
+
 import com.chaitanya.evently.model.base.BaseEntity;
 import com.chaitanya.evently.model.status.EventStatus;
+
 import jakarta.persistence.*;
 import lombok.*;
 
