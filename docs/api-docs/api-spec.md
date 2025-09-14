@@ -2,12 +2,21 @@
 
 This document gives a concise overview of API domains and shared response conventions. Detailed per-route specs live in `admin-api.md` and `user-api.md`.
 
+### Request Headers
+
+- User APIs (except authentication): require header `X-User-ID: <userId>`
+- Admin APIs: require header `X-Admin-User: true`
+
+### Postman Collections
+
+- User collection: [docs/api-docs/postman/Evently User API.postman_collection.json](postman/Evently%20User%20API.postman_collection.json)
+- Admin collection: [docs/api-docs/postman/Evently Admin API.postman_collection.json](postman/Evently%20Admin%20API.postman_collection.json)
+
 ### Domains and Base
 
 - Base prefix: `/api/v1`
 - Admin APIs: management operations
 - User APIs: consumer-facing operations (includes auth and booking workflow)
-
 
 ### For detailed API Details Proceed to:
 
@@ -21,34 +30,34 @@ This document gives a concise overview of API domains and shared response conven
 ```json
 {
   "page": 0,
-  "size": 20,
+  "size": 10,
   "sort": "createdAt",
-  "direction": "desc"
+  "direction": "asc"
 }
 ```
 
-### PaginationResponse
+### PaginationResponse (shape)
 
 ```json
 {
-  "isPaginated": true,
-  "content": [{ "...resourceFields": "..." }],
-  "page": {
-    "number": 0,
-    "size": 20,
-    "totalElements": 123,
-    "totalPages": 7
-  },
+  "content": [],
   "sort": {
-    "fields": [{ "property": "createdAt", "direction": "desc" }]
+    "fields": [{ "direction": "asc", "property": "createdAt" }]
   },
   "links": {
-    "self": "string",
-    "first": "string",
-    "last": "string",
-    "next": "string",
-    "prev": "string"
-  }
+    "next": null,
+    "last": "http://localhost:8080/...",
+    "self": "http://localhost:8080/...",
+    "prev": null,
+    "first": "http://localhost:8080/..."
+  },
+  "page": {
+    "totalElements": 0,
+    "size": 10,
+    "number": 0,
+    "totalPages": 0
+  },
+  "isPaginated": false
 }
 ```
 
@@ -56,11 +65,63 @@ This document gives a concise overview of API domains and shared response conven
 
 ```json
 {
-  "message": "string",
-  "code": "string",
-  "timestamp": "2025-01-15T10:30:00Z",
-  "path": "/api/v1/...",
-  "fieldErrors": [{ "field": "string", "message": "string" }]
+  "timestamp": "2025-09-17T10:18:40.788989500Z",
+  "status": 409,
+  "error": "Conflict",
+  "message": "<error message>",
+  "path": "<METHOD> /api/v1/...",
+  "details": null
+}
+```
+
+### Auth
+
+Signup Request
+
+```json
+{
+  "fullName": "Percy Jackson",
+  "email": "percy@evently.com",
+  "password": "password123"
+}
+```
+
+Signup Response
+
+```json
+{
+  "message": "User registered successfully"
+}
+```
+
+Signin Request
+
+```json
+{
+  "email": "alice@example.com",
+  "password": "password123"
+}
+```
+
+Signin Response
+
+```json
+{
+  "userId": 1,
+  "fullName": "Alice Johnson",
+  "email": "alice@example.com",
+  "message": "User signed in successfully"
+}
+```
+
+Get User by ID Response
+
+```json
+{
+  "id": 1,
+  "fullName": "Alice Johnson",
+  "email": "alice@example.com",
+  "password": "password123"
 }
 ```
 
@@ -115,26 +176,41 @@ This document gives a concise overview of API domains and shared response conven
 
 ### Booking
 
+Create Booking Request
+
 ```json
 {
+  "showId": 1,
+  "seats": [{ "section": "A", "row": "R1", "seatNumber": "1" }]
+}
+```
+
+Booking Response (example)
+
+```json
+{
+  "createdAt": "2025-09-17T09:51:54.206702Z",
   "id": 1,
-  "user": { "id": 1, "fullName": "string", "email": "string" },
+  "status": "CONFIRMED",
   "show": {
-    "id": 1,
-    "venue": { "id": 1, "name": "string", "address": "string" },
-    "event": {
-      "id": 1,
-      "title": "string",
-      "description": "string",
-      "category": "string"
+    "status": "LIVE",
+    "venue": {
+      "address": "123 Main St, Metropolis",
+      "name": "Grand Hall",
+      "id": 1
     },
-    "startTimestamp": "2025-07-15T20:00:00Z",
-    "durationMinutes": 120,
-    "status": "LIVE|CLOSED|CANCELLED"
+    "id": 3,
+    "event": {
+      "category": "CONFERENCE",
+      "description": "Talks and workshops on cutting-edge tech",
+      "id": 2,
+      "title": "Tech Conference"
+    },
+    "durationMinutes": 180,
+    "startTimestamp": "2025-09-22T09:51:47.146294Z"
   },
-  "status": "CONFIRMED|CANCELLED",
-  "totalAmount": 450.0,
-  "createdAt": "2025-07-01T10:00:00Z"
+  "totalAmount": 100,
+  "user": { "email": "alice@example.com", "fullName": "Alice Johnson", "id": 1 }
 }
 ```
 
@@ -142,56 +218,169 @@ This document gives a concise overview of API domains and shared response conven
 
 ```json
 {
-  "id": 1,
-  "booking": { "id": 1 },
-  "seat": { "id": 1, "seat_label": "A-1-10" },
-  "price": 120.0
+  "seat": { "id": 5, "seat_label": "A-R1-3" },
+  "id": 5,
+  "price": 100,
+  "booking": {
+    "createdAt": "2025-09-17T09:51:56.206702Z",
+    "id": 3,
+    "status": "CONFIRMED",
+    "show": {
+      "status": "LIVE",
+      "venue": { "id": 1, "name": "Grand Hall" },
+      "id": 3,
+      "event": { "id": 2, "title": "Tech Conference" },
+      "durationMinutes": 180,
+      "startTimestamp": "2025-09-22T09:51:47.146294Z"
+    },
+    "totalAmount": 300,
+    "user": { "id": 1, "fullName": "Alice Johnson" }
+  }
 }
 ```
 
-### Payment
+### Payment (User)
+
+Get Payment by ID (User)
 
 ```json
 {
-  "id": 1,
-  "booking": { "id": 1 },
-  "status": "SUCCESS|FAILED",
-  "amount": 450.0,
-  "createdAt": "2025-07-01T10:05:00Z"
-}
-```
-
-### Refund
-
-```json
-{
-  "id": 1,
   "bookingId": 1,
-  "paymentId": 10,
-  "amount": 450.0,
-  "createdAt": "2025-07-02T09:00:00Z"
+  "id": 1,
+  "amount": 100,
+  "createdAt": "2025-09-17T09:51:54.206702Z",
+  "status": "SUCCESS"
 }
 ```
 
-### SeatMap (with seat status)
+Process Payment Request (User)
 
 ```json
 {
-  "venueName": "string",
-  "totalCapacity": 1000,
+  "reservationId": "reservation-123",
+  "amount": 100.0
+}
+```
+
+### Payment (Admin)
+
+Get Payment by ID (Admin)
+
+```json
+{
+  "id": 1,
+  "amount": 100,
+  "createdAt": "2025-09-17T07:36:25.230275Z",
+  "status": "SUCCESS",
+  "booking": {
+    "id": 1,
+    "status": "CONFIRMED",
+    "show": {
+      "startTimestamp": "2025-09-22T07:36:18.174709Z",
+      "id": 3,
+      "event": { "title": "Tech Conference", "id": 2 },
+      "venue": { "name": "Grand Hall", "id": 1 }
+    },
+    "totalAmount": 100,
+    "user": {
+      "id": 1,
+      "email": "alice@example.com",
+      "fullName": "Alice Johnson"
+    },
+    "createdAt": "2025-09-17T07:36:25.230275Z"
+  }
+}
+```
+
+### Refund (User)
+
+Get Refund by ID (User)
+
+```json
+{
+  "bookingId": 1,
+  "id": 1,
+  "amount": 100,
+  "createdAt": "2025-09-17T10:08:58.677091Z",
+  "paymentId": 1
+}
+```
+
+Cancel Booking Response (User)
+
+```json
+{
+  "bookingId": 1,
+  "message": "Booking cancelled successfully. Refund will be processed within 3-5 business days.",
+  "success": true,
+  "refundAmount": 100
+}
+```
+
+### Seat Maps
+
+Admin Venue Seat Map Response
+
+```json
+{
+  "venueName": "Grand Hall",
+  "totalCapacity": 500,
   "sections": [
     {
-      "sectionId": "S1",
       "rows": [
         {
-          "rowId": "R1",
           "seats": [
-            { "id": 1, "seat_label": "S1-R1-1", "status": "BOOKED|AVAILABLE" }
-          ]
+            {
+              "seat": "1",
+              "row": "R1",
+              "id": 1,
+              "seat_label": "A-R1-1",
+              "section": "A"
+            },
+            {
+              "seat": "2",
+              "row": "R1",
+              "id": 3,
+              "seat_label": "A-R1-2",
+              "section": "A"
+            }
+          ],
+          "rowId": "R1"
         }
-      ]
+      ],
+      "sectionId": "A"
     }
   ]
+}
+```
+
+User Show Seats Response
+
+```json
+{
+  "bookedSeatIds": [7, 8, 9, 10, 11, 12],
+  "venueName": "Grand Hall",
+  "seatMap": {
+    "venueName": "Grand Hall",
+    "totalCapacity": 20,
+    "sections": [
+      {
+        "rows": [
+          {
+            "seats": [
+              { "seat_label": "A-R1-1", "id": 1, "status": "AVAILABLE" },
+              { "seat_label": "A-R1-4", "id": 7, "status": "BOOKED" }
+            ],
+            "rowId": "R1"
+          }
+        ],
+        "sectionId": "A"
+      }
+    ]
+  },
+  "eventName": "Rock Night",
+  "showName": "Show 1",
+  "showId": 1
 }
 ```
 
@@ -204,6 +393,7 @@ This document gives a concise overview of API domains and shared response conven
 | GET    | /api/v1/admin/venue/list        | List venues           |
 | GET    | /api/v1/admin/venue/{id}        | Get venue by id       |
 | GET    | /api/v1/admin/venue/name/{name} | Get venue by name     |
+| POST   | /api/v1/admin/venue             | Create venue          |
 | GET    | /api/v1/admin/venue/{id}/seats  | Get venue seat map    |
 | POST   | /api/v1/admin/venue/{id}/seats  | Create venue seat map |
 

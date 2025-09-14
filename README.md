@@ -40,8 +40,11 @@ Evently is a comprehensive event management and ticketing platform built with Sp
 - **API Docs** (`docs/api-docs`)
 
   - [API Specification](docs/api-docs/api-spec.md)
-  - [User API](docs/api-docs/user-api.md)
-  - [Admin API](docs/api-docs/admin-api.md)
+  - Postman Collections:
+    - [Evently User API.postman_collection.json](docs/api-docs/postman/Evently%20User%20API.postman_collection.json)
+    - [Evently Admin API.postman_collection.json](docs/api-docs/postman/Evently%20Admin%20API.postman_collection.json)
+
+  Import the above JSON files into Postman to try the APIs locally. Default base URL: `http://localhost:8080`.
 
 - **Database** (`docs/database`)
 
