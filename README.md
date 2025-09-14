@@ -30,6 +30,28 @@ Evently is a comprehensive event management and ticketing platform built with Sp
 - **Pagination**: Efficient data pagination for large datasets
 - **Async Processing**: Background email processing with scheduling
 
+## 📄 Documentation Index
+
+- **Top-level**
+
+  - [Concurrency Mechanisms Tradeoffs](docs/concurrency-mechanisms-tradeoffs.md)
+  - [Evently - Challenge (PDF)](docs/Evently%20-%20Challenge.pdf)
+
+- **API Docs** (`docs/api-docs`)
+
+  - [API Specification](docs/api-docs/api-spec.md)
+  - [User API](docs/api-docs/user-api.md)
+  - [Admin API](docs/api-docs/admin-api.md)
+
+- **Database** (`docs/database`)
+
+  - [Complete Schema (SQL)](docs/database/complete_schema.sql)
+
+- **Diagrams** (`docs/Diagrams`)
+  - [System Architecture Diagram](docs/Diagrams/System%20Architecture%20Diagram.png)
+  - [Evently ER Diagram](docs/Diagrams/Evently%20ER%20Diagram.png)
+  - [Booking Workflow](docs/Diagrams/Booking%20Workflow.png)
+
 ## 🏗️ Architecture
 
 ### Technology Stack
@@ -55,11 +77,19 @@ The platform uses a relational database with the following core entities:
 - **Refunds**: Refund processing records
 - **Emails**: Asynchronous email queue
 
-#### Visual Diagrams
+## Visual Diagrams
 
-- [**System Architecture Diagram**](docs/Diagrams/System%20Architecture%20Diagram.png) - High-level system architecture and component relationships
-- [**Database ER Diagram**](docs/Diagrams/Evently%20ER%20Diagram.png) - Complete entity-relationship diagram of the database schema
-- [**Booking Workflow Diagram**](docs/Diagrams/Booking%20Workflow.png) - Step-by-step booking process flow
+### System Arcitecture Diagram
+
+<img src="docs/Diagrams/System%20Architecture%20Diagram.png" alt="System Architecture Diagram" width="600" />
+
+### Database ER Diagram
+
+<img src="docs/Diagrams/Evently%20ER%20Diagram.png" alt="Database ER Diagram" width="600" />
+
+### Booking Workflow Diagram
+
+<img src="docs/Diagrams/Booking%20Workflow.png" alt="Booking Workflow Diagram" width="600" />
 
 ## 🚀 Quick Start
 
@@ -99,33 +129,6 @@ The platform uses a relational database with the following core entities:
    mvnw.cmd spring-boot:run
    ```
 
-4. **Access the application**
-   - API Base URL: `http://localhost:8080/api`
-   - Health Check: `http://localhost:8080/actuator/health`
-
-### Environment Configuration
-
-The application uses environment variables for configuration. Key variables include:
-
-```bash
-# Database Configuration
-POSTGRES_HOST=localhost
-POSTGRES_PORT=5432
-POSTGRES_DB=evently
-POSTGRES_USER=user
-POSTGRES_PASSWORD=pass
-
-# Redis Configuration
-REDIS_HOST=localhost
-REDIS_PORT=6379
-REDIS_PASSWORD=
-REDIS_DATABASE=0
-
-# Application Configuration
-SPRING_APP_NAME=evently
-DEFAULT_PAGE_SIZE=50
-```
-
 ## 📚 API Documentation
 
 ### Authentication
@@ -142,28 +145,28 @@ All admin API requests require the `X-Admin-User` header set to `true`.
 
 #### User Authentication
 
-- `POST /api/v1/auth/register` - Register a new user
-- `POST /api/v1/auth/login` - User login
+- `POST /api/v1/auth/signup` - Register a new user
+- `POST /api/v1/auth/signin` - User login
 
 #### Event Management
 
-- `GET /api/v1/user/events` - Browse available events
-- `GET /api/v1/user/events/{id}` - Get event details
-- `GET /api/v1/user/shows/{id}/seats` - View available seats
+- `GET /api/v1/user/event/list` - Browse available events
+- `GET /api/v1/user/event/{id}` - Get event details
+- `GET /api/v1/user/show/{showId}/seats` - View available seats
 
 #### Booking Process
 
-- `POST /api/v1/user/bookings` - Create a booking (reserve seats)
-- `POST /api/v1/user/bookings/payment` - Process payment
-- `GET /api/v1/user/bookings` - View booking history
-- `DELETE /api/v1/user/bookings/cancel` - Cancel booking
+- `POST /api/v1/user/booking` - Create a booking (reserve seats)
+- `POST /api/v1/user/booking/payment` - Process payment
+- `GET /api/v1/user/booking/list` - View booking history
+- `DELETE /api/v1/user/booking/cancel` - Cancel booking
 
 #### Admin Management
 
-- `POST /api/v1/admin/venues` - Create venues
-- `POST /api/v1/admin/events` - Create events
-- `POST /api/v1/admin/shows` - Schedule shows
-- `GET /api/v1/admin/users` - Manage users
+- `GET /api/v1/admin/venue/list` - Manage venues
+- `GET /api/v1/admin/event/list` - Manage events
+- `GET /api/v1/admin/show/event/{eventId}/list` - View shows for an event
+- `GET /api/v1/admin/user/list` - Manage users
 
 For complete API documentation, see [API Specification](docs/api-docs/api-spec.md).
 
@@ -205,10 +208,10 @@ src/
 
 The application uses Flyway for database migrations. Migration files are located in `src/main/resources/db/migration/` and are automatically applied on startup.
 
-### Running Tests
+### Running Project
 
 ```bash
-./mvnw test
+./mvnw spring-boot:run
 ```
 
 ### Building for Production
@@ -218,15 +221,30 @@ The application uses Flyway for database migrations. Migration files are located
 java -jar target/evently-0.0.1-SNAPSHOT.jar
 ```
 
-## 📊 Monitoring and Health Checks
-
-The application includes Spring Boot Actuator for monitoring:
-
-- Health Check: `/actuator/health`
-- Application Info: `/actuator/info`
-- Metrics: `/actuator/metrics`
-
 ## 🔧 Configuration
+
+### Environment Configuration
+
+The application uses environment variables for configuration. Key variables include:
+
+```bash
+# Database Configuration
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+POSTGRES_DB=evently
+POSTGRES_USER=user
+POSTGRES_PASSWORD=pass
+
+# Redis Configuration
+REDIS_HOST=localhost
+REDIS_PORT=6379
+REDIS_PASSWORD=
+REDIS_DATABASE=0
+
+# Application Configuration
+SPRING_APP_NAME=evently
+DEFAULT_PAGE_SIZE=50
+```
 
 ### Application Properties
 
@@ -235,21 +253,32 @@ Key configuration options in `application.yml`:
 ```yaml
 spring:
   application:
-    name: evently
+    name: ${SPRING_APP_NAME:evently}
+
   datasource:
-    url: jdbc:postgresql://localhost:5432/evently
-    username: user
-    password: pass
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:evently}?options=-c%20TimeZone%3DAsia/Kolkata
+    username: ${POSTGRES_USER:user}
+    password: ${POSTGRES_PASSWORD:pass}
+    driver-class-name: org.postgresql.Driver
+
   redis:
-    host: localhost
-    port: 6379
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+
   flyway:
-    enabled: true
+    enabled: ${FLYWAY_ENABLED:true}
     locations: classpath:db/migration
+    baseline-on-migrate: ${FLYWAY_BASELINE_ON_MIGRATE:true}
+    table: ${FLYWAY_TABLE:flyway_schema_history}
+
+logging:
+  level:
+    org.flywaydb: ${FLYWAY_LOG_LEVEL:INFO}
+    org.springframework: ${SPRING_LOG_LEVEL:INFO}
 
 app:
   pagination:
-    default-page-size: 50
+    default-page-size: ${DEFAULT_PAGE_SIZE:50}
 ```
 
 ---

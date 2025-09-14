@@ -8,47 +8,11 @@ This document gives a concise overview of API domains and shared response conven
 - Admin APIs: management operations
 - User APIs: consumer-facing operations (includes auth and booking workflow)
 
-### Common Request/Response Conventions
 
-- Controllers shape responses as JSON maps exposing only necessary fields; models are not returned directly.
+### For detailed API Details Proceed to:
 
-- PaginationRequest (request body for list endpoints):
-
-  - page: integer (>= 0)
-  - size: integer (> 0)
-  - sort: string (must be `createdAt`)
-  - direction: string (`asc` | `desc`)
-
-- PaginationResponse (all list endpoints):
-
-  - isPaginated: boolean
-  - content: array<object>
-  - page: { number, size, totalElements, totalPages }
-  - sort: { fields: [ { property, direction } ] }
-  - links: { self, first, last, next, prev }
-
-- ErrorResponse (handled globally):
-  - message: string
-  - code: string
-  - timestamp: string (ISO-8601)
-  - path: string
-  - fieldErrors?: array<{ field, message }>
-
-### Resource Summary Shapes
-
-- Venue: { id, name, address, capacity }
-- Event: { id, title, description, category, status }
-- Show: { id, venueId|venue, eventId|event, startTimestamp, durationMinutes, status }
-- Booking: { id, user|userId, show|showId, status, totalAmount, createdAt }
-- Ticket: { id, booking, seat, price }
-- Payment: { id, bookingId|booking, status, amount, createdAt }
-- Refund: { id, bookingId, paymentId, amount, createdAt }
-- SeatMap (with seat status): { venueName, totalCapacity, sections: [ { sectionId, rows: [ { rowId, seats: [ { id, seat_label, status } ] } ] } ] }
-
-Proceed to:
-
-- Admin: `admin-api.md`
-- User (incl. Auth): `user-api.md`
+- [Admin API Specification](docs/api-docs/admin-api.md)
+- [User API Specification](docs/api-docs/user-api.md)
 
 ## JSON Schemas (Rendered)
 
@@ -235,50 +199,50 @@ Proceed to:
 
 ### Admin Endpoints
 
-| Method | Path                                           | Description               |
-| ------ | ---------------------------------------------- | ------------------------- |
-| GET    | /api/v1/admin/venue/list                       | List venues               |
-| GET    | /api/v1/admin/venue/{id}                       | Get venue by id           |
-| GET    | /api/v1/admin/venue/name/{name}                | Get venue by name         |
-| GET    | /api/v1/admin/venue/{id}/seats                 | Get venue seat map        |
-| POST   | /api/v1/admin/venue/{id}/seats                 | Create venue seat map     |
+| Method | Path                            | Description           |
+| ------ | ------------------------------- | --------------------- |
+| GET    | /api/v1/admin/venue/list        | List venues           |
+| GET    | /api/v1/admin/venue/{id}        | Get venue by id       |
+| GET    | /api/v1/admin/venue/name/{name} | Get venue by name     |
+| GET    | /api/v1/admin/venue/{id}/seats  | Get venue seat map    |
+| POST   | /api/v1/admin/venue/{id}/seats  | Create venue seat map |
 
-| Method | Path                                           | Description               |
-| ------ | ---------------------------------------------- | ------------------------- |
-| GET    | /api/v1/admin/event/list                       | List events (paginated)   |
-| GET    | /api/v1/admin/event/{id}                       | Get event by id           |
-| GET    | /api/v1/admin/event/title/{title}              | Get event by title        |
-| POST   | /api/v1/admin/event                            | Create event              |
-| PATCH  | /api/v1/admin/event/{id}/status/update         | Update event status       |
+| Method | Path                                   | Description             |
+| ------ | -------------------------------------- | ----------------------- |
+| GET    | /api/v1/admin/event/list               | List events (paginated) |
+| GET    | /api/v1/admin/event/{id}               | Get event by id         |
+| GET    | /api/v1/admin/event/title/{title}      | Get event by title      |
+| POST   | /api/v1/admin/event                    | Create event            |
+| PATCH  | /api/v1/admin/event/{id}/status/update | Update event status     |
 
-| Method | Path                                           | Description               |
-| ------ | ---------------------------------------------- | ------------------------- |
-| POST   | /api/v1/admin/show                             | Create show               |
-| GET    | /api/v1/admin/show/{id}                        | Get show by id            |
-| GET    | /api/v1/admin/show/venue/{venueId}/list        | List shows by venue       |
-| GET    | /api/v1/admin/show/event/{eventId}/list        | List shows by event       |
-| PATCH  | /api/v1/admin/show/{id}/status/update          | Update show status        |
+| Method | Path                                    | Description         |
+| ------ | --------------------------------------- | ------------------- |
+| POST   | /api/v1/admin/show                      | Create show         |
+| GET    | /api/v1/admin/show/{id}                 | Get show by id      |
+| GET    | /api/v1/admin/show/venue/{venueId}/list | List shows by venue |
+| GET    | /api/v1/admin/show/event/{eventId}/list | List shows by event |
+| PATCH  | /api/v1/admin/show/{id}/status/update   | Update show status  |
 
-| Method | Path                                           | Description               |
-| ------ | ---------------------------------------------- | ------------------------- |
-| GET    | /api/v1/admin/user/{id}                        | Get user by id            |
-| GET    | /api/v1/admin/user/email/{email}               | Get user by email         |
-| GET    | /api/v1/admin/user/name/{name}                 | Get user by name          |
-| GET    | /api/v1/admin/user/list                        | List users (paginated)    |
+| Method | Path                             | Description            |
+| ------ | -------------------------------- | ---------------------- |
+| GET    | /api/v1/admin/user/{id}          | Get user by id         |
+| GET    | /api/v1/admin/user/email/{email} | Get user by email      |
+| GET    | /api/v1/admin/user/name/{name}   | Get user by name       |
+| GET    | /api/v1/admin/user/list          | List users (paginated) |
 
-| Method | Path                                           | Description               |
-| ------ | ---------------------------------------------- | ------------------------- |
-| GET    | /api/v1/admin/booking/{id}                     | Get booking by id         |
-| GET    | /api/v1/admin/booking/show/{showId}/list       | List bookings by show     |
-| GET    | /api/v1/admin/booking/event/{eventId}/list     | List bookings by event    |
-| GET    | /api/v1/admin/booking/venue/{venueId}/list     | List bookings by venue    |
-| GET    | /api/v1/admin/booking/user/{userId}/list       | List bookings by user     |
+| Method | Path                                       | Description            |
+| ------ | ------------------------------------------ | ---------------------- |
+| GET    | /api/v1/admin/booking/{id}                 | Get booking by id      |
+| GET    | /api/v1/admin/booking/show/{showId}/list   | List bookings by show  |
+| GET    | /api/v1/admin/booking/event/{eventId}/list | List bookings by event |
+| GET    | /api/v1/admin/booking/venue/{venueId}/list | List bookings by venue |
+| GET    | /api/v1/admin/booking/user/{userId}/list   | List bookings by user  |
 
-| Method | Path                                           | Description               |
-| ------ | ---------------------------------------------- | ------------------------- |
-| GET    | /api/v1/admin/ticket/{id}                      | Get ticket by id          |
-| GET    | /api/v1/admin/ticket/list                      | List tickets (paginated)  |
-| GET    | /api/v1/admin/ticket/booking/{bookingId}/list  | List tickets by booking   |
+| Method | Path                                          | Description              |
+| ------ | --------------------------------------------- | ------------------------ |
+| GET    | /api/v1/admin/ticket/{id}                     | Get ticket by id         |
+| GET    | /api/v1/admin/ticket/list                     | List tickets (paginated) |
+| GET    | /api/v1/admin/ticket/booking/{bookingId}/list | List tickets by booking  |
 
 | Method | Path                                           | Description               |
 | ------ | ---------------------------------------------- | ------------------------- |
@@ -286,32 +250,32 @@ Proceed to:
 | GET    | /api/v1/admin/payment/list                     | List payments (paginated) |
 | GET    | /api/v1/admin/payment/booking/{bookingId}/list | List payments by booking  |
 
-| Method | Path                                           | Description               |
-| ------ | ---------------------------------------------- | ------------------------- |
-| GET    | /api/v1/admin/refund/{id}                      | Get refund by id          |
-| GET    | /api/v1/admin/refund/list                      | List refunds (paginated)  |
-| GET    | /api/v1/admin/refund/booking/{bookingId}/list  | List refunds by booking   |
+| Method | Path                                          | Description              |
+| ------ | --------------------------------------------- | ------------------------ |
+| GET    | /api/v1/admin/refund/{id}                     | Get refund by id         |
+| GET    | /api/v1/admin/refund/list                     | List refunds (paginated) |
+| GET    | /api/v1/admin/refund/booking/{bookingId}/list | List refunds by booking  |
 
 ### User Endpoints (incl. Auth)
 
-| Method | Path                                                   | Description                     |
-| ------ | ------------------------------------------------------ | ------------------------------- |
-| POST   | /api/v1/auth/signup                                    | Sign up                         |
-| POST   | /api/v1/auth/signin                                    | Sign in                         |
-| GET    | /api/v1/auth/user/{userId}                             | Get user profile                |
+| Method | Path                       | Description      |
+| ------ | -------------------------- | ---------------- |
+| POST   | /api/v1/auth/signup        | Sign up          |
+| POST   | /api/v1/auth/signin        | Sign in          |
+| GET    | /api/v1/auth/user/{userId} | Get user profile |
 
-| Method | Path                                                   | Description                     |
-| ------ | ------------------------------------------------------ | ------------------------------- |
-| GET    | /api/v1/user/venue/list                                | List venues                     |
-| GET    | /api/v1/user/venue/{id}                                | Get venue by id                 |
-| GET    | /api/v1/user/venue/name/{name}                         | Get venue by name               |
-| GET    | /api/v1/user/venue/{id}/seats                          | Get venue seat map              |
+| Method | Path                           | Description        |
+| ------ | ------------------------------ | ------------------ |
+| GET    | /api/v1/user/venue/list        | List venues        |
+| GET    | /api/v1/user/venue/{id}        | Get venue by id    |
+| GET    | /api/v1/user/venue/name/{name} | Get venue by name  |
+| GET    | /api/v1/user/venue/{id}/seats  | Get venue seat map |
 
-| Method | Path                                                   | Description                     |
-| ------ | ------------------------------------------------------ | ------------------------------- |
-| GET    | /api/v1/user/event/list                                | List events (paginated)         |
-| GET    | /api/v1/user/event/{id}                                | Get event by id                 |
-| GET    | /api/v1/user/event/title/{title}                       | Get event by title              |
+| Method | Path                             | Description             |
+| ------ | -------------------------------- | ----------------------- |
+| GET    | /api/v1/user/event/list          | List events (paginated) |
+| GET    | /api/v1/user/event/{id}          | Get event by id         |
+| GET    | /api/v1/user/event/title/{title} | Get event by title      |
 
 | Method | Path                                                   | Description                     |
 | ------ | ------------------------------------------------------ | ------------------------------- |
@@ -321,27 +285,27 @@ Proceed to:
 | GET    | /api/v1/user/show/venue/{venueId}/event/{eventId}/list | List shows by venue+event       |
 | GET    | /api/v1/user/show/{showId}/seats                       | Get show seat map with statuses |
 
-| Method | Path                                                   | Description                     |
-| ------ | ------------------------------------------------------ | ------------------------------- |
-| POST   | /api/v1/user/booking                                   | Create booking (reservation)    |
-| POST   | /api/v1/user/booking/payment                           | Process booking payment         |
-| GET    | /api/v1/user/booking/{id}                              | Get booking by id               |
-| GET    | /api/v1/user/booking/list                              | List user bookings (paginated)  |
-| DELETE | /api/v1/user/booking/cancel                            | Cancel booking                  |
+| Method | Path                         | Description                    |
+| ------ | ---------------------------- | ------------------------------ |
+| POST   | /api/v1/user/booking         | Create booking (reservation)   |
+| POST   | /api/v1/user/booking/payment | Process booking payment        |
+| GET    | /api/v1/user/booking/{id}    | Get booking by id              |
+| GET    | /api/v1/user/booking/list    | List user bookings (paginated) |
+| DELETE | /api/v1/user/booking/cancel  | Cancel booking                 |
 
-| Method | Path                                                   | Description                     |
-| ------ | ------------------------------------------------------ | ------------------------------- |
-| GET    | /api/v1/user/tickets/{id}                              | Get ticket by id                |
-| GET    | /api/v1/user/tickets/booking/{bookingId}               | List tickets by booking         |
+| Method | Path                                     | Description             |
+| ------ | ---------------------------------------- | ----------------------- |
+| GET    | /api/v1/user/tickets/{id}                | Get ticket by id        |
+| GET    | /api/v1/user/tickets/booking/{bookingId} | List tickets by booking |
 
-| Method | Path                                                   | Description                     |
-| ------ | ------------------------------------------------------ | ------------------------------- |
-| GET    | /api/v1/user/payment/{id}                              | Get payment by id               |
-| GET    | /api/v1/user/payment/list                              | List payments (paginated)       |
-| GET    | /api/v1/user/payment/show/{showId}/list                | List payments by show           |
+| Method | Path                                    | Description               |
+| ------ | --------------------------------------- | ------------------------- |
+| GET    | /api/v1/user/payment/{id}               | Get payment by id         |
+| GET    | /api/v1/user/payment/list               | List payments (paginated) |
+| GET    | /api/v1/user/payment/show/{showId}/list | List payments by show     |
 
-| Method | Path                                                   | Description                     |
-| ------ | ------------------------------------------------------ | ------------------------------- |
-| GET    | /api/v1/user/refund/{id}                               | Get refund by id                |
-| GET    | /api/v1/user/refund/list                               | List refunds (paginated)        |
-| GET    | /api/v1/user/refund/show/{showId}/list                 | List refunds by show            |
+| Method | Path                                   | Description              |
+| ------ | -------------------------------------- | ------------------------ |
+| GET    | /api/v1/user/refund/{id}               | Get refund by id         |
+| GET    | /api/v1/user/refund/list               | List refunds (paginated) |
+| GET    | /api/v1/user/refund/show/{showId}/list | List refunds by show     |
