@@ -1,0 +1,2665 @@
+{
+	"info": {
+		"_postman_id": "1e4af4a4-cafe-4658-9f4d-8bb4b29dbc33",
+		"name": "Evently User API",
+		"description": "User-facing endpoints for Evently. Most requests require header X-User-ID with a valid user id.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37889977"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Signup",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"fullName\": \"Percy Jackson\",\n  \"email\": \"percy@evently.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/signup",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signup"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Signup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fullName\": \"Percy Jackson\",\n  \"email\": \"percy@evently.com\",\n  \"password\": \"password123\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/auth/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 09:53:08 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": \"2025-09-17T09:53:08.545813900Z\",\n    \"status\": 409,\n    \"error\": \"Conflict\",\n    \"message\": \"User with email alice@example.com already exists\",\n    \"path\": \"POST /api/v1/auth/signup\",\n    \"details\": null\n}"
+						},
+						{
+							"name": "Signup",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"fullName\": \"Percy Jackson\",\n  \"email\": \"percy@evently.com\",\n  \"password\": \"password123\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/auth/signup",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signup"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 09:53:45 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"User registered successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Signin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"alice@example.com\",\n  \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/signin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"signin"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Signin",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"alice@example.com\",\n  \"password\": \"password123\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/auth/signin",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"signin"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 09:52:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"userId\": 1,\n    \"fullName\": \"Alice Johnson\",\n    \"email\": \"alice@example.com\",\n    \"message\": \"User signed in successfully\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/auth/user/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"auth",
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/auth/user/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"auth",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 09:45:02 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"createdAt\": \"2025-09-17T09:44:48.655754Z\",\n    \"updatedAt\": \"2025-09-17T09:44:48.655754Z\",\n    \"fullName\": \"Alice Johnson\",\n    \"email\": \"alice@example.com\",\n    \"password\": \"password123\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Venues",
+			"item": [
+				{
+					"name": "List Venues",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "1",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/venue/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"venue",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Venues",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/venue/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"venue",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 09:55:42 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "[\n    {\n        \"address\": \"123 Main St, Metropolis\",\n        \"name\": \"Grand Hall\",\n        \"id\": 1,\n        \"capacity\": 500\n    },\n    {\n        \"address\": \"456 Center Ave, Gotham\",\n        \"name\": \"City Arena\",\n        \"id\": 2,\n        \"capacity\": 800\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Venue by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/venue/{{venueId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"venue",
+								"{{venueId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Venue by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/venue/{{venueId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"venue",
+										"{{venueId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 09:58:29 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"address\": \"123 Main St, Metropolis\",\n    \"name\": \"Grand Hall\",\n    \"id\": 1,\n    \"capacity\": 500\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Venue by Name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/venue/name/{{venueName}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"venue",
+								"name",
+								"{{venueName}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Venue by Name",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/venue/name/{{venueName}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"venue",
+										"name",
+										"{{venueName}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 09:59:10 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"address\": \"123 Main St, Metropolis\",\n    \"name\": \"Grand Hall\",\n    \"id\": 1,\n    \"capacity\": 500\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Venue Seat Map",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/venue/{{venueId}}/seats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"venue",
+								"{{venueId}}",
+								"seats"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Venue Seat Map",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/venue/{{venueId}}/seats",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"venue",
+										"{{venueId}}",
+										"seats"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:00:35 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"venueName\": \"Grand Hall\",\n    \"totalCapacity\": 500,\n    \"sections\": [\n        {\n            \"sectionId\": \"A\",\n            \"rows\": [\n                {\n                    \"rowId\": \"R1\",\n                    \"seats\": [\n                        {\n                            \"id\": 1,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"1\"\n                        },\n                        {\n                            \"id\": 19,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"10\"\n                        },\n                        {\n                            \"id\": 21,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"11\"\n                        },\n                        {\n                            \"id\": 23,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"12\"\n                        },\n                        {\n                            \"id\": 25,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"13\"\n                        },\n                        {\n                            \"id\": 27,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"14\"\n                        },\n                        {\n                            \"id\": 29,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"15\"\n                        },\n                        {\n                            \"id\": 31,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"16\"\n                        },\n                        {\n                            \"id\": 33,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"17\"\n                        },\n                        {\n                            \"id\": 35,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"18\"\n                        },\n                        {\n                            \"id\": 37,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"19\"\n                        },\n                        {\n                            \"id\": 3,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"2\"\n                        },\n                        {\n                            \"id\": 39,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"20\"\n                        },\n                        {\n                            \"id\": 5,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"3\"\n                        },\n                        {\n                            \"id\": 7,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"4\"\n                        },\n                        {\n                            \"id\": 9,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"5\"\n                        },\n                        {\n                            \"id\": 11,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"6\"\n                        },\n                        {\n                            \"id\": 13,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"7\"\n                        },\n                        {\n                            \"id\": 15,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"8\"\n                        },\n                        {\n                            \"id\": 17,\n                            \"createdAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"updatedAt\": \"2025-09-17T09:51:46.684458Z\",\n                            \"venue\": {\n                                \"id\": 1,\n                                \"createdAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"updatedAt\": \"2025-09-17T09:51:46.621406Z\",\n                                \"name\": \"Grand Hall\",\n                                \"address\": \"123 Main St, Metropolis\",\n                                \"capacity\": 500\n                            },\n                            \"section\": \"A\",\n                            \"row\": \"R1\",\n                            \"seatNumber\": \"9\"\n                        }\n                    ]\n                }\n            ]\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Get Event by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/event/{{eventId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"event",
+								"{{eventId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Event by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/event/{{eventId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"event",
+										"{{eventId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:01:20 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"description\": \"An electrifying evening of rock music\",\n    \"title\": \"Rock Night\",\n    \"id\": 1,\n    \"category\": \"MUSIC\",\n    \"status\": \"LIVE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Event by Title",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-USer-ID",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/event/title/{{eventTitle}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"event",
+								"title",
+								"{{eventTitle}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Event by Title",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-USer-ID",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/event/title/{{eventTitle}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"event",
+										"title",
+										"{{eventTitle}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:01:50 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"description\": \"An electrifying evening of rock music\",\n    \"title\": \"Rock Night\",\n    \"id\": 1,\n    \"category\": \"MUSIC\",\n    \"status\": \"LIVE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "List Events (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/event/list?category=MUSIC",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"event",
+								"list"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "MUSIC"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Events (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/event/list?category=MUSIC",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"event",
+										"list"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "MUSIC"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:02:53 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"description\": \"An electrifying evening of rock music\",\n            \"title\": \"Rock Night\",\n            \"id\": 1,\n            \"category\": \"MUSIC\",\n            \"status\": \"LIVE\"\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/user/event/list?page=0&size=10&category=MUSIC\",\n        \"self\": \"http://localhost:8080/api/v1/user/event/list?page=0&size=10&category=MUSIC\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/user/event/list?page=0&size=10&category=MUSIC\"\n    },\n    \"page\": {\n        \"totalElements\": 1,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Shows",
+			"item": [
+				{
+					"name": "Get Show by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/show/{{showId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"show",
+								"{{showId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Show by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/show/{{showId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"show",
+										"{{showId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:03:24 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"LIVE\",\n    \"venue\": {\n        \"address\": \"123 Main St, Metropolis\",\n        \"name\": \"Grand Hall\",\n        \"id\": 1\n    },\n    \"id\": 1,\n    \"event\": {\n        \"category\": \"MUSIC\",\n        \"description\": \"An electrifying evening of rock music\",\n        \"id\": 1,\n        \"title\": \"Rock Night\"\n    },\n    \"durationMinutes\": 120,\n    \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "List Shows by Venue (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"startTimestamp\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/show/venue/{{venueId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"show",
+								"venue",
+								"{{venueId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Shows by Venue (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"startTimestamp\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/show/venue/{{venueId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"show",
+										"venue",
+										"{{venueId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:04:43 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"status\": \"LIVE\",\n            \"venue\": {\n                \"address\": \"123 Main St, Metropolis\",\n                \"name\": \"Grand Hall\",\n                \"id\": 1\n            },\n            \"id\": 1,\n            \"event\": {\n                \"category\": \"MUSIC\",\n                \"description\": \"An electrifying evening of rock music\",\n                \"id\": 1,\n                \"title\": \"Rock Night\"\n            },\n            \"durationMinutes\": 120,\n            \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n        },\n        {\n            \"status\": \"LIVE\",\n            \"venue\": {\n                \"address\": \"123 Main St, Metropolis\",\n                \"name\": \"Grand Hall\",\n                \"id\": 1\n            },\n            \"id\": 3,\n            \"event\": {\n                \"category\": \"CONFERENCE\",\n                \"description\": \"Talks and workshops on cutting-edge tech\",\n                \"id\": 2,\n                \"title\": \"Tech Conference\"\n            },\n            \"durationMinutes\": 180,\n            \"startTimestamp\": \"2025-09-22T09:51:47.146294Z\"\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"startTimestamp\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/user/show/venue/1/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/user/show/venue/1/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/user/show/venue/1/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 2,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "List Shows by Event (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-USer-ID",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"startTimestamp\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/show/event/{{eventId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"show",
+								"event",
+								"{{eventId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Shows by Event (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-USer-ID",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"startTimestamp\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/show/event/{{eventId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"show",
+										"event",
+										"{{eventId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:05:24 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"status\": \"LIVE\",\n            \"venue\": {\n                \"address\": \"123 Main St, Metropolis\",\n                \"name\": \"Grand Hall\",\n                \"id\": 1\n            },\n            \"id\": 1,\n            \"event\": {\n                \"category\": \"MUSIC\",\n                \"description\": \"An electrifying evening of rock music\",\n                \"id\": 1,\n                \"title\": \"Rock Night\"\n            },\n            \"durationMinutes\": 120,\n            \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n        },\n        {\n            \"status\": \"LIVE\",\n            \"venue\": {\n                \"address\": \"456 Center Ave, Gotham\",\n                \"name\": \"City Arena\",\n                \"id\": 2\n            },\n            \"id\": 2,\n            \"event\": {\n                \"category\": \"MUSIC\",\n                \"description\": \"An electrifying evening of rock music\",\n                \"id\": 1,\n                \"title\": \"Rock Night\"\n            },\n            \"durationMinutes\": 120,\n            \"startTimestamp\": \"2025-09-21T09:51:47.118952Z\"\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"startTimestamp\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/user/show/event/1/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/user/show/event/1/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/user/show/event/1/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 2,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "List Shows by Venue and Event (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"startTimestamp\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/show/venue/{{venueId}}/event/{{eventId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"show",
+								"venue",
+								"{{venueId}}",
+								"event",
+								"{{eventId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Shows by Venue and Event (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"startTimestamp\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/show/venue/{{venueId}}/event/{{eventId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"show",
+										"venue",
+										"{{venueId}}",
+										"event",
+										"{{eventId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:06:31 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"status\": \"LIVE\",\n            \"venue\": {\n                \"address\": \"123 Main St, Metropolis\",\n                \"name\": \"Grand Hall\",\n                \"id\": 1\n            },\n            \"id\": 1,\n            \"event\": {\n                \"category\": \"MUSIC\",\n                \"description\": \"An electrifying evening of rock music\",\n                \"id\": 1,\n                \"title\": \"Rock Night\"\n            },\n            \"durationMinutes\": 120,\n            \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"startTimestamp\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/user/show/venue/1/event/1/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/user/show/venue/1/event/1/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/user/show/venue/1/event/1/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 1,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Show Seats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/show/{{showId}}/seats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"show",
+								"{{showId}}",
+								"seats"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Show Seats",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/show/{{showId}}/seats",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"show",
+										"{{showId}}",
+										"seats"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:06:57 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"bookedSeatIds\": [\n        7,\n        8,\n        9,\n        10,\n        11,\n        12\n    ],\n    \"venueName\": \"Grand Hall\",\n    \"seatMap\": {\n        \"venueName\": \"Grand Hall\",\n        \"totalCapacity\": 20,\n        \"sections\": [\n            {\n                \"rows\": [\n                    {\n                        \"seats\": [\n                            {\n                                \"seat_label\": \"A-R1-1\",\n                                \"id\": 1,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-10\",\n                                \"id\": 19,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-11\",\n                                \"id\": 21,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-12\",\n                                \"id\": 23,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-13\",\n                                \"id\": 25,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-14\",\n                                \"id\": 27,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-15\",\n                                \"id\": 29,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-16\",\n                                \"id\": 31,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-17\",\n                                \"id\": 33,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-18\",\n                                \"id\": 35,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-19\",\n                                \"id\": 37,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-2\",\n                                \"id\": 3,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-20\",\n                                \"id\": 39,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-3\",\n                                \"id\": 5,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-4\",\n                                \"id\": 7,\n                                \"status\": \"BOOKED\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-5\",\n                                \"id\": 9,\n                                \"status\": \"BOOKED\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-6\",\n                                \"id\": 11,\n                                \"status\": \"BOOKED\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-7\",\n                                \"id\": 13,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-8\",\n                                \"id\": 15,\n                                \"status\": \"AVAILABLE\"\n                            },\n                            {\n                                \"seat_label\": \"A-R1-9\",\n                                \"id\": 17,\n                                \"status\": \"AVAILABLE\"\n                            }\n                        ],\n                        \"rowId\": \"R1\"\n                    }\n                ],\n                \"sectionId\": \"A\"\n            }\n        ]\n    },\n    \"eventName\": \"Rock Night\",\n    \"showName\": \"Show 1\",\n    \"showId\": 1\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Bookings",
+			"item": [
+				{
+					"name": "Create Booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"showId\": {{showId}},\n  \"seats\": [\n    { \"section\": \"A\", \"row\": \"R1\", \"seatNumber\": \"1\" }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/booking",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Process Payment",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"reservationId\": \"{{reservationId}}\",\n  \"amount\": 100.00\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/booking/payment",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"booking",
+								"payment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Booking by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/booking/{{bookingId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"booking",
+								"{{bookingId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Booking by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/booking/{{bookingId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"booking",
+										"{{bookingId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:07:39 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2025-09-17T09:51:54.206702Z\",\n    \"id\": 1,\n    \"status\": \"CONFIRMED\",\n    \"show\": {\n        \"status\": \"LIVE\",\n        \"venue\": {\n            \"address\": \"123 Main St, Metropolis\",\n            \"name\": \"Grand Hall\",\n            \"id\": 1\n        },\n        \"id\": 3,\n        \"event\": {\n            \"category\": \"CONFERENCE\",\n            \"description\": \"Talks and workshops on cutting-edge tech\",\n            \"id\": 2,\n            \"title\": \"Tech Conference\"\n        },\n        \"durationMinutes\": 180,\n        \"startTimestamp\": \"2025-09-22T09:51:47.146294Z\"\n    },\n    \"totalAmount\": 100,\n    \"user\": {\n        \"email\": \"alice@example.com\",\n        \"fullName\": \"Alice Johnson\",\n        \"id\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List Bookings (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/booking/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"booking",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Bookings (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/booking/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"booking",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:08:34 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2025-09-17T09:51:48.206702Z\",\n            \"id\": 4,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 1,\n                \"event\": {\n                    \"category\": \"MUSIC\",\n                    \"description\": \"An electrifying evening of rock music\",\n                    \"id\": 1,\n                    \"title\": \"Rock Night\"\n                },\n                \"durationMinutes\": 120,\n                \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n            },\n            \"totalAmount\": 100,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:50.206702Z\",\n            \"id\": 6,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 1,\n                \"event\": {\n                    \"category\": \"MUSIC\",\n                    \"description\": \"An electrifying evening of rock music\",\n                    \"id\": 1,\n                    \"title\": \"Rock Night\"\n                },\n                \"durationMinutes\": 120,\n                \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n            },\n            \"totalAmount\": 300,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:52.206702Z\",\n            \"id\": 11,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"456 Center Ave, Gotham\",\n                    \"name\": \"City Arena\",\n                    \"id\": 2\n                },\n                \"id\": 2,\n                \"event\": {\n                    \"category\": \"MUSIC\",\n                    \"description\": \"An electrifying evening of rock music\",\n                    \"id\": 1,\n                    \"title\": \"Rock Night\"\n                },\n                \"durationMinutes\": 120,\n                \"startTimestamp\": \"2025-09-21T09:51:47.118952Z\"\n            },\n            \"totalAmount\": 200,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:54.206702Z\",\n            \"id\": 1,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 3,\n                \"event\": {\n                    \"category\": \"CONFERENCE\",\n                    \"description\": \"Talks and workshops on cutting-edge tech\",\n                    \"id\": 2,\n                    \"title\": \"Tech Conference\"\n                },\n                \"durationMinutes\": 180,\n                \"startTimestamp\": \"2025-09-22T09:51:47.146294Z\"\n            },\n            \"totalAmount\": 100,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:56.206702Z\",\n            \"id\": 3,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 3,\n                \"event\": {\n                    \"category\": \"CONFERENCE\",\n                    \"description\": \"Talks and workshops on cutting-edge tech\",\n                    \"id\": 2,\n                    \"title\": \"Tech Conference\"\n                },\n                \"durationMinutes\": 180,\n                \"startTimestamp\": \"2025-09-22T09:51:47.146294Z\"\n            },\n            \"totalAmount\": 300,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:58.206702Z\",\n            \"id\": 8,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"456 Center Ave, Gotham\",\n                    \"name\": \"City Arena\",\n                    \"id\": 2\n                },\n                \"id\": 4,\n                \"event\": {\n                    \"category\": \"CONFERENCE\",\n                    \"description\": \"Talks and workshops on cutting-edge tech\",\n                    \"id\": 2,\n                    \"title\": \"Tech Conference\"\n                },\n                \"durationMinutes\": 180,\n                \"startTimestamp\": \"2025-09-23T09:51:47.175637Z\"\n            },\n            \"totalAmount\": 200,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/user/booking/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/user/booking/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/user/booking/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 6,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Cancel Booking",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"bookingId\": {{bookingId}}\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/booking/cancel",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"booking",
+								"cancel"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Cancel Booking",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"bookingId\": {{bookingId}}\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/booking/cancel",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"booking",
+										"cancel"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:08:59 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"bookingId\": 1,\n    \"message\": \"Booking cancelled successfully. Refund will be processed within 3-5 business days.\",\n    \"success\": true,\n    \"refundAmount\": 100\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Tickets",
+			"item": [
+				{
+					"name": "Get Ticket by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/tickets/{{ticketId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"tickets",
+								"{{ticketId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Ticket by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/tickets/{{ticketId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"tickets",
+										"{{ticketId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:12:38 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"seat\": {\n        \"id\": 5,\n        \"seat_label\": \"A-R1-3\"\n    },\n    \"id\": 5,\n    \"price\": 100,\n    \"booking\": {\n        \"createdAt\": \"2025-09-17T09:51:56.206702Z\",\n        \"id\": 3,\n        \"status\": \"CONFIRMED\",\n        \"show\": {\n            \"status\": \"LIVE\",\n            \"venue\": {\n                \"id\": 1,\n                \"name\": \"Grand Hall\"\n            },\n            \"id\": 3,\n            \"event\": {\n                \"id\": 2,\n                \"title\": \"Tech Conference\"\n            },\n            \"durationMinutes\": 180,\n            \"startTimestamp\": \"2025-09-22T09:51:47.146294Z\"\n        },\n        \"totalAmount\": 300,\n        \"user\": {\n            \"id\": 1,\n            \"fullName\": \"Alice Johnson\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List Tickets by Booking (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/tickets/booking/{{bookingId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"tickets",
+								"booking",
+								"{{bookingId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Tickets by Booking (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/tickets/booking/{{bookingId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"tickets",
+										"booking",
+										"{{bookingId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:13:09 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/user/tickets/booking/1?page=-1&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/user/tickets/booking/1?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/user/tickets/booking/1?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 0,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 0\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "Get Payment by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/payment/{{paymentId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"payment",
+								"{{paymentId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Payment by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/payment/{{paymentId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"payment",
+										"{{paymentId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:09:18 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"bookingId\": 1,\n    \"id\": 1,\n    \"amount\": 100,\n    \"createdAt\": \"2025-09-17T09:51:54.206702Z\",\n    \"status\": \"SUCCESS\"\n}"
+						}
+					]
+				},
+				{
+					"name": "List Payments (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/payment/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"payment",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Payments (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/payment/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"payment",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:09:33 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"bookingId\": 4,\n            \"id\": 4,\n            \"amount\": 100,\n            \"createdAt\": \"2025-09-17T09:51:48.206702Z\",\n            \"status\": \"SUCCESS\"\n        },\n        {\n            \"bookingId\": 6,\n            \"id\": 6,\n            \"amount\": 300,\n            \"createdAt\": \"2025-09-17T09:51:50.206702Z\",\n            \"status\": \"SUCCESS\"\n        },\n        {\n            \"bookingId\": 11,\n            \"id\": 11,\n            \"amount\": 200,\n            \"createdAt\": \"2025-09-17T09:51:52.206702Z\",\n            \"status\": \"SUCCESS\"\n        },\n        {\n            \"bookingId\": 1,\n            \"id\": 1,\n            \"amount\": 100,\n            \"createdAt\": \"2025-09-17T09:51:54.206702Z\",\n            \"status\": \"SUCCESS\"\n        },\n        {\n            \"bookingId\": 3,\n            \"id\": 3,\n            \"amount\": 300,\n            \"createdAt\": \"2025-09-17T09:51:56.206702Z\",\n            \"status\": \"SUCCESS\"\n        },\n        {\n            \"bookingId\": 8,\n            \"id\": 8,\n            \"amount\": 200,\n            \"createdAt\": \"2025-09-17T09:51:58.206702Z\",\n            \"status\": \"SUCCESS\"\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/user/payment/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/user/payment/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/user/payment/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 6,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "List Payments by Show (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/payment/show/{{showId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"payment",
+								"show",
+								"{{showId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Payments by Show (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/payment/show/{{showId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"payment",
+										"show",
+										"{{showId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:10:13 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"bookingId\": 4,\n            \"id\": 4,\n            \"amount\": 100,\n            \"createdAt\": \"2025-09-17T09:51:48.206702Z\",\n            \"status\": \"SUCCESS\"\n        },\n        {\n            \"bookingId\": 6,\n            \"id\": 6,\n            \"amount\": 300,\n            \"createdAt\": \"2025-09-17T09:51:50.206702Z\",\n            \"status\": \"SUCCESS\"\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/user/payment/show/1/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/user/payment/show/1/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/user/payment/show/1/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 2,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Refunds",
+			"item": [
+				{
+					"name": "Get Refund by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/refund/{{refundId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"refund",
+								"{{refundId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Refund by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/refund/{{refundId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"refund",
+										"{{refundId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:10:32 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"bookingId\": 1,\n    \"id\": 1,\n    \"amount\": 100,\n    \"createdAt\": \"2025-09-17T10:08:58.677091Z\",\n    \"paymentId\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "List Refunds (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/refund/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"refund",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Refunds (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/refund/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"refund",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:11:09 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"bookingId\": 1,\n            \"id\": 1,\n            \"amount\": 100,\n            \"createdAt\": \"2025-09-17T10:08:58.677091Z\",\n            \"paymentId\": 1\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/user/refund/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/user/refund/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/user/refund/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 1,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "List Refunds by Show (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-User-ID",
+								"value": "{{userId}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/user/refund/show/{{showId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"refund",
+								"show",
+								"{{showId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Refunds by Show (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-User-ID",
+										"value": "{{userId}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/user/refund/show/{{showId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"user",
+										"refund",
+										"show",
+										"{{showId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:11:33 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/user/refund/show/1/list?page=-1&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/user/refund/show/1/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/user/refund/show/1/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 0,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 0\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		},
+		{
+			"key": "userId",
+			"value": "1"
+		},
+		{
+			"key": "showId",
+			"value": "1"
+		},
+		{
+			"key": "bookingId",
+			"value": "1"
+		},
+		{
+			"key": "eventId",
+			"value": "1"
+		},
+		{
+			"key": "venueId",
+			"value": "1"
+		},
+		{
+			"key": "ticketId",
+			"value": "1"
+		},
+		{
+			"key": "paymentId",
+			"value": "1"
+		},
+		{
+			"key": "refundId",
+			"value": "1"
+		},
+		{
+			"key": "eventTitle",
+			"value": "Rock Night"
+		},
+		{
+			"key": "venueName",
+			"value": "Grand Hall"
+		},
+		{
+			"key": "category",
+			"value": "MUSIC"
+		},
+		{
+			"key": "reservationId",
+			"value": "reservation-123"
+		}
+	]
+}

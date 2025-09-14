@@ -1,0 +1,3233 @@
+{
+	"info": {
+		"_postman_id": "904f234d-9688-4529-a652-8ac7f0b4e3a0",
+		"name": "Evently Admin API",
+		"description": "Admin management endpoints for Evently platform. All requests require header X-Admin-User: true.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37889977"
+	},
+	"item": [
+		{
+			"name": "Admin User Management",
+			"item": [
+				{
+					"name": "Get User by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/user/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"user",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/user/{{userId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"user",
+										"{{userId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Sep 2025 17:59:26 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"fullName\": \"Alice Johnson\",\n    \"email\": \"alice@example.com\",\n    \"id\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User by Email",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/user/email/{{userEmail}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"user",
+								"email",
+								"{{userEmail}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User by Email",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/user/email/{{userEmail}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"user",
+										"email",
+										"{{userEmail}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Disposition",
+									"value": "inline;filename=f.txt"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Sep 2025 17:59:41 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"fullName\": \"Alice Johnson\",\n    \"email\": \"alice@example.com\",\n    \"id\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User by Name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/user/name/{{userName}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"user",
+								"name",
+								"{{userName}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User by Name",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/user/name/{{userName}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"user",
+										"name",
+										"{{userName}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 16 Sep 2025 18:00:19 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"fullName\": \"Alice Johnson\",\n    \"email\": \"alice@example.com\",\n    \"id\": 1\n}"
+						}
+					]
+				},
+				{
+					"name": "List Users (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/user/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"user",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Users (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/user/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"user",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 06:10:43 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"content\": [\n        {\n            \"fullName\": \"Alice Johnson\",\n            \"email\": \"alice@example.com\",\n            \"id\": 1\n        },\n        {\n            \"fullName\": \"Bob Smith\",\n            \"email\": \"bob@example.com\",\n            \"id\": 2\n        }\n    ],\n    \"isPaginated\": false,\n    \"page\": {\n        \"totalPages\": 1,\n        \"number\": 0,\n        \"size\": 10,\n        \"totalElements\": 2\n    },\n    \"links\": {\n        \"self\": \"http://localhost:8080/api/v1/admin/user/list?page=0&size=10\",\n        \"last\": \"http://localhost:8080/api/v1/admin/user/list?page=0&size=10\",\n        \"next\": null,\n        \"first\": \"http://localhost:8080/api/v1/admin/user/list?page=0&size=10\",\n        \"prev\": null\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin Venue Management",
+			"item": [
+				{
+					"name": "List Venues",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/venue/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"venue",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Venues",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/venue/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"venue",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:16:48 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"address\": \"123 Main St, Metropolis\",\n        \"name\": \"Grand Hall\",\n        \"id\": 1,\n        \"capacity\": 500\n    },\n    {\n        \"address\": \"456 Center Ave, Gotham\",\n        \"name\": \"City Arena\",\n        \"id\": 2,\n        \"capacity\": 800\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "Get Venue by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/venue/{{venueId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"venue",
+								"{{venueId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Venue by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/venue/{{venueId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"venue",
+										"{{venueId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:17:06 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"address\": \"123 Main St, Metropolis\",\n    \"name\": \"Grand Hall\",\n    \"id\": 1,\n    \"capacity\": 500\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Venue by Name",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/venue/name/{{venueName}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"venue",
+								"name",
+								"{{venueName}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Venue by Name",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/venue/name/{{venueName}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"venue",
+										"name",
+										"{{venueName}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:17:18 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"address\": \"123 Main St, Metropolis\",\n    \"name\": \"Grand Hall\",\n    \"id\": 1,\n    \"capacity\": 500\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Venue",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Grand Hall\",\n  \"address\": \"123 Main St, Metropolis\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/venue",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"venue"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Venue",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Sanskrutik Bhavan\",\n  \"address\": \"Panchavati, Amravati, MH-444604\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/venue",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"venue"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:18:25 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"address\": \"Panchavati, Amravati, MH-444604\",\n    \"name\": \"Sanskrutik Bhavan\",\n    \"id\": 3,\n    \"capacity\": 0\n}"
+						},
+						{
+							"name": "Create Venue",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"Grand Hall\",\n  \"address\": \"123 Main St, Metropolis\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/venue",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"venue"
+									]
+								}
+							},
+							"status": "Conflict",
+							"code": 409,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:18:40 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"timestamp\": \"2025-09-17T10:18:40.788989500Z\",\n    \"status\": 409,\n    \"error\": \"Conflict\",\n    \"message\": \"Venue with name 'Grand Hall' already exists\",\n    \"path\": \"POST /api/v1/admin/venue\",\n    \"details\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Venue Seat Map",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/venue/{{venueId}}/seats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"venue",
+								"{{venueId}}",
+								"seats"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Venue Seat Map",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/venue/{{venueId}}/seats",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"venue",
+										"{{venueId}}",
+										"seats"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:19:08 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"venueName\": \"Grand Hall\",\n    \"totalCapacity\": 500,\n    \"sections\": [\n        {\n            \"rows\": [\n                {\n                    \"seats\": [\n                        {\n                            \"seat\": \"1\",\n                            \"row\": \"R1\",\n                            \"id\": 1,\n                            \"seat_label\": \"A-R1-1\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"10\",\n                            \"row\": \"R1\",\n                            \"id\": 19,\n                            \"seat_label\": \"A-R1-10\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"11\",\n                            \"row\": \"R1\",\n                            \"id\": 21,\n                            \"seat_label\": \"A-R1-11\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"12\",\n                            \"row\": \"R1\",\n                            \"id\": 23,\n                            \"seat_label\": \"A-R1-12\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"13\",\n                            \"row\": \"R1\",\n                            \"id\": 25,\n                            \"seat_label\": \"A-R1-13\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"14\",\n                            \"row\": \"R1\",\n                            \"id\": 27,\n                            \"seat_label\": \"A-R1-14\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"15\",\n                            \"row\": \"R1\",\n                            \"id\": 29,\n                            \"seat_label\": \"A-R1-15\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"16\",\n                            \"row\": \"R1\",\n                            \"id\": 31,\n                            \"seat_label\": \"A-R1-16\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"17\",\n                            \"row\": \"R1\",\n                            \"id\": 33,\n                            \"seat_label\": \"A-R1-17\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"18\",\n                            \"row\": \"R1\",\n                            \"id\": 35,\n                            \"seat_label\": \"A-R1-18\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"19\",\n                            \"row\": \"R1\",\n                            \"id\": 37,\n                            \"seat_label\": \"A-R1-19\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"2\",\n                            \"row\": \"R1\",\n                            \"id\": 3,\n                            \"seat_label\": \"A-R1-2\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"20\",\n                            \"row\": \"R1\",\n                            \"id\": 39,\n                            \"seat_label\": \"A-R1-20\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"3\",\n                            \"row\": \"R1\",\n                            \"id\": 5,\n                            \"seat_label\": \"A-R1-3\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"4\",\n                            \"row\": \"R1\",\n                            \"id\": 7,\n                            \"seat_label\": \"A-R1-4\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"5\",\n                            \"row\": \"R1\",\n                            \"id\": 9,\n                            \"seat_label\": \"A-R1-5\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"6\",\n                            \"row\": \"R1\",\n                            \"id\": 11,\n                            \"seat_label\": \"A-R1-6\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"7\",\n                            \"row\": \"R1\",\n                            \"id\": 13,\n                            \"seat_label\": \"A-R1-7\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"8\",\n                            \"row\": \"R1\",\n                            \"id\": 15,\n                            \"seat_label\": \"A-R1-8\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"9\",\n                            \"row\": \"R1\",\n                            \"id\": 17,\n                            \"seat_label\": \"A-R1-9\",\n                            \"section\": \"A\"\n                        }\n                    ],\n                    \"rowId\": \"R1\"\n                }\n            ],\n            \"sectionId\": \"A\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Venue Seat Map",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"sections\": [\n    {\n      \"sectionId\": \"A\",\n      \"rows\": [\n        {\n          \"rowId\": \"R1\",\n          \"seatCount\": 10\n        }\n      ]\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/venue/{{venueId}}/seats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"venue",
+								"{{venueId}}",
+								"seats"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Venue Seat Map",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"sections\": [\n    {\n      \"sectionId\": \"A\",\n      \"rows\": [\n        {\n          \"rowId\": \"R1\",\n          \"seatCount\": 10\n        }\n      ]\n    }\n  ]\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/venue/{{venueId}}/seats",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"venue",
+										"{{venueId}}",
+										"seats"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:21:06 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"venueName\": \"Sanskrutik Bhavan\",\n    \"totalCapacity\": 10,\n    \"sections\": [\n        {\n            \"rows\": [\n                {\n                    \"seats\": [\n                        {\n                            \"seat\": \"1\",\n                            \"row\": \"R1\",\n                            \"id\": 41,\n                            \"seat_label\": \"A-R1-1\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"10\",\n                            \"row\": \"R1\",\n                            \"id\": 50,\n                            \"seat_label\": \"A-R1-10\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"2\",\n                            \"row\": \"R1\",\n                            \"id\": 42,\n                            \"seat_label\": \"A-R1-2\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"3\",\n                            \"row\": \"R1\",\n                            \"id\": 43,\n                            \"seat_label\": \"A-R1-3\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"4\",\n                            \"row\": \"R1\",\n                            \"id\": 44,\n                            \"seat_label\": \"A-R1-4\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"5\",\n                            \"row\": \"R1\",\n                            \"id\": 45,\n                            \"seat_label\": \"A-R1-5\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"6\",\n                            \"row\": \"R1\",\n                            \"id\": 46,\n                            \"seat_label\": \"A-R1-6\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"7\",\n                            \"row\": \"R1\",\n                            \"id\": 47,\n                            \"seat_label\": \"A-R1-7\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"8\",\n                            \"row\": \"R1\",\n                            \"id\": 48,\n                            \"seat_label\": \"A-R1-8\",\n                            \"section\": \"A\"\n                        },\n                        {\n                            \"seat\": \"9\",\n                            \"row\": \"R1\",\n                            \"id\": 49,\n                            \"seat_label\": \"A-R1-9\",\n                            \"section\": \"A\"\n                        }\n                    ],\n                    \"rowId\": \"R1\"\n                }\n            ],\n            \"sectionId\": \"A\"\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin Event Management",
+			"item": [
+				{
+					"name": "List Events (paginated, optional category)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/event/list?category=MUSIC",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"event",
+								"list"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "MUSIC"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Events (paginated, optional category)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/event/list?category=MUSIC",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"event",
+										"list"
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "MUSIC"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:21:36 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"description\": \"An electrifying evening of rock music\",\n            \"title\": \"Rock Night\",\n            \"id\": 1,\n            \"category\": \"MUSIC\",\n            \"status\": \"LIVE\"\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/admin/event/list?page=0&size=10&category=MUSIC\",\n        \"self\": \"http://localhost:8080/api/v1/admin/event/list?page=0&size=10&category=MUSIC\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/admin/event/list?page=0&size=10&category=MUSIC\"\n    },\n    \"page\": {\n        \"totalElements\": 1,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Event by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/event/{{eventId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"event",
+								"{{eventId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Event by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/event/{{eventId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"event",
+										"{{eventId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:21:46 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"description\": \"An electrifying evening of rock music\",\n    \"title\": \"Rock Night\",\n    \"id\": 1,\n    \"category\": \"MUSIC\",\n    \"status\": \"LIVE\"\n}"
+						},
+						{
+							"name": "Get Event by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/event/{{eventId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"event",
+										"{{eventId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:23:19 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"description\": \"An electrifying evening of rock music\",\n    \"title\": \"Tomoae School Annual Gathering\",\n    \"id\": 3,\n    \"category\": \"MUSIC\",\n    \"status\": \"CREATED\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Event by Title",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/event/title/{{eventTitle}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"event",
+								"title",
+								"{{eventTitle}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Event by Title",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/event/title/{{eventTitle}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"event",
+										"title",
+										"{{eventTitle}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:21:53 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"description\": \"An electrifying evening of rock music\",\n    \"title\": \"Rock Night\",\n    \"id\": 1,\n    \"category\": \"MUSIC\",\n    \"status\": \"LIVE\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Event",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Tomoae School Annual Gathering\",\n  \"description\": \"An electrifying evening of rock music\",\n  \"category\": \"MUSIC\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/event",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"event"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Event",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"title\": \"Tomoae School Annual Gathering\",\n  \"description\": \"An electrifying evening of rock music\",\n  \"category\": \"MUSIC\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/event",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"event"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:22:26 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"description\": \"An electrifying evening of rock music\",\n    \"title\": \"Tomoae School Annual Gathering\",\n    \"id\": 3,\n    \"category\": \"MUSIC\",\n    \"status\": \"CREATED\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Event Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"LIVE\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/event/{{eventId}}/status/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"event",
+								"{{eventId}}",
+								"status",
+								"update"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update Event Status",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"status\": \"LIVE\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/event/{{eventId}}/status/update",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"event",
+										"{{eventId}}",
+										"status",
+										"update"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:23:45 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"description\": \"An electrifying evening of rock music\",\n    \"title\": \"Tomoae School Annual Gathering\",\n    \"id\": 3,\n    \"category\": \"MUSIC\",\n    \"status\": \"LIVE\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin Show Management",
+			"item": [
+				{
+					"name": "Create Show",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"eventId\": 3,\n  \"venueId\": 3,\n  \"startTimestamp\": \"2025-09-20T19:00:00Z\",\n  \"durationMinutes\": 120\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/show",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"show"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create Show",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"eventId\": 3,\n  \"venueId\": 3,\n  \"startTimestamp\": \"2025-09-20T19:00:00Z\",\n  \"durationMinutes\": 120\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/show",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"show"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:24:18 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"LIVE\",\n    \"venue\": {\n        \"address\": \"Panchavati, Amravati, MH-444604\",\n        \"name\": \"Sanskrutik Bhavan\",\n        \"id\": 3\n    },\n    \"id\": 5,\n    \"event\": {\n        \"category\": \"MUSIC\",\n        \"description\": \"An electrifying evening of rock music\",\n        \"id\": 3,\n        \"title\": \"Tomoae School Annual Gathering\"\n    },\n    \"durationMinutes\": 120,\n    \"startTimestamp\": \"2025-09-20T19:00:00Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Show by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/show/{{showId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"show",
+								"{{showId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Show by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/show/{{showId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"show",
+										"{{showId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:24:46 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": \"LIVE\",\n    \"venue\": {\n        \"address\": \"123 Main St, Metropolis\",\n        \"name\": \"Grand Hall\",\n        \"id\": 1\n    },\n    \"id\": 1,\n    \"event\": {\n        \"category\": \"MUSIC\",\n        \"description\": \"An electrifying evening of rock music\",\n        \"id\": 1,\n        \"title\": \"Rock Night\"\n    },\n    \"durationMinutes\": 120,\n    \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n}"
+						}
+					]
+				},
+				{
+					"name": "List Shows by Venue (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"startTimestamp\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/show/venue/{{venueId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"show",
+								"venue",
+								"{{venueId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Shows by Venue (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"startTimestamp\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/show/venue/{{venueId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"show",
+										"venue",
+										"{{venueId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:25:26 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"status\": \"LIVE\",\n            \"venue\": {\n                \"address\": \"123 Main St, Metropolis\",\n                \"name\": \"Grand Hall\",\n                \"id\": 1\n            },\n            \"id\": 1,\n            \"event\": {\n                \"category\": \"MUSIC\",\n                \"description\": \"An electrifying evening of rock music\",\n                \"id\": 1,\n                \"title\": \"Rock Night\"\n            },\n            \"durationMinutes\": 120,\n            \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n        },\n        {\n            \"status\": \"LIVE\",\n            \"venue\": {\n                \"address\": \"123 Main St, Metropolis\",\n                \"name\": \"Grand Hall\",\n                \"id\": 1\n            },\n            \"id\": 3,\n            \"event\": {\n                \"category\": \"CONFERENCE\",\n                \"description\": \"Talks and workshops on cutting-edge tech\",\n                \"id\": 2,\n                \"title\": \"Tech Conference\"\n            },\n            \"durationMinutes\": 180,\n            \"startTimestamp\": \"2025-09-22T09:51:47.146294Z\"\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"startTimestamp\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/admin/show/venue/1/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/admin/show/venue/1/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/admin/show/venue/1/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 2,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "List Shows by Event (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"startTimestamp\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/show/event/{{eventId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"show",
+								"event",
+								"{{eventId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Shows by Event (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"startTimestamp\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/show/event/{{eventId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"show",
+										"event",
+										"{{eventId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:25:53 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"status\": \"LIVE\",\n            \"venue\": {\n                \"address\": \"Panchavati, Amravati, MH-444604\",\n                \"name\": \"Sanskrutik Bhavan\",\n                \"id\": 3\n            },\n            \"id\": 5,\n            \"event\": {\n                \"category\": \"MUSIC\",\n                \"description\": \"An electrifying evening of rock music\",\n                \"id\": 3,\n                \"title\": \"Tomoae School Annual Gathering\"\n            },\n            \"durationMinutes\": 120,\n            \"startTimestamp\": \"2025-09-20T19:00:00Z\"\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"startTimestamp\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/admin/show/event/3/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/admin/show/event/3/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/admin/show/event/3/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 1,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "Update Show Status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"LIVE\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/show/{{showId}}/status/update",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"show",
+								"{{showId}}",
+								"status",
+								"update"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin Booking Management",
+			"item": [
+				{
+					"name": "Get Booking by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/booking/{{bookingId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"booking",
+								"{{bookingId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Booking by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/booking/{{bookingId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"booking",
+										"{{bookingId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:26:11 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"createdAt\": \"2025-09-17T09:51:54.206702Z\",\n    \"id\": 1,\n    \"status\": \"CANCELLED\",\n    \"show\": {\n        \"status\": \"LIVE\",\n        \"venue\": {\n            \"address\": \"123 Main St, Metropolis\",\n            \"name\": \"Grand Hall\",\n            \"id\": 1\n        },\n        \"id\": 3,\n        \"event\": {\n            \"category\": \"CONFERENCE\",\n            \"description\": \"Talks and workshops on cutting-edge tech\",\n            \"id\": 2,\n            \"title\": \"Tech Conference\"\n        },\n        \"durationMinutes\": 180,\n        \"startTimestamp\": \"2025-09-22T09:51:47.146294Z\"\n    },\n    \"totalAmount\": 100,\n    \"user\": {\n        \"email\": \"alice@example.com\",\n        \"fullName\": \"Alice Johnson\",\n        \"id\": 1\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List Bookings by Show (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/booking/show/{{showId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"booking",
+								"show",
+								"{{showId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Bookings by Show (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/booking/show/{{showId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"booking",
+										"show",
+										"{{showId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:26:19 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2025-09-17T09:51:48.206702Z\",\n            \"id\": 4,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 1,\n                \"event\": {\n                    \"category\": \"MUSIC\",\n                    \"description\": \"An electrifying evening of rock music\",\n                    \"id\": 1,\n                    \"title\": \"Rock Night\"\n                },\n                \"durationMinutes\": 120,\n                \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n            },\n            \"totalAmount\": 100,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:49.206702Z\",\n            \"id\": 5,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 1,\n                \"event\": {\n                    \"category\": \"MUSIC\",\n                    \"description\": \"An electrifying evening of rock music\",\n                    \"id\": 1,\n                    \"title\": \"Rock Night\"\n                },\n                \"durationMinutes\": 120,\n                \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n            },\n            \"totalAmount\": 200,\n            \"user\": {\n                \"email\": \"bob@example.com\",\n                \"fullName\": \"Bob Smith\",\n                \"id\": 2\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:50.206702Z\",\n            \"id\": 6,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 1,\n                \"event\": {\n                    \"category\": \"MUSIC\",\n                    \"description\": \"An electrifying evening of rock music\",\n                    \"id\": 1,\n                    \"title\": \"Rock Night\"\n                },\n                \"durationMinutes\": 120,\n                \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n            },\n            \"totalAmount\": 300,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/admin/booking/show/1/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/admin/booking/show/1/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/admin/booking/show/1/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 3,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "List Bookings by Event (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/booking/event/{{eventId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"booking",
+								"event",
+								"{{eventId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Bookings by Event (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/booking/event/{{eventId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"booking",
+										"event",
+										"{{eventId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:26:30 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/admin/booking/event/3/list?page=-1&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/admin/booking/event/3/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/admin/booking/event/3/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 0,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 0\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "List Bookings by Venue (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/booking/venue/{{venueId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"booking",
+								"venue",
+								"{{venueId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Bookings by Venue (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/booking/venue/{{venueId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"booking",
+										"venue",
+										"{{venueId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:26:39 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2025-09-17T09:51:48.206702Z\",\n            \"id\": 4,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 1,\n                \"event\": {\n                    \"category\": \"MUSIC\",\n                    \"description\": \"An electrifying evening of rock music\",\n                    \"id\": 1,\n                    \"title\": \"Rock Night\"\n                },\n                \"durationMinutes\": 120,\n                \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n            },\n            \"totalAmount\": 100,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:49.206702Z\",\n            \"id\": 5,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 1,\n                \"event\": {\n                    \"category\": \"MUSIC\",\n                    \"description\": \"An electrifying evening of rock music\",\n                    \"id\": 1,\n                    \"title\": \"Rock Night\"\n                },\n                \"durationMinutes\": 120,\n                \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n            },\n            \"totalAmount\": 200,\n            \"user\": {\n                \"email\": \"bob@example.com\",\n                \"fullName\": \"Bob Smith\",\n                \"id\": 2\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:50.206702Z\",\n            \"id\": 6,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 1,\n                \"event\": {\n                    \"category\": \"MUSIC\",\n                    \"description\": \"An electrifying evening of rock music\",\n                    \"id\": 1,\n                    \"title\": \"Rock Night\"\n                },\n                \"durationMinutes\": 120,\n                \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n            },\n            \"totalAmount\": 300,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:54.206702Z\",\n            \"id\": 1,\n            \"status\": \"CANCELLED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 3,\n                \"event\": {\n                    \"category\": \"CONFERENCE\",\n                    \"description\": \"Talks and workshops on cutting-edge tech\",\n                    \"id\": 2,\n                    \"title\": \"Tech Conference\"\n                },\n                \"durationMinutes\": 180,\n                \"startTimestamp\": \"2025-09-22T09:51:47.146294Z\"\n            },\n            \"totalAmount\": 100,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:55.206702Z\",\n            \"id\": 2,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 3,\n                \"event\": {\n                    \"category\": \"CONFERENCE\",\n                    \"description\": \"Talks and workshops on cutting-edge tech\",\n                    \"id\": 2,\n                    \"title\": \"Tech Conference\"\n                },\n                \"durationMinutes\": 180,\n                \"startTimestamp\": \"2025-09-22T09:51:47.146294Z\"\n            },\n            \"totalAmount\": 200,\n            \"user\": {\n                \"email\": \"bob@example.com\",\n                \"fullName\": \"Bob Smith\",\n                \"id\": 2\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:56.206702Z\",\n            \"id\": 3,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 3,\n                \"event\": {\n                    \"category\": \"CONFERENCE\",\n                    \"description\": \"Talks and workshops on cutting-edge tech\",\n                    \"id\": 2,\n                    \"title\": \"Tech Conference\"\n                },\n                \"durationMinutes\": 180,\n                \"startTimestamp\": \"2025-09-22T09:51:47.146294Z\"\n            },\n            \"totalAmount\": 300,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/admin/booking/venue/1/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/admin/booking/venue/1/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/admin/booking/venue/1/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 6,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				},
+				{
+					"name": "List Bookings by User (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/booking/user/{{userId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"booking",
+								"user",
+								"{{userId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Bookings by User (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/booking/user/{{userId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"booking",
+										"user",
+										"{{userId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 10:26:52 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"content\": [\n        {\n            \"createdAt\": \"2025-09-17T09:51:48.206702Z\",\n            \"id\": 4,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 1,\n                \"event\": {\n                    \"category\": \"MUSIC\",\n                    \"description\": \"An electrifying evening of rock music\",\n                    \"id\": 1,\n                    \"title\": \"Rock Night\"\n                },\n                \"durationMinutes\": 120,\n                \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n            },\n            \"totalAmount\": 100,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:50.206702Z\",\n            \"id\": 6,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 1,\n                \"event\": {\n                    \"category\": \"MUSIC\",\n                    \"description\": \"An electrifying evening of rock music\",\n                    \"id\": 1,\n                    \"title\": \"Rock Night\"\n                },\n                \"durationMinutes\": 120,\n                \"startTimestamp\": \"2025-09-20T09:51:46.946412Z\"\n            },\n            \"totalAmount\": 300,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:52.206702Z\",\n            \"id\": 11,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"456 Center Ave, Gotham\",\n                    \"name\": \"City Arena\",\n                    \"id\": 2\n                },\n                \"id\": 2,\n                \"event\": {\n                    \"category\": \"MUSIC\",\n                    \"description\": \"An electrifying evening of rock music\",\n                    \"id\": 1,\n                    \"title\": \"Rock Night\"\n                },\n                \"durationMinutes\": 120,\n                \"startTimestamp\": \"2025-09-21T09:51:47.118952Z\"\n            },\n            \"totalAmount\": 200,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:54.206702Z\",\n            \"id\": 1,\n            \"status\": \"CANCELLED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 3,\n                \"event\": {\n                    \"category\": \"CONFERENCE\",\n                    \"description\": \"Talks and workshops on cutting-edge tech\",\n                    \"id\": 2,\n                    \"title\": \"Tech Conference\"\n                },\n                \"durationMinutes\": 180,\n                \"startTimestamp\": \"2025-09-22T09:51:47.146294Z\"\n            },\n            \"totalAmount\": 100,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:56.206702Z\",\n            \"id\": 3,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"123 Main St, Metropolis\",\n                    \"name\": \"Grand Hall\",\n                    \"id\": 1\n                },\n                \"id\": 3,\n                \"event\": {\n                    \"category\": \"CONFERENCE\",\n                    \"description\": \"Talks and workshops on cutting-edge tech\",\n                    \"id\": 2,\n                    \"title\": \"Tech Conference\"\n                },\n                \"durationMinutes\": 180,\n                \"startTimestamp\": \"2025-09-22T09:51:47.146294Z\"\n            },\n            \"totalAmount\": 300,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        },\n        {\n            \"createdAt\": \"2025-09-17T09:51:58.206702Z\",\n            \"id\": 8,\n            \"status\": \"CONFIRMED\",\n            \"show\": {\n                \"status\": \"LIVE\",\n                \"venue\": {\n                    \"address\": \"456 Center Ave, Gotham\",\n                    \"name\": \"City Arena\",\n                    \"id\": 2\n                },\n                \"id\": 4,\n                \"event\": {\n                    \"category\": \"CONFERENCE\",\n                    \"description\": \"Talks and workshops on cutting-edge tech\",\n                    \"id\": 2,\n                    \"title\": \"Tech Conference\"\n                },\n                \"durationMinutes\": 180,\n                \"startTimestamp\": \"2025-09-23T09:51:47.175637Z\"\n            },\n            \"totalAmount\": 200,\n            \"user\": {\n                \"email\": \"alice@example.com\",\n                \"fullName\": \"Alice Johnson\",\n                \"id\": 1\n            }\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"direction\": \"asc\",\n                \"property\": \"createdAt\"\n            }\n        ]\n    },\n    \"links\": {\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/admin/booking/user/1/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/admin/booking/user/1/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/admin/booking/user/1/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 6,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin Ticket Management",
+			"item": [
+				{
+					"name": "Get Ticket by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/ticket/{{ticketId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"ticket",
+								"{{ticketId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Ticket by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/ticket/{{ticketId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"ticket",
+										"{{ticketId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 07:22:02 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"price\": 100,\n    \"id\": 1,\n    \"seat\": {\n        \"seat_label\": \"A-R1-1\",\n        \"id\": 1\n    },\n    \"booking\": {\n        \"user\": {\n            \"fullName\": \"Alice Johnson\",\n            \"email\": \"alice@example.com\",\n            \"id\": 1\n        },\n        \"totalAmount\": 100,\n        \"show\": {\n            \"durationMinutes\": 180,\n            \"event\": {\n                \"id\": 2,\n                \"description\": \"Talks and workshops on cutting-edge tech\",\n                \"category\": \"CONFERENCE\",\n                \"title\": \"Tech Conference\"\n            },\n            \"id\": 3,\n            \"venue\": {\n                \"name\": \"Grand Hall\",\n                \"address\": \"123 Main St, Metropolis\",\n                \"id\": 1\n            },\n            \"status\": \"LIVE\",\n            \"startTimestamp\": \"2025-09-22T07:20:03.000721Z\"\n        },\n        \"status\": \"CONFIRMED\",\n        \"id\": 1,\n        \"createdAt\": \"2025-09-17T07:20:10.057487Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List Tickets (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/ticket/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"ticket",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Tickets (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/ticket/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"ticket",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 07:30:46 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"isPaginated\": true,\n    \"page\": {\n        \"size\": 10,\n        \"totalElements\": 24,\n        \"totalPages\": 3,\n        \"number\": 0\n    },\n    \"links\": {\n        \"first\": \"http://localhost:8080/api/v1/admin/ticket/list?page=0&size=10\",\n        \"prev\": null,\n        \"self\": \"http://localhost:8080/api/v1/admin/ticket/list?page=0&size=10\",\n        \"last\": \"http://localhost:8080/api/v1/admin/ticket/list?page=2&size=10\",\n        \"next\": \"http://localhost:8080/api/v1/admin/ticket/list?page=1&size=10\"\n    },\n    \"sort\": {\n        \"fields\": [\n            {\n                \"property\": \"createdAt\",\n                \"direction\": \"asc\"\n            }\n        ]\n    },\n    \"content\": [\n        {\n            \"price\": 100,\n            \"id\": 1,\n            \"seat\": {\n                \"seat_label\": \"A-R1-1\",\n                \"id\": 1\n            },\n            \"booking\": {\n                \"user\": {\n                    \"fullName\": \"Alice Johnson\",\n                    \"email\": \"alice@example.com\",\n                    \"id\": 1\n                },\n                \"totalAmount\": 100,\n                \"show\": {\n                    \"durationMinutes\": 180,\n                    \"event\": {\n                        \"id\": 2,\n                        \"description\": \"Talks and workshops on cutting-edge tech\",\n                        \"category\": \"CONFERENCE\",\n                        \"title\": \"Tech Conference\"\n                    },\n                    \"id\": 3,\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"address\": \"123 Main St, Metropolis\",\n                        \"id\": 1\n                    },\n                    \"status\": \"LIVE\",\n                    \"startTimestamp\": \"2025-09-22T07:20:03.000721Z\"\n                },\n                \"status\": \"CONFIRMED\",\n                \"id\": 1,\n                \"createdAt\": \"2025-09-17T07:20:10.057487Z\"\n            }\n        },\n        {\n            \"price\": 100,\n            \"id\": 2,\n            \"seat\": {\n                \"seat_label\": \"A-R1-1\",\n                \"id\": 2\n            },\n            \"booking\": {\n                \"user\": {\n                    \"fullName\": \"Bob Smith\",\n                    \"email\": \"bob@example.com\",\n                    \"id\": 2\n                },\n                \"totalAmount\": 200,\n                \"show\": {\n                    \"durationMinutes\": 180,\n                    \"event\": {\n                        \"id\": 2,\n                        \"description\": \"Talks and workshops on cutting-edge tech\",\n                        \"category\": \"CONFERENCE\",\n                        \"title\": \"Tech Conference\"\n                    },\n                    \"id\": 3,\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"address\": \"123 Main St, Metropolis\",\n                        \"id\": 1\n                    },\n                    \"status\": \"LIVE\",\n                    \"startTimestamp\": \"2025-09-22T07:20:03.000721Z\"\n                },\n                \"status\": \"CONFIRMED\",\n                \"id\": 2,\n                \"createdAt\": \"2025-09-17T07:20:11.057487Z\"\n            }\n        },\n        {\n            \"price\": 100,\n            \"id\": 3,\n            \"seat\": {\n                \"seat_label\": \"A-R1-2\",\n                \"id\": 3\n            },\n            \"booking\": {\n                \"user\": {\n                    \"fullName\": \"Bob Smith\",\n                    \"email\": \"bob@example.com\",\n                    \"id\": 2\n                },\n                \"totalAmount\": 200,\n                \"show\": {\n                    \"durationMinutes\": 180,\n                    \"event\": {\n                        \"id\": 2,\n                        \"description\": \"Talks and workshops on cutting-edge tech\",\n                        \"category\": \"CONFERENCE\",\n                        \"title\": \"Tech Conference\"\n                    },\n                    \"id\": 3,\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"address\": \"123 Main St, Metropolis\",\n                        \"id\": 1\n                    },\n                    \"status\": \"LIVE\",\n                    \"startTimestamp\": \"2025-09-22T07:20:03.000721Z\"\n                },\n                \"status\": \"CONFIRMED\",\n                \"id\": 2,\n                \"createdAt\": \"2025-09-17T07:20:11.057487Z\"\n            }\n        },\n        {\n            \"price\": 100,\n            \"id\": 4,\n            \"seat\": {\n                \"seat_label\": \"A-R1-2\",\n                \"id\": 4\n            },\n            \"booking\": {\n                \"user\": {\n                    \"fullName\": \"Alice Johnson\",\n                    \"email\": \"alice@example.com\",\n                    \"id\": 1\n                },\n                \"totalAmount\": 300,\n                \"show\": {\n                    \"durationMinutes\": 180,\n                    \"event\": {\n                        \"id\": 2,\n                        \"description\": \"Talks and workshops on cutting-edge tech\",\n                        \"category\": \"CONFERENCE\",\n                        \"title\": \"Tech Conference\"\n                    },\n                    \"id\": 3,\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"address\": \"123 Main St, Metropolis\",\n                        \"id\": 1\n                    },\n                    \"status\": \"LIVE\",\n                    \"startTimestamp\": \"2025-09-22T07:20:03.000721Z\"\n                },\n                \"status\": \"CONFIRMED\",\n                \"id\": 3,\n                \"createdAt\": \"2025-09-17T07:20:12.057487Z\"\n            }\n        },\n        {\n            \"price\": 100,\n            \"id\": 5,\n            \"seat\": {\n                \"seat_label\": \"A-R1-3\",\n                \"id\": 5\n            },\n            \"booking\": {\n                \"user\": {\n                    \"fullName\": \"Alice Johnson\",\n                    \"email\": \"alice@example.com\",\n                    \"id\": 1\n                },\n                \"totalAmount\": 300,\n                \"show\": {\n                    \"durationMinutes\": 180,\n                    \"event\": {\n                        \"id\": 2,\n                        \"description\": \"Talks and workshops on cutting-edge tech\",\n                        \"category\": \"CONFERENCE\",\n                        \"title\": \"Tech Conference\"\n                    },\n                    \"id\": 3,\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"address\": \"123 Main St, Metropolis\",\n                        \"id\": 1\n                    },\n                    \"status\": \"LIVE\",\n                    \"startTimestamp\": \"2025-09-22T07:20:03.000721Z\"\n                },\n                \"status\": \"CONFIRMED\",\n                \"id\": 3,\n                \"createdAt\": \"2025-09-17T07:20:12.057487Z\"\n            }\n        },\n        {\n            \"price\": 100,\n            \"id\": 6,\n            \"seat\": {\n                \"seat_label\": \"A-R1-3\",\n                \"id\": 6\n            },\n            \"booking\": {\n                \"user\": {\n                    \"fullName\": \"Alice Johnson\",\n                    \"email\": \"alice@example.com\",\n                    \"id\": 1\n                },\n                \"totalAmount\": 300,\n                \"show\": {\n                    \"durationMinutes\": 180,\n                    \"event\": {\n                        \"id\": 2,\n                        \"description\": \"Talks and workshops on cutting-edge tech\",\n                        \"category\": \"CONFERENCE\",\n                        \"title\": \"Tech Conference\"\n                    },\n                    \"id\": 3,\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"address\": \"123 Main St, Metropolis\",\n                        \"id\": 1\n                    },\n                    \"status\": \"LIVE\",\n                    \"startTimestamp\": \"2025-09-22T07:20:03.000721Z\"\n                },\n                \"status\": \"CONFIRMED\",\n                \"id\": 3,\n                \"createdAt\": \"2025-09-17T07:20:12.057487Z\"\n            }\n        },\n        {\n            \"price\": 100,\n            \"id\": 7,\n            \"seat\": {\n                \"seat_label\": \"A-R1-4\",\n                \"id\": 7\n            },\n            \"booking\": {\n                \"user\": {\n                    \"fullName\": \"Alice Johnson\",\n                    \"email\": \"alice@example.com\",\n                    \"id\": 1\n                },\n                \"totalAmount\": 100,\n                \"show\": {\n                    \"durationMinutes\": 180,\n                    \"event\": {\n                        \"id\": 2,\n                        \"description\": \"Talks and workshops on cutting-edge tech\",\n                        \"category\": \"CONFERENCE\",\n                        \"title\": \"Tech Conference\"\n                    },\n                    \"id\": 3,\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"address\": \"123 Main St, Metropolis\",\n                        \"id\": 1\n                    },\n                    \"status\": \"LIVE\",\n                    \"startTimestamp\": \"2025-09-22T07:20:03.000721Z\"\n                },\n                \"status\": \"CONFIRMED\",\n                \"id\": 1,\n                \"createdAt\": \"2025-09-17T07:20:10.057487Z\"\n            }\n        },\n        {\n            \"price\": 100,\n            \"id\": 8,\n            \"seat\": {\n                \"seat_label\": \"A-R1-4\",\n                \"id\": 8\n            },\n            \"booking\": {\n                \"user\": {\n                    \"fullName\": \"Bob Smith\",\n                    \"email\": \"bob@example.com\",\n                    \"id\": 2\n                },\n                \"totalAmount\": 200,\n                \"show\": {\n                    \"durationMinutes\": 180,\n                    \"event\": {\n                        \"id\": 2,\n                        \"description\": \"Talks and workshops on cutting-edge tech\",\n                        \"category\": \"CONFERENCE\",\n                        \"title\": \"Tech Conference\"\n                    },\n                    \"id\": 3,\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"address\": \"123 Main St, Metropolis\",\n                        \"id\": 1\n                    },\n                    \"status\": \"LIVE\",\n                    \"startTimestamp\": \"2025-09-22T07:20:03.000721Z\"\n                },\n                \"status\": \"CONFIRMED\",\n                \"id\": 2,\n                \"createdAt\": \"2025-09-17T07:20:11.057487Z\"\n            }\n        },\n        {\n            \"price\": 100,\n            \"id\": 9,\n            \"seat\": {\n                \"seat_label\": \"A-R1-5\",\n                \"id\": 9\n            },\n            \"booking\": {\n                \"user\": {\n                    \"fullName\": \"Bob Smith\",\n                    \"email\": \"bob@example.com\",\n                    \"id\": 2\n                },\n                \"totalAmount\": 200,\n                \"show\": {\n                    \"durationMinutes\": 180,\n                    \"event\": {\n                        \"id\": 2,\n                        \"description\": \"Talks and workshops on cutting-edge tech\",\n                        \"category\": \"CONFERENCE\",\n                        \"title\": \"Tech Conference\"\n                    },\n                    \"id\": 3,\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"address\": \"123 Main St, Metropolis\",\n                        \"id\": 1\n                    },\n                    \"status\": \"LIVE\",\n                    \"startTimestamp\": \"2025-09-22T07:20:03.000721Z\"\n                },\n                \"status\": \"CONFIRMED\",\n                \"id\": 2,\n                \"createdAt\": \"2025-09-17T07:20:11.057487Z\"\n            }\n        },\n        {\n            \"price\": 100,\n            \"id\": 10,\n            \"seat\": {\n                \"seat_label\": \"A-R1-5\",\n                \"id\": 10\n            },\n            \"booking\": {\n                \"user\": {\n                    \"fullName\": \"Alice Johnson\",\n                    \"email\": \"alice@example.com\",\n                    \"id\": 1\n                },\n                \"totalAmount\": 300,\n                \"show\": {\n                    \"durationMinutes\": 180,\n                    \"event\": {\n                        \"id\": 2,\n                        \"description\": \"Talks and workshops on cutting-edge tech\",\n                        \"category\": \"CONFERENCE\",\n                        \"title\": \"Tech Conference\"\n                    },\n                    \"id\": 3,\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"address\": \"123 Main St, Metropolis\",\n                        \"id\": 1\n                    },\n                    \"status\": \"LIVE\",\n                    \"startTimestamp\": \"2025-09-22T07:20:03.000721Z\"\n                },\n                \"status\": \"CONFIRMED\",\n                \"id\": 3,\n                \"createdAt\": \"2025-09-17T07:20:12.057487Z\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List Tickets by Booking (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/ticket/booking/{{bookingId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"ticket",
+								"booking",
+								"{{bookingId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Tickets by Booking (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/ticket/booking/{{bookingId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"ticket",
+										"booking",
+										"{{bookingId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 07:36:30 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"sort\": {\n        \"fields\": [\n            {\n                \"property\": \"createdAt\",\n                \"direction\": \"asc\"\n            }\n        ]\n    },\n    \"links\": {\n        \"self\": \"http://localhost:8080/api/v1/admin/ticket/booking/2/list?page=0&size=10\",\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/admin/ticket/booking/2/list?page=0&size=10\",\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/admin/ticket/booking/2/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 2,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false,\n    \"content\": [\n        {\n            \"id\": 2,\n            \"price\": 100,\n            \"booking\": {\n                \"id\": 2,\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 3,\n                    \"event\": {\n                        \"description\": \"Talks and workshops on cutting-edge tech\",\n                        \"id\": 2,\n                        \"title\": \"Tech Conference\",\n                        \"category\": \"CONFERENCE\"\n                    },\n                    \"durationMinutes\": 180,\n                    \"startTimestamp\": \"2025-09-22T07:36:18.174709Z\",\n                    \"status\": \"LIVE\",\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"id\": 1,\n                        \"address\": \"123 Main St, Metropolis\"\n                    }\n                },\n                \"totalAmount\": 200,\n                \"user\": {\n                    \"id\": 2,\n                    \"email\": \"bob@example.com\",\n                    \"fullName\": \"Bob Smith\"\n                },\n                \"createdAt\": \"2025-09-17T07:36:26.230275Z\"\n            },\n            \"seat\": {\n                \"id\": 2,\n                \"seat_label\": \"A-R1-1\"\n            }\n        },\n        {\n            \"id\": 3,\n            \"price\": 100,\n            \"booking\": {\n                \"id\": 2,\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 3,\n                    \"event\": {\n                        \"description\": \"Talks and workshops on cutting-edge tech\",\n                        \"id\": 2,\n                        \"title\": \"Tech Conference\",\n                        \"category\": \"CONFERENCE\"\n                    },\n                    \"durationMinutes\": 180,\n                    \"startTimestamp\": \"2025-09-22T07:36:18.174709Z\",\n                    \"status\": \"LIVE\",\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"id\": 1,\n                        \"address\": \"123 Main St, Metropolis\"\n                    }\n                },\n                \"totalAmount\": 200,\n                \"user\": {\n                    \"id\": 2,\n                    \"email\": \"bob@example.com\",\n                    \"fullName\": \"Bob Smith\"\n                },\n                \"createdAt\": \"2025-09-17T07:36:26.230275Z\"\n            },\n            \"seat\": {\n                \"id\": 3,\n                \"seat_label\": \"A-R1-2\"\n            }\n        }\n    ]\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin Payment Management",
+			"item": [
+				{
+					"name": "Get Payment by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/payment/{{paymentId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"payment",
+								"{{paymentId}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Payment by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/payment/{{paymentId}}",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"payment",
+										"{{paymentId}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 07:41:31 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"id\": 1,\n    \"amount\": 100,\n    \"createdAt\": \"2025-09-17T07:36:25.230275Z\",\n    \"status\": \"SUCCESS\",\n    \"booking\": {\n        \"id\": 1,\n        \"status\": \"CONFIRMED\",\n        \"show\": {\n            \"startTimestamp\": \"2025-09-22T07:36:18.174709Z\",\n            \"id\": 3,\n            \"event\": {\n                \"title\": \"Tech Conference\",\n                \"id\": 2\n            },\n            \"venue\": {\n                \"name\": \"Grand Hall\",\n                \"id\": 1\n            }\n        },\n        \"totalAmount\": 100,\n        \"user\": {\n            \"id\": 1,\n            \"email\": \"alice@example.com\",\n            \"fullName\": \"Alice Johnson\"\n        },\n        \"createdAt\": \"2025-09-17T07:36:25.230275Z\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List Payments (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/payment/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"payment",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Payments (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/payment/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"payment",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 07:51:54 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"links\": {\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/admin/payment/list?page=0&size=10\",\n        \"next\": \"http://localhost:8080/api/v1/admin/payment/list?page=1&size=10\",\n        \"last\": \"http://localhost:8080/api/v1/admin/payment/list?page=1&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/admin/payment/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 12,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 2\n    },\n    \"isPaginated\": true,\n    \"content\": [\n        {\n            \"id\": 9,\n            \"amount\": 300,\n            \"createdAt\": \"2025-09-17T07:50:55.803030Z\",\n            \"status\": \"SUCCESS\",\n            \"booking\": {\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 4,\n                    \"event\": {\n                        \"title\": \"Tech Conference\",\n                        \"id\": 2\n                    },\n                    \"venue\": {\n                        \"name\": \"City Arena\",\n                        \"id\": 2\n                    },\n                    \"startTimestamp\": \"2025-09-23T07:50:43.765514Z\"\n                },\n                \"totalAmount\": 300,\n                \"user\": {\n                    \"id\": 2,\n                    \"email\": \"bob@example.com\",\n                    \"fullName\": \"Bob Smith\"\n                },\n                \"createdAt\": \"2025-09-17T07:50:55.803030Z\",\n                \"id\": 9\n            }\n        },\n        {\n            \"id\": 8,\n            \"amount\": 200,\n            \"createdAt\": \"2025-09-17T07:50:54.803030Z\",\n            \"status\": \"SUCCESS\",\n            \"booking\": {\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 4,\n                    \"event\": {\n                        \"title\": \"Tech Conference\",\n                        \"id\": 2\n                    },\n                    \"venue\": {\n                        \"name\": \"City Arena\",\n                        \"id\": 2\n                    },\n                    \"startTimestamp\": \"2025-09-23T07:50:43.765514Z\"\n                },\n                \"totalAmount\": 200,\n                \"user\": {\n                    \"id\": 1,\n                    \"email\": \"alice@example.com\",\n                    \"fullName\": \"Alice Johnson\"\n                },\n                \"createdAt\": \"2025-09-17T07:50:54.803030Z\",\n                \"id\": 8\n            }\n        },\n        {\n            \"id\": 7,\n            \"amount\": 100,\n            \"createdAt\": \"2025-09-17T07:50:53.803030Z\",\n            \"status\": \"SUCCESS\",\n            \"booking\": {\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 4,\n                    \"event\": {\n                        \"title\": \"Tech Conference\",\n                        \"id\": 2\n                    },\n                    \"venue\": {\n                        \"name\": \"City Arena\",\n                        \"id\": 2\n                    },\n                    \"startTimestamp\": \"2025-09-23T07:50:43.765514Z\"\n                },\n                \"totalAmount\": 100,\n                \"user\": {\n                    \"id\": 2,\n                    \"email\": \"bob@example.com\",\n                    \"fullName\": \"Bob Smith\"\n                },\n                \"createdAt\": \"2025-09-17T07:50:53.803030Z\",\n                \"id\": 7\n            }\n        },\n        {\n            \"id\": 3,\n            \"amount\": 300,\n            \"createdAt\": \"2025-09-17T07:50:52.803030Z\",\n            \"status\": \"SUCCESS\",\n            \"booking\": {\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 3,\n                    \"event\": {\n                        \"title\": \"Tech Conference\",\n                        \"id\": 2\n                    },\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"id\": 1\n                    },\n                    \"startTimestamp\": \"2025-09-22T07:50:43.730062Z\"\n                },\n                \"totalAmount\": 300,\n                \"user\": {\n                    \"id\": 1,\n                    \"email\": \"alice@example.com\",\n                    \"fullName\": \"Alice Johnson\"\n                },\n                \"createdAt\": \"2025-09-17T07:50:52.803030Z\",\n                \"id\": 3\n            }\n        },\n        {\n            \"id\": 2,\n            \"amount\": 200,\n            \"createdAt\": \"2025-09-17T07:50:51.803030Z\",\n            \"status\": \"SUCCESS\",\n            \"booking\": {\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 3,\n                    \"event\": {\n                        \"title\": \"Tech Conference\",\n                        \"id\": 2\n                    },\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"id\": 1\n                    },\n                    \"startTimestamp\": \"2025-09-22T07:50:43.730062Z\"\n                },\n                \"totalAmount\": 200,\n                \"user\": {\n                    \"id\": 2,\n                    \"email\": \"bob@example.com\",\n                    \"fullName\": \"Bob Smith\"\n                },\n                \"createdAt\": \"2025-09-17T07:50:51.803030Z\",\n                \"id\": 2\n            }\n        },\n        {\n            \"id\": 1,\n            \"amount\": 100,\n            \"createdAt\": \"2025-09-17T07:50:50.803030Z\",\n            \"status\": \"SUCCESS\",\n            \"booking\": {\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 3,\n                    \"event\": {\n                        \"title\": \"Tech Conference\",\n                        \"id\": 2\n                    },\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"id\": 1\n                    },\n                    \"startTimestamp\": \"2025-09-22T07:50:43.730062Z\"\n                },\n                \"totalAmount\": 100,\n                \"user\": {\n                    \"id\": 1,\n                    \"email\": \"alice@example.com\",\n                    \"fullName\": \"Alice Johnson\"\n                },\n                \"createdAt\": \"2025-09-17T07:50:50.803030Z\",\n                \"id\": 1\n            }\n        },\n        {\n            \"id\": 12,\n            \"amount\": 300,\n            \"createdAt\": \"2025-09-17T07:50:49.803030Z\",\n            \"status\": \"SUCCESS\",\n            \"booking\": {\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 2,\n                    \"event\": {\n                        \"title\": \"Rock Night\",\n                        \"id\": 1\n                    },\n                    \"venue\": {\n                        \"name\": \"City Arena\",\n                        \"id\": 2\n                    },\n                    \"startTimestamp\": \"2025-09-21T07:50:43.702791Z\"\n                },\n                \"totalAmount\": 300,\n                \"user\": {\n                    \"id\": 2,\n                    \"email\": \"bob@example.com\",\n                    \"fullName\": \"Bob Smith\"\n                },\n                \"createdAt\": \"2025-09-17T07:50:49.803030Z\",\n                \"id\": 12\n            }\n        },\n        {\n            \"id\": 11,\n            \"amount\": 200,\n            \"createdAt\": \"2025-09-17T07:50:48.803030Z\",\n            \"status\": \"SUCCESS\",\n            \"booking\": {\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 2,\n                    \"event\": {\n                        \"title\": \"Rock Night\",\n                        \"id\": 1\n                    },\n                    \"venue\": {\n                        \"name\": \"City Arena\",\n                        \"id\": 2\n                    },\n                    \"startTimestamp\": \"2025-09-21T07:50:43.702791Z\"\n                },\n                \"totalAmount\": 200,\n                \"user\": {\n                    \"id\": 1,\n                    \"email\": \"alice@example.com\",\n                    \"fullName\": \"Alice Johnson\"\n                },\n                \"createdAt\": \"2025-09-17T07:50:48.803030Z\",\n                \"id\": 11\n            }\n        },\n        {\n            \"id\": 10,\n            \"amount\": 100,\n            \"createdAt\": \"2025-09-17T07:50:47.803030Z\",\n            \"status\": \"SUCCESS\",\n            \"booking\": {\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 2,\n                    \"event\": {\n                        \"title\": \"Rock Night\",\n                        \"id\": 1\n                    },\n                    \"venue\": {\n                        \"name\": \"City Arena\",\n                        \"id\": 2\n                    },\n                    \"startTimestamp\": \"2025-09-21T07:50:43.702791Z\"\n                },\n                \"totalAmount\": 100,\n                \"user\": {\n                    \"id\": 2,\n                    \"email\": \"bob@example.com\",\n                    \"fullName\": \"Bob Smith\"\n                },\n                \"createdAt\": \"2025-09-17T07:50:47.803030Z\",\n                \"id\": 10\n            }\n        },\n        {\n            \"id\": 6,\n            \"amount\": 300,\n            \"createdAt\": \"2025-09-17T07:50:46.803030Z\",\n            \"status\": \"SUCCESS\",\n            \"booking\": {\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 1,\n                    \"event\": {\n                        \"title\": \"Rock Night\",\n                        \"id\": 1\n                    },\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"id\": 1\n                    },\n                    \"startTimestamp\": \"2025-09-20T07:50:43.657520Z\"\n                },\n                \"totalAmount\": 300,\n                \"user\": {\n                    \"id\": 1,\n                    \"email\": \"alice@example.com\",\n                    \"fullName\": \"Alice Johnson\"\n                },\n                \"createdAt\": \"2025-09-17T07:50:46.803030Z\",\n                \"id\": 6\n            }\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"property\": \"createdAt\",\n                \"direction\": \"desc\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "List Payments by Booking (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/payment/booking/{{bookingId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"payment",
+								"booking",
+								"{{bookingId}}",
+								"list"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Payments by Booking (paginated)",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "X-Admin-User",
+										"value": "true"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/admin/payment/booking/{{bookingId}}/list",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"admin",
+										"payment",
+										"booking",
+										"{{bookingId}}",
+										"list"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 17 Sep 2025 07:52:52 GMT"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=60"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"links\": {\n        \"prev\": null,\n        \"first\": \"http://localhost:8080/api/v1/admin/payment/booking/1/list?page=0&size=10\",\n        \"next\": null,\n        \"last\": \"http://localhost:8080/api/v1/admin/payment/booking/1/list?page=0&size=10\",\n        \"self\": \"http://localhost:8080/api/v1/admin/payment/booking/1/list?page=0&size=10\"\n    },\n    \"page\": {\n        \"totalElements\": 1,\n        \"size\": 10,\n        \"number\": 0,\n        \"totalPages\": 1\n    },\n    \"isPaginated\": false,\n    \"content\": [\n        {\n            \"id\": 1,\n            \"amount\": 100,\n            \"createdAt\": \"2025-09-17T07:50:50.803030Z\",\n            \"status\": \"SUCCESS\",\n            \"booking\": {\n                \"status\": \"CONFIRMED\",\n                \"show\": {\n                    \"id\": 3,\n                    \"event\": {\n                        \"title\": \"Tech Conference\",\n                        \"id\": 2\n                    },\n                    \"venue\": {\n                        \"name\": \"Grand Hall\",\n                        \"id\": 1\n                    },\n                    \"startTimestamp\": \"2025-09-22T07:50:43.730062Z\"\n                },\n                \"totalAmount\": 100,\n                \"user\": {\n                    \"id\": 1,\n                    \"email\": \"alice@example.com\",\n                    \"fullName\": \"Alice Johnson\"\n                },\n                \"createdAt\": \"2025-09-17T07:50:50.803030Z\",\n                \"id\": 1\n            }\n        }\n    ],\n    \"sort\": {\n        \"fields\": [\n            {\n                \"property\": \"createdAt\",\n                \"direction\": \"asc\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Admin Refund Management",
+			"item": [
+				{
+					"name": "Get Refund by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/refund/{{refundId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"refund",
+								"{{refundId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Refunds (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/refund/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"refund",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Refunds by Booking (paginated)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Admin-User",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"page\": 0,\r\n    \"size\": 10,\r\n    \"sort\": \"createdAt\",\r\n    \"direction\": \"asc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/admin/refund/booking/{{bookingId}}/list",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"refund",
+								"booking",
+								"{{bookingId}}",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "userEmail",
+			"value": "alice@example.com",
+			"type": "string"
+		},
+		{
+			"key": "userName",
+			"value": "Alice Johnson",
+			"type": "string"
+		},
+		{
+			"key": "venueId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "venueName",
+			"value": "Grand Hall",
+			"type": "string"
+		},
+		{
+			"key": "eventId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "eventTitle",
+			"value": "Rock Night",
+			"type": "string"
+		},
+		{
+			"key": "showId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "bookingId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "ticketId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "paymentId",
+			"value": "1",
+			"type": "string"
+		},
+		{
+			"key": "refundId",
+			"value": "1",
+			"type": "string"
+		}
+	]
+}
