@@ -376,152 +376,7 @@ FROM
     ins_bookings;
 
 -- 7) Tickets
-WITH booking_resolved AS (
-    SELECT
-        u.id AS user_id,
-        sh.id AS show_id,
-        v.id AS venue_id,
-        bs.total_amount,
-        bs.created_at_ts,
-        bs.seat_numbers
-    FROM
-        (
-            VALUES
-                (
-                    'alice@example.com',
-                    'Rock Night',
-                    'Grand Hall',
-                    100.00 :: DECIMAL(10, 2),
-                    CURRENT_TIMESTAMP + INTERVAL '1 second',
-                    ARRAY ['1'] :: text []
-                ),
-                (
-                    'bob@example.com',
-                    'Rock Night',
-                    'Grand Hall',
-                    200.00 :: DECIMAL(10, 2),
-                    CURRENT_TIMESTAMP + INTERVAL '2 seconds',
-                    ARRAY ['2','3'] :: text []
-                ),
-                (
-                    'alice@example.com',
-                    'Rock Night',
-                    'Grand Hall',
-                    300.00 :: DECIMAL(10, 2),
-                    CURRENT_TIMESTAMP + INTERVAL '3 seconds',
-                    ARRAY ['4','5','6'] :: text []
-                ),
-                (
-                    'bob@example.com',
-                    'Rock Night',
-                    'City Arena',
-                    100.00 :: DECIMAL(10, 2),
-                    CURRENT_TIMESTAMP + INTERVAL '4 seconds',
-                    ARRAY ['1'] :: text []
-                ),
-                (
-                    'alice@example.com',
-                    'Rock Night',
-                    'City Arena',
-                    200.00 :: DECIMAL(10, 2),
-                    CURRENT_TIMESTAMP + INTERVAL '5 seconds',
-                    ARRAY ['2','3'] :: text []
-                ),
-                (
-                    'bob@example.com',
-                    'Rock Night',
-                    'City Arena',
-                    300.00 :: DECIMAL(10, 2),
-                    CURRENT_TIMESTAMP + INTERVAL '6 seconds',
-                    ARRAY ['4','5','6'] :: text []
-                ),
-                (
-                    'alice@example.com',
-                    'Tech Conference',
-                    'Grand Hall',
-                    100.00 :: DECIMAL(10, 2),
-                    CURRENT_TIMESTAMP + INTERVAL '7 seconds',
-                    ARRAY ['1'] :: text []
-                ),
-                (
-                    'bob@example.com',
-                    'Tech Conference',
-                    'Grand Hall',
-                    200.00 :: DECIMAL(10, 2),
-                    CURRENT_TIMESTAMP + INTERVAL '8 seconds',
-                    ARRAY ['2','3'] :: text []
-                ),
-                (
-                    'alice@example.com',
-                    'Tech Conference',
-                    'Grand Hall',
-                    300.00 :: DECIMAL(10, 2),
-                    CURRENT_TIMESTAMP + INTERVAL '9 seconds',
-                    ARRAY ['4','5','6'] :: text []
-                ),
-                (
-                    'bob@example.com',
-                    'Tech Conference',
-                    'City Arena',
-                    100.00 :: DECIMAL(10, 2),
-                    CURRENT_TIMESTAMP + INTERVAL '10 seconds',
-                    ARRAY ['1'] :: text []
-                ),
-                (
-                    'alice@example.com',
-                    'Tech Conference',
-                    'City Arena',
-                    200.00 :: DECIMAL(10, 2),
-                    CURRENT_TIMESTAMP + INTERVAL '11 seconds',
-                    ARRAY ['2','3'] :: text []
-                ),
-                (
-                    'bob@example.com',
-                    'Tech Conference',
-                    'City Arena',
-                    300.00 :: DECIMAL(10, 2),
-                    CURRENT_TIMESTAMP + INTERVAL '12 seconds',
-                    ARRAY ['4','5','6'] :: text []
-                )
-        ) AS bs(
-            user_email,
-            event_title,
-            venue_name,
-            total_amount,
-            created_at_ts,
-            seat_numbers
-        )
-        JOIN users u ON u.email = bs.user_email
-        JOIN events e ON e.title = bs.event_title
-        JOIN venues v ON v.name = bs.venue_name
-        JOIN shows sh ON sh.event_id = e.id
-        AND sh.venue_id = v.id
-),
-booking_join AS (
-    SELECT
-        b.id AS booking_id,
-        br.venue_id,
-        br.seat_numbers
-    FROM
-        booking_resolved br
-        JOIN bookings b ON b.user_id = br.user_id
-        AND b.show_id = br.show_id
-        AND b.total_amount = br.total_amount
-        AND b.created_at = br.created_at_ts
-),
-expanded AS (
-    SELECT
-        bj.booking_id,
-        s.id AS seat_id
-    FROM
-        booking_join bj
-        JOIN LATERAL unnest(bj.seat_numbers) AS sn ON TRUE
-        JOIN seats s ON s.venue_id = bj.venue_id
-        AND s.section = 'A'
-        AND s.row = 'R1'
-        AND s.seat_number = sn
-)
-INSERT INTO
+insert into
     tickets (
         booking_id,
         seat_id,
@@ -529,11 +384,172 @@ INSERT INTO
         created_at,
         updated_at
     )
-SELECT
-    booking_id,
-    seat_id,
-    100.00,
-    CURRENT_TIMESTAMP,
-    CURRENT_TIMESTAMP
-FROM
-    expanded;
+values
+    (
+        1,
+        1,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        2,
+        2,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        2,
+        3,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        3,
+        4,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        3,
+        5,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        3,
+        6,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        4,
+        7,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        5,
+        8,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        5,
+        9,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        6,
+        10,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        6,
+        11,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        6,
+        12,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        7,
+        1,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        8,
+        2,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        8,
+        3,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        9,
+        4,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        9,
+        5,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        9,
+        6,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        10,
+        7,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        11,
+        8,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        11,
+        9,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        12,
+        10,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        12,
+        11,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    ),
+(
+        12,
+        12,
+        100.00 :: DECIMAL(10, 2),
+        CURRENT_TIMESTAMP,
+        CURRENT_TIMESTAMP
+    );

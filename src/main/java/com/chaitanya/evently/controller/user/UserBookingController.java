@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -141,11 +142,11 @@ public class UserBookingController {
 
         Map<String, Object> links = response.getLinks() == null ? Map.of()
                 : Map.of(
-                        "self", response.getLinks().getSelf(),
-                        "first", response.getLinks().getFirst(),
-                        "last", response.getLinks().getLast(),
-                        "next", response.getLinks().getNext(),
-                        "prev", response.getLinks().getPrev());
+                        "self", Optional.ofNullable(response.getLinks().getSelf()),
+                        "first", Optional.ofNullable(response.getLinks().getFirst()),
+                        "last", Optional.ofNullable(response.getLinks().getLast()),
+                        "next", Optional.ofNullable(response.getLinks().getNext()),
+                        "prev", Optional.ofNullable(response.getLinks().getPrev()));
 
         return Map.of(
                 "isPaginated", response.isPaginated(),

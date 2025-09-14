@@ -4,12 +4,12 @@ spring:
 
   datasource:
     # Only use DATABASE_URL (Render provides it, you can also set locally)
-    url: ${DATABASE_URL:jdbc:postgresql://user:pass@localhost:5432/evently_db?options=-c%20TimeZone%3DAsia/Kolkata}
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/evently_db?options=-c%20TimeZone%3DAsia/Kolkata&user=user&password=pass}
     driver-class-name: org.postgresql.Driver
 
   redis:
     # Only use REDIS_URL (Render provides it, or set manually in local env)
-    url: ${REDIS_URL:redis://localhost:6379}
+    url: ${REDIS_URL:redis://localhost:6379/0}
 
   flyway:
     enabled: ${FLYWAY_ENABLED:true}
