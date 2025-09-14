@@ -1,6 +1,9 @@
 package com.chaitanya.evently.dto.seat.map;
 
 import java.util.List;
+
+import com.chaitanya.evently.model.Seat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,6 +37,6 @@ public class SeatMapResponse {
     @Builder
     public static class Row {
         private String rowId;
-        private List<com.chaitanya.evently.dto.seat.SeatResponse> seats;
+        private List<Seat> seats;
     }
 }

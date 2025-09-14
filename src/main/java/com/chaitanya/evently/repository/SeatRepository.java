@@ -18,6 +18,12 @@ public interface SeatRepository extends JpaRepository<Seat, Long> {
 
     boolean existsByVenueIdAndSectionAndRowAndSeatNumber(Long venueId, String section, String row, String seatNumber);
 
+    @Query("SELECT s FROM Seat s WHERE s.venue.id = :venueId AND s.section = :section AND s.row = :row AND s.seatNumber = :seatNumber")
+    java.util.Optional<Seat> findByVenueIdAndSectionAndRowAndSeatNumber(@Param("venueId") Long venueId,
+            @Param("section") String section,
+            @Param("row") String row,
+            @Param("seatNumber") String seatNumber);
+
     void deleteByVenueId(Long venueId);
 
     long countByVenueId(Long venueId);

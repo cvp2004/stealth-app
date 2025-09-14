@@ -24,6 +24,16 @@ public interface EventRepository extends JpaRepository<Event, Long> {
     Page<Event> findByCategoryAndStatus(@Param("category") String category, @Param("status") EventStatus status,
             Pageable pageable);
 
+    // User-specific queries - only show LIVE and CLOSED events
+    @Query("SELECT e FROM Event e WHERE e.status IN ('LIVE', 'CLOSED')")
+    Page<Event> findLiveAndClosedEvents(Pageable pageable);
+
+    @Query("SELECT e FROM Event e WHERE e.category = :category AND e.status IN ('LIVE', 'CLOSED')")
+    Page<Event> findLiveAndClosedEventsByCategory(@Param("category") String category, Pageable pageable);
+
+    @Query("SELECT e FROM Event e WHERE e.title = :title AND e.status IN ('LIVE', 'CLOSED')")
+    Optional<Event> findLiveAndClosedEventByTitle(@Param("title") String title);
+
     Optional<Event> findByTitle(String title);
 
     boolean existsByTitle(String title);

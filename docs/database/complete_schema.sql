@@ -13,9 +13,6 @@ CREATE TABLE venues (
     id BIGSERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     address VARCHAR(500),
-    city VARCHAR(100),
-    state VARCHAR(50),
-    country VARCHAR(50),
     capacity INTEGER NOT NULL DEFAULT 0,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -27,27 +24,6 @@ ALTER TABLE
 ADD
     CONSTRAINT uk_venues_name UNIQUE (name);
 
--- Add comments for documentation
-COMMENT ON TABLE venues IS 'Stores venue information including name, address, and capacity';
-
-COMMENT ON COLUMN venues.id IS 'Primary key for venue';
-
-COMMENT ON COLUMN venues.name IS 'Unique name of the venue';
-
-COMMENT ON COLUMN venues.address IS 'Physical address of the venue';
-
-COMMENT ON COLUMN venues.city IS 'City where the venue is located';
-
-COMMENT ON COLUMN venues.state IS 'State/Province where the venue is located';
-
-COMMENT ON COLUMN venues.country IS 'Country where the venue is located';
-
-COMMENT ON COLUMN venues.capacity IS 'Total seating capacity of the venue (auto-calculated)';
-
-COMMENT ON COLUMN venues.created_at IS 'Timestamp when venue was created';
-
-COMMENT ON COLUMN venues.updated_at IS 'Timestamp when venue was last updated';
-
 -- =====================================================
 -- 2. SEATS TABLE
 -- =====================================================
@@ -58,7 +34,6 @@ CREATE TABLE seats (
     section VARCHAR(50),
     row VARCHAR(10),
     seat_number VARCHAR(10),
-    price DECIMAL(10, 2) NOT NULL DEFAULT 100.00,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     -- Foreign key constraint
@@ -71,31 +46,7 @@ ALTER TABLE
 ADD
     CONSTRAINT uk_seat_unique UNIQUE (venue_id, section, row, seat_number);
 
--- Add check constraint for price
-ALTER TABLE
-    seats
-ADD
-    CONSTRAINT chk_seats_price CHECK (price >= 0);
-
--- Add comments for documentation
-COMMENT ON TABLE seats IS 'Stores individual seat information for each venue';
-
-COMMENT ON COLUMN seats.id IS 'Primary key for seat';
-
-COMMENT ON COLUMN seats.venue_id IS 'Foreign key reference to venues table';
-
-COMMENT ON COLUMN seats.section IS 'Section identifier (e.g., VIP, General, Balcony)';
-
-COMMENT ON COLUMN seats.row IS 'Row identifier within the section';
-
-COMMENT ON COLUMN seats.seat_number IS 'Seat number within the row';
-
-COMMENT ON COLUMN seats.price IS 'Price of the seat in USD';
-
-COMMENT ON COLUMN seats.created_at IS 'Timestamp when seat was created';
-
-COMMENT ON COLUMN seats.updated_at IS 'Timestamp when seat was last updated';
-
+--
 -- =====================================================
 -- 3. EVENTS TABLE
 -- =====================================================
@@ -121,25 +72,8 @@ ALTER TABLE
     events
 ADD
     CONSTRAINT chk_events_status CHECK (
-        status IN ('CREATED', 'LIVE', 'CLOSED', 'CANCELLED')
+        status IN ('CREATED', 'LIVE', 'CLOSED')
     );
-
--- Add comments for documentation
-COMMENT ON TABLE events IS 'Stores event information and metadata';
-
-COMMENT ON COLUMN events.id IS 'Primary key for event';
-
-COMMENT ON COLUMN events.title IS 'Unique title of the event';
-
-COMMENT ON COLUMN events.description IS 'Detailed description of the event';
-
-COMMENT ON COLUMN events.category IS 'Category of the event (e.g., CONCERT, SPORTS, THEATER)';
-
-COMMENT ON COLUMN events.status IS 'Current status of the event';
-
-COMMENT ON COLUMN events.created_at IS 'Timestamp when event was created';
-
-COMMENT ON COLUMN events.updated_at IS 'Timestamp when event was last updated';
 
 -- =====================================================
 -- 4. SHOWS TABLE
@@ -182,25 +116,6 @@ ADD
         AND duration_minutes <= 1440
     );
 
--- Add comments for documentation
-COMMENT ON TABLE shows IS 'Stores show information linking events to venues with timing';
-
-COMMENT ON COLUMN shows.id IS 'Primary key for show';
-
-COMMENT ON COLUMN shows.venue_id IS 'Foreign key reference to venues table';
-
-COMMENT ON COLUMN shows.event_id IS 'Foreign key reference to events table';
-
-COMMENT ON COLUMN shows.start_timestamp IS 'Start time of the show';
-
-COMMENT ON COLUMN shows.duration_minutes IS 'Duration of the show in minutes';
-
-COMMENT ON COLUMN shows.status IS 'Current status of the show';
-
-COMMENT ON COLUMN shows.created_at IS 'Timestamp when show was created';
-
-COMMENT ON COLUMN shows.updated_at IS 'Timestamp when show was last updated';
-
 -- =====================================================
 -- 5. USERS TABLE
 -- =====================================================
@@ -233,21 +148,6 @@ ALTER TABLE
     users
 ADD
     CONSTRAINT chk_users_password CHECK (LENGTH(password) >= 8);
-
--- Add comments for documentation
-COMMENT ON TABLE users IS 'Stores user account information';
-
-COMMENT ON COLUMN users.id IS 'Primary key for user';
-
-COMMENT ON COLUMN users.full_name IS 'Full name of the user';
-
-COMMENT ON COLUMN users.email IS 'Unique email address of the user';
-
-COMMENT ON COLUMN users.password IS 'Hashed password of the user';
-
-COMMENT ON COLUMN users.created_at IS 'Timestamp when user was created';
-
-COMMENT ON COLUMN users.updated_at IS 'Timestamp when user was last updated';
 
 -- =====================================================
 -- 6. BOOKINGS TABLE
@@ -288,23 +188,6 @@ ALTER TABLE
 ADD
     CONSTRAINT chk_bookings_total_amount CHECK (total_amount >= 0);
 
--- Add comments for documentation
-COMMENT ON TABLE bookings IS 'Stores booking information for users and shows';
-
-COMMENT ON COLUMN bookings.id IS 'Primary key for booking';
-
-COMMENT ON COLUMN bookings.user_id IS 'Foreign key reference to users table';
-
-COMMENT ON COLUMN bookings.show_id IS 'Foreign key reference to shows table';
-
-COMMENT ON COLUMN bookings.status IS 'Current status of the booking';
-
-COMMENT ON COLUMN bookings.total_amount IS 'Total amount for the booking';
-
-COMMENT ON COLUMN bookings.created_at IS 'Timestamp when booking was created';
-
-COMMENT ON COLUMN bookings.updated_at IS 'Timestamp when booking was last updated';
-
 -- =====================================================
 -- 7. TICKETS TABLE
 -- =====================================================
@@ -312,7 +195,6 @@ COMMENT ON COLUMN bookings.updated_at IS 'Timestamp when booking was last update
 CREATE TABLE tickets (
     id BIGSERIAL PRIMARY KEY,
     booking_id BIGINT NOT NULL,
-    show_id BIGINT NOT NULL,
     seat_id BIGINT NOT NULL,
     price DECIMAL(10, 2) NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -325,11 +207,7 @@ ALTER TABLE
 ADD
     CONSTRAINT fk_tickets_booking_id FOREIGN KEY (booking_id) REFERENCES bookings(id) ON DELETE CASCADE;
 
-ALTER TABLE
-    tickets
-ADD
-    CONSTRAINT fk_tickets_show_id FOREIGN KEY (show_id) REFERENCES shows(id) ON DELETE CASCADE;
-
+--
 ALTER TABLE
     tickets
 ADD
@@ -340,23 +218,6 @@ ALTER TABLE
     tickets
 ADD
     CONSTRAINT chk_tickets_price CHECK (price >= 0);
-
--- Add comments for documentation
-COMMENT ON TABLE tickets IS 'Stores individual ticket information';
-
-COMMENT ON COLUMN tickets.id IS 'Primary key for ticket';
-
-COMMENT ON COLUMN tickets.booking_id IS 'Foreign key reference to bookings table';
-
-COMMENT ON COLUMN tickets.show_id IS 'Foreign key reference to shows table';
-
-COMMENT ON COLUMN tickets.seat_id IS 'Foreign key reference to seats table';
-
-COMMENT ON COLUMN tickets.price IS 'Price of the ticket';
-
-COMMENT ON COLUMN tickets.created_at IS 'Timestamp when ticket was created';
-
-COMMENT ON COLUMN tickets.updated_at IS 'Timestamp when ticket was last updated';
 
 -- =====================================================
 -- 8. PAYMENTS TABLE
@@ -389,21 +250,6 @@ ALTER TABLE
 ADD
     CONSTRAINT chk_payments_amount CHECK (amount >= 0);
 
--- Add comments for documentation
-COMMENT ON TABLE payments IS 'Stores payment information for bookings';
-
-COMMENT ON COLUMN payments.id IS 'Primary key for payment';
-
-COMMENT ON COLUMN payments.booking_id IS 'Foreign key reference to bookings table';
-
-COMMENT ON COLUMN payments.amount IS 'Amount of the payment';
-
-COMMENT ON COLUMN payments.status IS 'Status of the payment';
-
-COMMENT ON COLUMN payments.created_at IS 'Timestamp when payment was created';
-
-COMMENT ON COLUMN payments.updated_at IS 'Timestamp when payment was last updated';
-
 -- =====================================================
 -- 9. REFUNDS TABLE
 -- =====================================================
@@ -413,7 +259,7 @@ CREATE TABLE refunds (
     payment_id BIGINT NOT NULL,
     booking_id BIGINT NOT NULL,
     amount DECIMAL(10, 2) NOT NULL,
-    status VARCHAR(20) NOT NULL DEFAULT 'PENDING',
+    status VARCHAR(20) NOT NULL DEFAULT 'SUCCESS',
     processed_at TIMESTAMP WITH TIME ZONE,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -441,25 +287,6 @@ ALTER TABLE
     refunds
 ADD
     CONSTRAINT chk_refunds_amount CHECK (amount >= 0);
-
--- Add comments for documentation
-COMMENT ON TABLE refunds IS 'Stores refund information for cancelled bookings';
-
-COMMENT ON COLUMN refunds.id IS 'Primary key for refund';
-
-COMMENT ON COLUMN refunds.payment_id IS 'Foreign key reference to payments table';
-
-COMMENT ON COLUMN refunds.booking_id IS 'Foreign key reference to bookings table';
-
-COMMENT ON COLUMN refunds.amount IS 'Amount of the refund';
-
-COMMENT ON COLUMN refunds.status IS 'Status of the refund';
-
-COMMENT ON COLUMN refunds.processed_at IS 'Timestamp when refund was processed';
-
-COMMENT ON COLUMN refunds.created_at IS 'Timestamp when refund was created';
-
-COMMENT ON COLUMN refunds.updated_at IS 'Timestamp when refund was last updated';
 
 -- =====================================================
 -- 10. EMAILS TABLE
@@ -491,29 +318,6 @@ ADD
     CONSTRAINT chk_emails_email_type CHECK (
         email_type IN ('CANCEL_BOOKING', 'BOOKING_CONFIRMATION')
     );
-
--- Add comments for documentation
-COMMENT ON TABLE emails IS 'Stores email queue for asynchronous processing';
-
-COMMENT ON COLUMN emails.id IS 'Primary key for email';
-
-COMMENT ON COLUMN emails.user_id IS 'Foreign key reference to users table';
-
-COMMENT ON COLUMN emails.email_type IS 'Type of email to be sent';
-
-COMMENT ON COLUMN emails.email_subject IS 'Subject line of the email';
-
-COMMENT ON COLUMN emails.email_body IS 'Body content of the email';
-
-COMMENT ON COLUMN emails.email_sent IS 'Flag indicating if email has been sent';
-
-COMMENT ON COLUMN emails.sent_at IS 'Timestamp when email was sent';
-
-COMMENT ON COLUMN emails.error_message IS 'Error message if email sending failed';
-
-COMMENT ON COLUMN emails.created_at IS 'Timestamp when email was created';
-
-COMMENT ON COLUMN emails.updated_at IS 'Timestamp when email was last updated';
 
 -- =====================================================
 -- SCHEMA SUMMARY

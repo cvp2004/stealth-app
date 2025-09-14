@@ -27,10 +27,6 @@ public class Ticket extends BaseEntity {
     private Booking booking;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "show_id", nullable = false)
-    private Show show;
-
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "seat_id", nullable = false)
     private Seat seat;
 

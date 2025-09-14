@@ -2,7 +2,6 @@ package com.chaitanya.evently.service;
 
 import com.chaitanya.evently.dto.PaginationResponse;
 import com.chaitanya.evently.dto.event.EventRequest;
-import com.chaitanya.evently.dto.event.EventResponse;
 import com.chaitanya.evently.dto.event.EventStatusUpdateRequest;
 import com.chaitanya.evently.dto.event.PaginationRequest;
 import com.chaitanya.evently.exception.types.BadRequestException;
@@ -10,6 +9,7 @@ import com.chaitanya.evently.exception.types.ConflictException;
 import com.chaitanya.evently.exception.types.NotFoundException;
 import com.chaitanya.evently.model.Event;
 import com.chaitanya.evently.model.status.EventStatus;
+import com.chaitanya.evently.model.status.ShowStatus;
 import com.chaitanya.evently.repository.EventRepository;
 import com.chaitanya.evently.repository.ShowRepository;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +21,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -30,14 +32,48 @@ public class EventService {
     private final ShowRepository showRepository;
 
     @Transactional(readOnly = true)
-    public EventResponse getEventById(Long id) {
-        Event event = eventRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException("Event not found with id: " + id));
-        return mapToEventResponse(event);
+    public List<Event> getAllEvents() {
+        return eventRepository.findAll();
     }
 
     @Transactional(readOnly = true)
-    public PaginationResponse<EventResponse> getEvents(String category, PaginationRequest paginationRequest,
+    public Event getEventById(Long id) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Event not found with id: " + id));
+        return event;
+    }
+
+    @Transactional(readOnly = true)
+    public Event getEventByIdForUser(Long id) {
+        Event event = eventRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Event not found with id: " + id));
+
+        // Check if event is LIVE or CLOSED (not CREATED)
+        if (event.getStatus() == EventStatus.CREATED) {
+            throw new NotFoundException("Event not found with id: " + id);
+        }
+
+        return event;
+    }
+
+    @Transactional(readOnly = true)
+    public Event getEventByTitleForUser(String title) {
+        Event event = eventRepository.findLiveAndClosedEventByTitle(title)
+                .orElseThrow(() -> new NotFoundException("Event not found with title: " + title));
+
+        return event;
+    }
+
+    @Transactional(readOnly = true)
+    public Event getEventByTitleForAdmin(String title) {
+        Event event = eventRepository.findByTitle(title)
+                .orElseThrow(() -> new NotFoundException("Event not found with title: " + title));
+
+        return event;
+    }
+
+    @Transactional(readOnly = true)
+    public PaginationResponse<Event> getEvents(String category, PaginationRequest paginationRequest,
             String baseUrl) {
         Pageable pageable = createPageable(paginationRequest);
         Page<Event> eventPage;
@@ -48,13 +84,26 @@ public class EventService {
             eventPage = eventRepository.findAll(pageable);
         }
 
-        Page<EventResponse> eventResponsePage = eventPage.map(this::mapToEventResponse);
+        return PaginationResponse.fromPage(eventPage, baseUrl, category);
+    }
 
-        return PaginationResponse.fromPage(eventResponsePage, baseUrl, category);
+    @Transactional(readOnly = true)
+    public PaginationResponse<Event> getEventsForUser(String category, PaginationRequest paginationRequest,
+            String baseUrl) {
+        Pageable pageable = createPageable(paginationRequest);
+        Page<Event> eventPage;
+
+        if (category != null && !category.trim().isEmpty()) {
+            eventPage = eventRepository.findLiveAndClosedEventsByCategory(category, pageable);
+        } else {
+            eventPage = eventRepository.findLiveAndClosedEvents(pageable);
+        }
+
+        return PaginationResponse.fromPage(eventPage, baseUrl, category);
     }
 
     @Transactional
-    public EventResponse createEvent(EventRequest request) {
+    public Event createEvent(EventRequest request) {
         if (eventRepository.existsByTitle(request.getTitle())) {
             throw new ConflictException("Event with title '" + request.getTitle() + "' already exists");
         }
@@ -68,11 +117,11 @@ public class EventService {
         Event savedEvent = eventRepository.save(event);
         log.info("Created event with id: {} and title: {}", savedEvent.getId(), savedEvent.getTitle());
 
-        return mapToEventResponse(savedEvent);
+        return savedEvent;
     }
 
     @Transactional
-    public EventResponse updateEvent(Long id, EventRequest request) {
+    public Event updateEvent(Long id, EventRequest request) {
         Event event = eventRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Event not found with id: " + id));
 
@@ -88,11 +137,11 @@ public class EventService {
         Event updatedEvent = eventRepository.save(event);
         log.info("Updated event with id: {} and title: {}", updatedEvent.getId(), updatedEvent.getTitle());
 
-        return mapToEventResponse(updatedEvent);
+        return updatedEvent;
     }
 
     @Transactional
-    public EventResponse updateEventStatus(Long id, EventStatusUpdateRequest request) {
+    public Event updateEventStatus(Long id, EventStatusUpdateRequest request) {
         Event event = eventRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Event not found with id: " + id));
 
@@ -102,27 +151,27 @@ public class EventService {
         // Validate state transition
         validateStateTransition(currentStatus, newStatus);
 
+        // If attempting to close the event, ensure there are no LIVE shows
+        if (newStatus == EventStatus.CLOSED) {
+            var liveShows = showRepository.findByEventIdAndStatus(id,
+                    ShowStatus.LIVE);
+
+            if (!(liveShows.isEmpty())) {
+                throw new BadRequestException("There are still LIVE shows for this event. Cancel those shows first.");
+            }
+        }
+
         event.setStatus(newStatus);
         Event updatedEvent = eventRepository.save(event);
-
-        // If event status is changed to CLOSED, cancel all LIVE shows for this event
-        if (newStatus == EventStatus.CLOSED) {
-            showRepository.findByEventIdAndStatus(id, com.chaitanya.evently.model.status.ShowStatus.LIVE)
-                    .forEach(show -> {
-                        show.setStatus(com.chaitanya.evently.model.status.ShowStatus.CANCELLED);
-                        showRepository.save(show);
-                    });
-            log.info("Cancelled all LIVE shows for event with id: {} due to event status change to CLOSED", id);
-        }
 
         log.info("Updated event status from {} to {} for event with id: {}",
                 currentStatus, newStatus, updatedEvent.getId());
 
-        return mapToEventResponse(updatedEvent);
+        return updatedEvent;
     }
 
     @Transactional(readOnly = true)
-    public PaginationResponse<EventResponse> getEventsForAdmin(String category, PaginationRequest paginationRequest,
+    public PaginationResponse<Event> getEventsForAdmin(String category, PaginationRequest paginationRequest,
             String baseUrl) {
         // Admin can see all events regardless of status
         return getEvents(category, paginationRequest, baseUrl);
@@ -178,13 +227,4 @@ public class EventService {
         return PageRequest.of(paginationRequest.getPage(), paginationRequest.getSize(), sort);
     }
 
-    private EventResponse mapToEventResponse(Event event) {
-        return EventResponse.builder()
-                .id(event.getId())
-                .title(event.getTitle())
-                .description(event.getDescription())
-                .category(event.getCategory())
-                .status(event.getStatus())
-                .build();
-    }
 }

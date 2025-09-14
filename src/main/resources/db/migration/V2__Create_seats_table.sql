@@ -3,7 +3,7 @@ CREATE TABLE seats (
     id BIGSERIAL PRIMARY KEY,
     venue_id BIGINT NOT NULL,
     section VARCHAR(50),
-    row VARCHAR(10),
+    "row" VARCHAR(10),
     seat_number VARCHAR(10),
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -16,7 +16,7 @@ CREATE INDEX idx_seats_venue_id ON seats(venue_id);
 
 CREATE INDEX idx_seats_section ON seats(section);
 
-CREATE INDEX idx_seats_row ON seats(row);
+CREATE INDEX idx_seats_row ON seats("row");
 
 CREATE INDEX idx_seats_created_at ON seats(created_at);
 
@@ -25,9 +25,9 @@ CREATE INDEX idx_seats_updated_at ON seats(updated_at);
 -- Create composite indexes for common queries
 CREATE INDEX idx_seats_venue_section ON seats(venue_id, section);
 
-CREATE INDEX idx_seats_venue_section_row ON seats(venue_id, section, row);
+CREATE INDEX idx_seats_venue_section_row ON seats(venue_id, section, "row");
 
-CREATE INDEX idx_seats_venue_section_row_seat ON seats(venue_id, section, row, seat_number);
+CREATE INDEX idx_seats_venue_section_row_seat ON seats(venue_id, section, "row", seat_number);
 
 -- Create unique constraint to prevent duplicate seats
 ALTER TABLE

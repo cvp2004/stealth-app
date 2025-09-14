@@ -1,10 +1,8 @@
 package com.chaitanya.evently.service;
 
-import com.chaitanya.evently.dto.seat.SeatResponse;
 import com.chaitanya.evently.dto.seat.map.SeatMapRequest;
 import com.chaitanya.evently.dto.seat.map.SeatMapResponse;
 import com.chaitanya.evently.dto.venue.VenueRequest;
-import com.chaitanya.evently.dto.venue.VenueResponse;
 import com.chaitanya.evently.exception.types.ConflictException;
 import com.chaitanya.evently.exception.types.NotFoundException;
 import com.chaitanya.evently.model.Seat;
@@ -32,28 +30,26 @@ public class VenueService {
     private final ShowRepository showRepository;
 
     @Transactional(readOnly = true)
-    public VenueResponse getVenueById(Long id) {
+    public Venue getVenueById(Long id) {
         Venue venue = venueRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Venue not found with id: " + id));
-        return mapToVenueResponse(venue);
+        return venue;
     }
 
     @Transactional(readOnly = true)
-    public VenueResponse getVenueByName(String name) {
+    public Venue getVenueByName(String name) {
         Venue venue = venueRepository.findByName(name)
                 .orElseThrow(() -> new NotFoundException("Venue not found with name: " + name));
-        return mapToVenueResponse(venue);
+        return venue;
     }
 
     @Transactional(readOnly = true)
-    public List<VenueResponse> getAllVenues() {
-        return venueRepository.findAll().stream()
-                .map(this::mapToVenueResponse)
-                .collect(Collectors.toList());
+    public List<Venue> getAllVenues() {
+        return venueRepository.findAll();
     }
 
     @Transactional
-    public VenueResponse createVenue(VenueRequest request) {
+    public Venue createVenue(VenueRequest request) {
         if (venueRepository.existsByName(request.getName())) {
             throw new ConflictException("Venue with name '" + request.getName() + "' already exists");
         }
@@ -67,11 +63,11 @@ public class VenueService {
         Venue savedVenue = venueRepository.save(venue);
         log.info("Created venue with id: {} and name: {}", savedVenue.getId(), savedVenue.getName());
 
-        return mapToVenueResponse(savedVenue);
+        return savedVenue;
     }
 
     @Transactional
-    public VenueResponse updateVenue(Long id, VenueRequest request) {
+    public Venue updateVenue(Long id, VenueRequest request) {
         Venue venue = venueRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Venue not found with id: " + id));
 
@@ -87,7 +83,7 @@ public class VenueService {
         Venue updatedVenue = venueRepository.save(venue);
         log.info("Updated venue with id: {} and name: {}", updatedVenue.getId(), updatedVenue.getName());
 
-        return mapToVenueResponse(updatedVenue);
+        return updatedVenue;
     }
 
     @Transactional
@@ -118,16 +114,15 @@ public class VenueService {
         List<Seat> seats = seatRepository.findByVenueIdOrdered(venueId);
 
         // Group seats by section and row
-        Map<String, Map<String, List<SeatResponse>>> groupedSeats = seats.stream()
-                .map(this::mapToSeatResponse)
+        Map<String, Map<String, List<Seat>>> groupedSeats = seats.stream()
                 .collect(Collectors.groupingBy(
-                        SeatResponse::getSection,
-                        Collectors.groupingBy(SeatResponse::getRow)));
+                        Seat::getSection,
+                        Collectors.groupingBy(Seat::getRow)));
 
         List<SeatMapResponse.Section> sections = groupedSeats.entrySet().stream()
                 .map(entry -> {
                     String sectionId = entry.getKey();
-                    Map<String, List<SeatResponse>> rows = entry.getValue();
+                    Map<String, List<Seat>> rows = entry.getValue();
 
                     List<SeatMapResponse.Row> rowList = rows.entrySet().stream()
                             .map(rowEntry -> SeatMapResponse.Row.builder()
@@ -201,24 +196,6 @@ public class VenueService {
 
         // Return the seat map in the same hierarchical structure
         return getSeatMap(venueId);
-    }
-
-    private VenueResponse mapToVenueResponse(Venue venue) {
-        return VenueResponse.builder()
-                .id(venue.getId())
-                .name(venue.getName())
-                .address(venue.getAddress())
-                .capacity(venue.getCapacity())
-                .build();
-    }
-
-    private SeatResponse mapToSeatResponse(Seat seat) {
-        return SeatResponse.builder()
-                .id(seat.getId())
-                .section(seat.getSection())
-                .row(seat.getRow())
-                .seatNumber(seat.getSeatNumber())
-                .build();
     }
 
     /**

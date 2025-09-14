@@ -3,7 +3,9 @@ package com.chaitanya.evently.exception;
 import com.chaitanya.evently.dto.ErrorResponse;
 import com.chaitanya.evently.exception.types.BadRequestException;
 import com.chaitanya.evently.exception.types.ConflictException;
+import com.chaitanya.evently.exception.types.InternalServerException;
 import com.chaitanya.evently.exception.types.NotFoundException;
+import com.chaitanya.evently.exception.types.UnauthorizedException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import java.io.IOException;
@@ -57,6 +59,20 @@ public class GlobalExceptionHandler {
         String requestPath = path(request);
         log.warn("Bad request for: {} - Error: {}", requestPath, ex.getMessage());
         return build(HttpStatus.BAD_REQUEST, "Bad Request", ex.getMessage(), requestPath, null);
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ErrorResponse> handleUnauthorized(UnauthorizedException ex, WebRequest request) {
+        String requestPath = path(request);
+        log.warn("Unauthorized access for request: {} - Error: {}", requestPath, ex.getMessage());
+        return build(HttpStatus.UNAUTHORIZED, "Unauthorized", ex.getMessage(), requestPath, null);
+    }
+
+    @ExceptionHandler(InternalServerException.class)
+    public ResponseEntity<ErrorResponse> handleInternalServer(InternalServerException ex, WebRequest request) {
+        String requestPath = path(request);
+        log.error("Internal server error for request: {} - Error: {}", requestPath, ex.getMessage(), ex);
+        return build(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", ex.getMessage(), requestPath, null);
     }
 
     @ExceptionHandler(IllegalArgumentException.class)

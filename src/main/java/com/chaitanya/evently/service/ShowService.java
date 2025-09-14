@@ -1,18 +1,21 @@
 package com.chaitanya.evently.service;
 
 import com.chaitanya.evently.dto.PaginationResponse;
-import com.chaitanya.evently.dto.show.ShowFilterRequest;
 import com.chaitanya.evently.dto.show.ShowRequest;
-import com.chaitanya.evently.dto.show.ShowResponse;
 import com.chaitanya.evently.dto.show.ShowStatusUpdateRequest;
 import com.chaitanya.evently.dto.event.PaginationRequest;
 import com.chaitanya.evently.exception.types.BadRequestException;
 import com.chaitanya.evently.exception.types.ConflictException;
 import com.chaitanya.evently.exception.types.NotFoundException;
+import com.chaitanya.evently.model.Booking;
+import com.chaitanya.evently.model.Email;
 import com.chaitanya.evently.model.Event;
 import com.chaitanya.evently.model.Show;
 import com.chaitanya.evently.model.Venue;
+import com.chaitanya.evently.model.status.BookingStatus;
 import com.chaitanya.evently.model.status.ShowStatus;
+import com.chaitanya.evently.repository.BookingRepository;
+import com.chaitanya.evently.repository.EmailRepository;
 import com.chaitanya.evently.repository.EventRepository;
 import com.chaitanya.evently.repository.ShowRepository;
 import com.chaitanya.evently.repository.VenueRepository;
@@ -26,8 +29,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.ZoneOffset;
 import java.util.List;
 
 @Service
@@ -38,27 +39,54 @@ public class ShowService {
     private final ShowRepository showRepository;
     private final VenueRepository venueRepository;
     private final EventRepository eventRepository;
+    private final BookingRepository bookingRepository;
+    private final EmailRepository emailRepository;
+    private final BookingWorkflowService bookingWorkflowService;
 
     @Transactional(readOnly = true)
-    public ShowResponse getShowById(Long id) {
+    public Show getShowById(Long id) {
         Show show = showRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Show not found with id: " + id));
-        return mapToShowResponse(show);
+        return show;
     }
 
     @Transactional(readOnly = true)
-    public PaginationResponse<ShowResponse> getShows(ShowFilterRequest filterRequest,
+    public PaginationResponse<Show> getAllShows(PaginationRequest paginationRequest, String baseUrl) {
+        Pageable pageable = createPageable(paginationRequest);
+        Page<Show> showPage = showRepository.findAll(pageable);
+
+        return PaginationResponse.fromPage(showPage, baseUrl);
+    }
+
+    @Transactional(readOnly = true)
+    public PaginationResponse<Show> getShowsByVenueId(Long venueId, PaginationRequest paginationRequest,
+            String baseUrl) {
+        Pageable pageable = createPageable(paginationRequest);
+        Page<Show> showPage = showRepository.findByVenueId(venueId, pageable);
+
+        return PaginationResponse.fromPage(showPage, baseUrl);
+    }
+
+    @Transactional(readOnly = true)
+    public PaginationResponse<Show> getShowsByEventId(Long eventId, PaginationRequest paginationRequest,
+            String baseUrl) {
+        Pageable pageable = createPageable(paginationRequest);
+        Page<Show> showPage = showRepository.findByEventId(eventId, pageable);
+
+        return PaginationResponse.fromPage(showPage, baseUrl);
+    }
+
+    @Transactional(readOnly = true)
+    public PaginationResponse<Show> getShowsByVenueIdAndEventId(Long venueId, Long eventId,
             PaginationRequest paginationRequest, String baseUrl) {
         Pageable pageable = createPageable(paginationRequest);
-        Page<Show> showPage = applyFilters(filterRequest, pageable);
+        Page<Show> showPage = showRepository.findByVenueIdAndEventId(venueId, eventId, pageable);
 
-        Page<ShowResponse> showResponsePage = showPage.map(this::mapToShowResponse);
-
-        return PaginationResponse.fromPage(showResponsePage, baseUrl);
+        return PaginationResponse.fromPage(showPage, baseUrl);
     }
 
     @Transactional
-    public ShowResponse createShow(ShowRequest request) {
+    public Show createShow(ShowRequest request) {
         // Validate venue exists
         Venue venue = venueRepository.findById(request.getVenueId())
                 .orElseThrow(() -> new NotFoundException("Venue not found with id: " + request.getVenueId()));
@@ -83,11 +111,11 @@ public class ShowService {
         log.info("Created show with id: {} for event: {} at venue: {}",
                 savedShow.getId(), event.getTitle(), venue.getName());
 
-        return mapToShowResponse(savedShow);
+        return savedShow;
     }
 
     @Transactional
-    public ShowResponse updateShow(Long id, ShowRequest request) {
+    public Show updateShow(Long id, ShowRequest request) {
         Show show = showRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Show not found with id: " + id));
 
@@ -114,11 +142,11 @@ public class ShowService {
         log.info("Updated show with id: {} for event: {} at venue: {}",
                 updatedShow.getId(), event.getTitle(), venue.getName());
 
-        return mapToShowResponse(updatedShow);
+        return updatedShow;
     }
 
     @Transactional
-    public ShowResponse updateShowStatus(Long id, ShowStatusUpdateRequest request) {
+    public Show updateShowStatus(Long id, ShowStatusUpdateRequest request) {
         Show show = showRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Show not found with id: " + id));
 
@@ -128,12 +156,39 @@ public class ShowService {
         // Validate state transition
         validateShowStateTransition(currentStatus, newStatus);
 
+        // Handle state transition logic
+        if (currentStatus == ShowStatus.LIVE && newStatus == ShowStatus.CANCELLED) {
+            // Cancel all bookings associated with the show
+            log.info("Cancelling all bookings for show {} due to show cancellation", id);
+            List<Booking> bookings = bookingRepository.findByShowId(id, Pageable.unpaged()).getContent();
+
+            List<Booking> confirmedBookings = bookings.stream()
+                    .filter(booking -> booking.getStatus() == BookingStatus.CONFIRMED)
+                    .toList();
+
+            for (Booking booking : confirmedBookings) {
+                bookingWorkflowService.cancelBooking(booking.getId(), booking.getUser().getId());
+
+                String emailSubject = "Booking Cancellation Confirmation - Booking #" + booking.getId();
+                String emailBody = createShowCancellationEmailBody(booking);
+
+                Email email = Email.builder()
+                        .user(booking.getUser())
+                        .emailType(Email.EmailType.CANCEL_BOOKING)
+                        .emailSubject(emailSubject)
+                        .emailBody(emailBody)
+                        .build();
+                emailRepository.save(email);
+                log.info("Created cancellation email for user {}", booking.getUser().getEmail());
+            }
+        }
+
         show.setStatus(newStatus);
         Show updatedShow = showRepository.save(show);
         log.info("Updated show status from {} to {} for show with id: {}",
                 currentStatus, newStatus, updatedShow.getId());
 
-        return mapToShowResponse(updatedShow);
+        return updatedShow;
     }
 
     @Transactional
@@ -146,104 +201,23 @@ public class ShowService {
                 id, show.getEvent().getTitle(), show.getVenue().getName());
     }
 
-    @Transactional
-    public void deleteShowsByVenueId(Long venueId) {
-        showRepository.deleteByVenueId(venueId);
-        log.info("Deleted all shows for venue with id: {}", venueId);
-    }
-
-    @Transactional
-    public void deleteShowsByEventId(Long eventId) {
-        showRepository.deleteByEventId(eventId);
-        log.info("Deleted all shows for event with id: {}", eventId);
-    }
-
-    @Transactional
-    public void cancelLiveShowsForEvent(Long eventId) {
-        List<Show> liveShows = showRepository.findByEventIdAndStatus(eventId, ShowStatus.LIVE);
-        for (Show show : liveShows) {
-            show.setStatus(ShowStatus.CANCELLED);
-        }
-        showRepository.saveAll(liveShows);
-        log.info("Cancelled {} live shows for event with id: {}", liveShows.size(), eventId);
-    }
-
-    @Transactional(readOnly = true)
-    public PaginationResponse<ShowResponse> getShowsForAdmin(ShowFilterRequest filterRequest,
-            PaginationRequest paginationRequest, String baseUrl) {
-        // Admin can see all shows regardless of status
-        return getShows(filterRequest, paginationRequest, baseUrl);
-    }
-
-    private Page<Show> applyFilters(ShowFilterRequest filterRequest, Pageable pageable) {
-        if (filterRequest == null) {
-            return showRepository.findAll(pageable);
-        }
-
-        Long venueId = filterRequest.getVenueId();
-        Long eventId = filterRequest.getEventId();
-        Instant date = filterRequest.getDate();
-        Instant fromDate = filterRequest.getFromDate();
-        Instant toDate = filterRequest.getToDate();
-
-        // Apply filters based on what's provided
-        if (venueId != null && eventId != null) {
-            if (fromDate != null && toDate != null) {
-                return showRepository.findByVenueIdAndEventIdAndDateRange(venueId, eventId, fromDate, toDate, pageable);
-            } else if (date != null) {
-                LocalDate localDate = LocalDate.ofInstant(date, ZoneOffset.UTC);
-                return showRepository.findByVenueIdAndEventIdAndDateRange(venueId, eventId,
-                        localDate.atStartOfDay().toInstant(ZoneOffset.UTC),
-                        localDate.atTime(23, 59, 59).toInstant(ZoneOffset.UTC), pageable);
-            } else {
-                return showRepository.findByVenueIdAndEventId(venueId, eventId, pageable);
-            }
-        } else if (venueId != null) {
-            if (fromDate != null && toDate != null) {
-                return showRepository.findByVenueIdAndDateRange(venueId, fromDate, toDate, pageable);
-            } else if (date != null) {
-                LocalDate localDate = LocalDate.ofInstant(date, ZoneOffset.UTC);
-                return showRepository.findByVenueIdAndDate(venueId,
-                        localDate.atStartOfDay().toInstant(ZoneOffset.UTC), pageable);
-            } else {
-                return showRepository.findByVenueId(venueId, pageable);
-            }
-        } else if (eventId != null) {
-            if (fromDate != null && toDate != null) {
-                return showRepository.findByEventIdAndDateRange(eventId, fromDate, toDate, pageable);
-            } else if (date != null) {
-                LocalDate localDate = LocalDate.ofInstant(date, ZoneOffset.UTC);
-                return showRepository.findByEventIdAndDate(eventId,
-                        localDate.atStartOfDay().toInstant(ZoneOffset.UTC), pageable);
-            } else {
-                return showRepository.findByEventId(eventId, pageable);
-            }
-        } else if (fromDate != null && toDate != null) {
-            return showRepository.findByDateRange(fromDate, toDate, pageable);
-        } else if (date != null) {
-            LocalDate localDate = LocalDate.ofInstant(date, ZoneOffset.UTC);
-            return showRepository.findByDate(localDate.atStartOfDay().toInstant(ZoneOffset.UTC), pageable);
-        } else {
-            return showRepository.findAll(pageable);
-        }
-    }
-
     private boolean hasOverlappingShows(Long venueId, Instant startTimestamp, Integer durationMinutes) {
-        Instant endTimestamp = startTimestamp.plusSeconds(durationMinutes * 60L);
+        // Instant endTimestamp = startTimestamp.plusSeconds(durationMinutes * 60L);
 
-        // Check for overlapping shows at the same venue
-        List<Show> existingShows = showRepository.findByVenueId(venueId, PageRequest.of(0, Integer.MAX_VALUE))
-                .getContent();
+        // // Check for overlapping shows at the same venue
+        // List<Show> existingShows = showRepository.findByVenueId(venueId);
 
-        for (Show existingShow : existingShows) {
-            Instant existingStart = existingShow.getStartTimestamp();
-            Instant existingEnd = existingStart.plusSeconds(existingShow.getDurationMinutes() * 60L);
+        // for (Show existingShow : existingShows) {
+        // Instant existingStart = existingShow.getStartTimestamp();
+        // Instant existingEnd =
+        // existingStart.plusSeconds(existingShow.getDurationMinutes() * 60L);
 
-            // Check if shows overlap
-            if (startTimestamp.isBefore(existingEnd) && endTimestamp.isAfter(existingStart)) {
-                return true;
-            }
-        }
+        // // Check if shows overlap
+        // if (startTimestamp.isBefore(existingEnd) &&
+        // endTimestamp.isAfter(existingStart)) {
+        // return true;
+        // }
+        // }
 
         return false;
     }
@@ -253,8 +227,7 @@ public class ShowService {
         Instant endTimestamp = startTimestamp.plusSeconds(durationMinutes * 60L);
 
         // Check for overlapping shows at the same venue (excluding current show)
-        List<Show> existingShows = showRepository.findByVenueId(venueId, PageRequest.of(0, Integer.MAX_VALUE))
-                .getContent();
+        List<Show> existingShows = showRepository.findByVenueId(venueId);
 
         for (Show existingShow : existingShows) {
             if (existingShow.getId().equals(currentShowId)) {
@@ -307,19 +280,30 @@ public class ShowService {
         return PageRequest.of(paginationRequest.getPage(), paginationRequest.getSize(), sort);
     }
 
-    private ShowResponse mapToShowResponse(Show show) {
-        return ShowResponse.builder()
-                .id(show.getId())
-                .venueId(show.getVenue().getId())
-                .venueName(show.getVenue().getName())
-                .eventId(show.getEvent().getId())
-                .eventTitle(show.getEvent().getTitle())
-                .eventDescription(show.getEvent().getDescription())
-                .eventCategory(show.getEvent().getCategory())
-                .startTimestamp(show.getStartTimestamp())
-                .durationMinutes(show.getDurationMinutes())
-                .status(show.getStatus())
-                .createdAt(show.getCreatedAt())
-                .build();
+    private String createShowCancellationEmailBody(Booking booking) {
+        StringBuilder emailBody = new StringBuilder();
+
+        emailBody.append("Dear ").append(booking.getUser().getFullName()).append(",\n\n");
+        emailBody.append("We regret to inform you that the show has been cancelled.\n\n");
+
+        emailBody.append("USER DETAILS:\n");
+        emailBody.append("Name: ").append(booking.getUser().getFullName()).append("\n");
+        emailBody.append("Email: ").append(booking.getUser().getEmail()).append("\n\n");
+
+        emailBody.append("BOOKING DETAILS:\n");
+        emailBody.append("Booking ID: ").append(booking.getId()).append("\n");
+        emailBody.append("Event: ").append(booking.getShow().getEvent().getTitle()).append("\n");
+        emailBody.append("Show Date: ").append(booking.getShow().getStartTimestamp()).append("\n");
+        emailBody.append("Venue: ").append(booking.getShow().getVenue().getName()).append("\n");
+        emailBody.append("Total Amount: $").append(booking.getTotalAmount()).append("\n\n");
+
+        emailBody.append(
+                "Due to the show cancellation, your booking has been automatically cancelled and a full refund will be processed within 3-5 business days.\n\n");
+        emailBody.append(
+                "We apologize for any inconvenience caused. If you have any questions, please contact our support team.\n\n");
+        emailBody.append("Thank you for your understanding.\n\n");
+        emailBody.append("The Evently Team");
+
+        return emailBody.toString();
     }
 }

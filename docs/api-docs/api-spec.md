@@ -1,296 +1,347 @@
-# Evently API Specification
+## Evently API Overview
 
-## Table of Contents
+This document gives a concise overview of API domains and shared response conventions. Detailed per-route specs live in `admin-api.md` and `user-api.md`.
 
-1. [Overview](#overview)
-2. [Authentication](#authentication)
-3. [User APIs](#user-apis)
-   - [Authentication](#user-authentication)
-   - [Events](#user-events)
-   - [Shows](#user-shows)
-   - [Venues](#user-venues)
-   - [Bookings](#user-bookings)
-   - [Tickets](#user-tickets)
-   - [Payments](#user-payments)
-   - [Refunds](#user-refunds)
-4. [Admin APIs](#admin-apis)
-   - [Events](#admin-events)
-   - [Shows](#admin-shows)
-   - [Venues](#admin-venues)
-   - [Users](#admin-users)
-   - [Bookings](#admin-bookings)
-   - [Tickets](#admin-tickets)
-   - [Payments](#admin-payments)
-   - [Refunds](#admin-refunds)
-5. [Common Response Formats](#common-response-formats)
-6. [Error Handling](#error-handling)
+### Domains and Base
 
-## Overview
+- Base prefix: `/api/v1`
+- Admin APIs: management operations
+- User APIs: consumer-facing operations (includes auth and booking workflow)
 
-Evently is a comprehensive event management platform that allows users to discover, book, and manage events, shows, and tickets. The API provides endpoints for both regular users and administrators to interact with the system.
+### Common Request/Response Conventions
 
-**Base URL:** `http://localhost:8080/api`
+- Controllers shape responses as JSON maps exposing only necessary fields; models are not returned directly.
 
-## Authentication
+- PaginationRequest (request body for list endpoints):
 
-### User APIs
+  - page: integer (>= 0)
+  - size: integer (> 0)
+  - sort: string (must be `createdAt`)
+  - direction: string (`asc` | `desc`)
 
-All user API requests (except authentication endpoints) require the `X-User-ID` header containing a valid user ID.
+- PaginationResponse (all list endpoints):
 
-### Admin APIs
+  - isPaginated: boolean
+  - content: array<object>
+  - page: { number, size, totalElements, totalPages }
+  - sort: { fields: [ { property, direction } ] }
+  - links: { self, first, last, next, prev }
 
-All admin API requests require the `X-Admin-User` header set to `true` for authorization.
+- ErrorResponse (handled globally):
+  - message: string
+  - code: string
+  - timestamp: string (ISO-8601)
+  - path: string
+  - fieldErrors?: array<{ field, message }>
 
-### Public APIs
+### Resource Summary Shapes
 
-Authentication endpoints (`/api/v1/auth/**`) are publicly accessible and do not require any headers.
+- Venue: { id, name, address, capacity }
+- Event: { id, title, description, category, status }
+- Show: { id, venueId|venue, eventId|event, startTimestamp, durationMinutes, status }
+- Booking: { id, user|userId, show|showId, status, totalAmount, createdAt }
+- Ticket: { id, booking, seat, price }
+- Payment: { id, bookingId|booking, status, amount, createdAt }
+- Refund: { id, bookingId, paymentId, amount, createdAt }
+- SeatMap (with seat status): { venueName, totalCapacity, sections: [ { sectionId, rows: [ { rowId, seats: [ { id, seat_label, status } ] } ] } ] }
 
-## User APIs
+Proceed to:
 
-### User Authentication
+- Admin: `admin-api.md`
+- User (incl. Auth): `user-api.md`
 
-| Method | Endpoint            | Description                            |
-| ------ | ------------------- | -------------------------------------- |
-| POST   | `/v1/auth/register` | Register a new user account            |
-| POST   | `/v1/auth/login`    | Authenticate user and get access token |
+## JSON Schemas (Rendered)
 
-### User Events
-
-| Method | Endpoint                        | Description                                   |
-| ------ | ------------------------------- | --------------------------------------------- |
-| GET    | `/v1/user/events`               | Get paginated list of events                  |
-| GET    | `/v1/user/events/{id}`          | Get event details by ID                       |
-| GET    | `/v1/user/events/title/{title}` | Get event details by title (LIVE/CLOSED only) |
-
-### User Shows
-
-| Method | Endpoint                                         | Description                        |
-| ------ | ------------------------------------------------ | ---------------------------------- |
-| GET    | `/v1/user/shows`                                 | Get paginated list of shows        |
-| GET    | `/v1/user/shows/{id}`                            | Get show details by ID             |
-| GET    | `/v1/user/shows/{id}/seats`                      | Get available seats for a show     |
-| GET    | `/v1/user/shows/venue/{venueId}`                 | Get shows by venue ID              |
-| GET    | `/v1/user/shows/event/{eventId}`                 | Get shows by event ID              |
-| GET    | `/v1/user/shows/venue/{venueId}/event/{eventId}` | Get shows by venue ID and event ID |
-
-### User Venues
-
-| Method | Endpoint               | Description                  |
-| ------ | ---------------------- | ---------------------------- |
-| GET    | `/v1/user/venues`      | Get paginated list of venues |
-| GET    | `/v1/user/venues/{id}` | Get venue details by ID      |
-
-### User Bookings
-
-| Method | Endpoint                                            | Description                               |
-| ------ | --------------------------------------------------- | ----------------------------------------- |
-| GET    | `/v1/user/bookings`                                 | Get user's bookings with pagination       |
-| GET    | `/v1/user/bookings/{id}`                            | Get specific booking details              |
-| GET    | `/v1/user/bookings/venue/{venueId}`                 | Get user's bookings by venue ID           |
-| GET    | `/v1/user/bookings/show/{showId}`                   | Get user's bookings by show ID            |
-| GET    | `/v1/user/bookings/event/{eventId}`                 | Get user's bookings by event ID           |
-| GET    | `/v1/user/bookings/venue/{venueId}/show/{showId}`   | Get user's bookings by venue and show ID  |
-| GET    | `/v1/user/bookings/venue/{venueId}/event/{eventId}` | Get user's bookings by venue and event ID |
-| GET    | `/v1/user/bookings/show/{showId}/event/{eventId}`   | Get user's bookings by show and event ID  |
-| POST   | `/v1/user/bookings`                                 | Create a new booking (reserve seats)      |
-| POST   | `/v1/user/bookings/payment`                         | Process payment for a booking             |
-| DELETE | `/v1/user/bookings/cancel`                          | Cancel an existing booking                |
-
-### User Tickets
-
-| Method | Endpoint                | Description                        |
-| ------ | ----------------------- | ---------------------------------- |
-| GET    | `/v1/user/tickets`      | Get user's tickets with pagination |
-| GET    | `/v1/user/tickets/{id}` | Get specific ticket details        |
-
-### User Payments
-
-| Method | Endpoint                 | Description                  |
-| ------ | ------------------------ | ---------------------------- |
-| GET    | `/v1/user/payments`      | Get user's payment history   |
-| GET    | `/v1/user/payments/{id}` | Get specific payment details |
-
-### User Refunds
-
-| Method | Endpoint                | Description                        |
-| ------ | ----------------------- | ---------------------------------- |
-| GET    | `/v1/user/refunds`      | Get user's refunds with pagination |
-| GET    | `/v1/user/refunds/{id}` | Get specific refund details        |
-
-## Admin APIs
-
-### Admin Events
-
-| Method | Endpoint                         | Description                               |
-| ------ | -------------------------------- | ----------------------------------------- |
-| GET    | `/v1/admin/events`               | Get all events with pagination            |
-| GET    | `/v1/admin/events/{id}`          | Get event details by ID                   |
-| GET    | `/v1/admin/events/title/{title}` | Get event details by title (all statuses) |
-| POST   | `/v1/admin/events`               | Create a new event                        |
-| PUT    | `/v1/admin/events/{id}`          | Update an existing event                  |
-| DELETE | `/v1/admin/events/{id}`          | Delete an event                           |
-
-### Admin Shows
-
-| Method | Endpoint                                          | Description                        |
-| ------ | ------------------------------------------------- | ---------------------------------- |
-| GET    | `/v1/admin/shows`                                 | Get all shows with pagination      |
-| GET    | `/v1/admin/shows/{id}`                            | Get show details                   |
-| GET    | `/v1/admin/shows/venue/{venueId}`                 | Get shows by venue ID              |
-| GET    | `/v1/admin/shows/event/{eventId}`                 | Get shows by event ID              |
-| GET    | `/v1/admin/shows/venue/{venueId}/event/{eventId}` | Get shows by venue ID and event ID |
-| POST   | `/v1/admin/shows`                                 | Create a new show                  |
-| PUT    | `/v1/admin/shows/{id}`                            | Update an existing show            |
-| DELETE | `/v1/admin/shows/{id}`                            | Delete a show                      |
-
-### Admin Venues
-
-| Method | Endpoint                | Description                    |
-| ------ | ----------------------- | ------------------------------ |
-| GET    | `/v1/admin/venues`      | Get all venues with pagination |
-| GET    | `/v1/admin/venues/{id}` | Get venue details              |
-| POST   | `/v1/admin/venues`      | Create a new venue             |
-| PUT    | `/v1/admin/venues/{id}` | Update an existing venue       |
-| DELETE | `/v1/admin/venues/{id}` | Delete a venue                 |
-
-### Admin Users
-
-| Method | Endpoint                        | Description                   |
-| ------ | ------------------------------- | ----------------------------- |
-| GET    | `/v1/admin/users`               | Get all users with pagination |
-| GET    | `/v1/admin/users/{id}`          | Get user details by ID        |
-| GET    | `/v1/admin/users/email/{email}` | Get user details by email     |
-| GET    | `/v1/admin/users/name/{name}`   | Get user details by name      |
-
-### Admin Bookings
-
-| Method | Endpoint                                                           | Description                              |
-| ------ | ------------------------------------------------------------------ | ---------------------------------------- |
-| GET    | `/v1/admin/bookings`                                               | Get all bookings with pagination         |
-| GET    | `/v1/admin/bookings/{id}`                                          | Get specific booking details             |
-| GET    | `/v1/admin/bookings/venue/{venueId}`                               | Get bookings by venue ID                 |
-| GET    | `/v1/admin/bookings/show/{showId}`                                 | Get bookings by show ID                  |
-| GET    | `/v1/admin/bookings/event/{eventId}`                               | Get bookings by event ID                 |
-| GET    | `/v1/admin/bookings/user/{userId}`                                 | Get bookings by user ID                  |
-| GET    | `/v1/admin/bookings/venue/{venueId}/show/{showId}`                 | Get bookings by venue and show ID        |
-| GET    | `/v1/admin/bookings/venue/{venueId}/event/{eventId}`               | Get bookings by venue and event ID       |
-| GET    | `/v1/admin/bookings/show/{showId}/event/{eventId}`                 | Get bookings by show and event ID        |
-| GET    | `/v1/admin/bookings/user/{userId}/venue/{venueId}`                 | Get bookings by user and venue ID        |
-| GET    | `/v1/admin/bookings/user/{userId}/event/{eventId}`                 | Get bookings by user and event ID        |
-| GET    | `/v1/admin/bookings/venue/{venueId}/show/{showId}/event/{eventId}` | Get bookings by venue, show and event ID |
-| GET    | `/v1/admin/bookings/user/{userId}/venue/{venueId}/event/{eventId}` | Get bookings by user, venue and event ID |
-| PATCH  | `/v1/admin/bookings/{id}/status`                                   | Update booking status                    |
-| DELETE | `/v1/admin/bookings/{id}`                                          | Delete a booking                         |
-
-### Admin Tickets
-
-| Method | Endpoint                 | Description                     |
-| ------ | ------------------------ | ------------------------------- |
-| GET    | `/v1/admin/tickets`      | Get all tickets with pagination |
-| GET    | `/v1/admin/tickets/{id}` | Get ticket details              |
-| PUT    | `/v1/admin/tickets/{id}` | Update ticket information       |
-
-### Admin Payments
-
-| Method | Endpoint                  | Description                      |
-| ------ | ------------------------- | -------------------------------- |
-| GET    | `/v1/admin/payments`      | Get all payments with pagination |
-| GET    | `/v1/admin/payments/{id}` | Get payment details              |
-| PUT    | `/v1/admin/payments/{id}` | Update payment status            |
-
-### Admin Refunds
-
-| Method | Endpoint                 | Description                     |
-| ------ | ------------------------ | ------------------------------- |
-| GET    | `/v1/admin/refunds`      | Get all refunds with pagination |
-| GET    | `/v1/admin/refunds/{id}` | Get refund details              |
-| PUT    | `/v1/admin/refunds/{id}` | Update refund status            |
-
-## Common Response Formats`
-
-### Paginated Response
+### PaginationRequest
 
 ```json
 {
-  "data": [...],
-  "pagination": {
-    "page": 0,
-    "size": 10,
-    "totalElements": 100,
-    "totalPages": 10,
-    "first": true,
-    "last": false
+  "page": 0,
+  "size": 20,
+  "sort": "createdAt",
+  "direction": "desc"
+}
+```
+
+### PaginationResponse
+
+```json
+{
+  "isPaginated": true,
+  "content": [{ "...resourceFields": "..." }],
+  "page": {
+    "number": 0,
+    "size": 20,
+    "totalElements": 123,
+    "totalPages": 7
+  },
+  "sort": {
+    "fields": [{ "property": "createdAt", "direction": "desc" }]
   },
   "links": {
-    "self": "http://localhost:8080/api/v1/events?page=0&size=10",
-    "next": "http://localhost:8080/api/v1/events?page=1&size=10",
-    "prev": null
+    "self": "string",
+    "first": "string",
+    "last": "string",
+    "next": "string",
+    "prev": "string"
   }
 }
 ```
 
-### Error Response
+### ErrorResponse
 
 ```json
 {
-  "message": "Error description",
-  "success": false,
-  "errors": [
+  "message": "string",
+  "code": "string",
+  "timestamp": "2025-01-15T10:30:00Z",
+  "path": "/api/v1/...",
+  "fieldErrors": [{ "field": "string", "message": "string" }]
+}
+```
+
+### Venue
+
+```json
+{ "id": 1, "name": "string", "address": "string", "capacity": 0 }
+```
+
+### Event
+
+```json
+{
+  "id": 1,
+  "title": "string",
+  "description": "string",
+  "category": "string",
+  "status": "CREATED|LIVE|CLOSED"
+}
+```
+
+### Show (summary)
+
+```json
+{
+  "id": 1,
+  "venueId": 1,
+  "eventId": 1,
+  "startTimestamp": "2025-07-15T20:00:00Z",
+  "durationMinutes": 120,
+  "status": "LIVE|CLOSED|CANCELLED"
+}
+```
+
+### Show (embedded venue/event)
+
+```json
+{
+  "id": 1,
+  "venue": { "id": 1, "name": "string", "address": "string" },
+  "event": {
+    "id": 1,
+    "title": "string",
+    "description": "string",
+    "category": "string"
+  },
+  "startTimestamp": "2025-07-15T20:00:00Z",
+  "durationMinutes": 120,
+  "status": "LIVE|CLOSED|CANCELLED"
+}
+```
+
+### Booking
+
+```json
+{
+  "id": 1,
+  "user": { "id": 1, "fullName": "string", "email": "string" },
+  "show": {
+    "id": 1,
+    "venue": { "id": 1, "name": "string", "address": "string" },
+    "event": {
+      "id": 1,
+      "title": "string",
+      "description": "string",
+      "category": "string"
+    },
+    "startTimestamp": "2025-07-15T20:00:00Z",
+    "durationMinutes": 120,
+    "status": "LIVE|CLOSED|CANCELLED"
+  },
+  "status": "CONFIRMED|CANCELLED",
+  "totalAmount": 450.0,
+  "createdAt": "2025-07-01T10:00:00Z"
+}
+```
+
+### Ticket
+
+```json
+{
+  "id": 1,
+  "booking": { "id": 1 },
+  "seat": { "id": 1, "seat_label": "A-1-10" },
+  "price": 120.0
+}
+```
+
+### Payment
+
+```json
+{
+  "id": 1,
+  "booking": { "id": 1 },
+  "status": "SUCCESS|FAILED",
+  "amount": 450.0,
+  "createdAt": "2025-07-01T10:05:00Z"
+}
+```
+
+### Refund
+
+```json
+{
+  "id": 1,
+  "bookingId": 1,
+  "paymentId": 10,
+  "amount": 450.0,
+  "createdAt": "2025-07-02T09:00:00Z"
+}
+```
+
+### SeatMap (with seat status)
+
+```json
+{
+  "venueName": "string",
+  "totalCapacity": 1000,
+  "sections": [
     {
-      "field": "fieldName",
-      "message": "Field-specific error message"
+      "sectionId": "S1",
+      "rows": [
+        {
+          "rowId": "R1",
+          "seats": [
+            { "id": 1, "seat_label": "S1-R1-1", "status": "BOOKED|AVAILABLE" }
+          ]
+        }
+      ]
     }
   ]
 }
 ```
 
-## Error Handling
+## Endpoint Inventory (Tables)
 
-The API uses standard HTTP status codes:
+### Admin Endpoints
 
-- **200 OK** - Request successful
-- **201 Created** - Resource created successfully
-- **400 Bad Request** - Invalid request data
-- **401 Unauthorized** - Authentication required
-- **403 Forbidden** - Insufficient permissions
-- **404 Not Found** - Resource not found
-- **409 Conflict** - Resource conflict (e.g., seat already booked)
-- **422 Unprocessable Entity** - Validation errors
-- **500 Internal Server Error** - Server error
+| Method | Path                                           | Description               |
+| ------ | ---------------------------------------------- | ------------------------- |
+| GET    | /api/v1/admin/venue/list                       | List venues               |
+| GET    | /api/v1/admin/venue/{id}                       | Get venue by id           |
+| GET    | /api/v1/admin/venue/name/{name}                | Get venue by name         |
+| GET    | /api/v1/admin/venue/{id}/seats                 | Get venue seat map        |
+| POST   | /api/v1/admin/venue/{id}/seats                 | Create venue seat map     |
 
-### Common Error Scenarios
+| Method | Path                                           | Description               |
+| ------ | ---------------------------------------------- | ------------------------- |
+| GET    | /api/v1/admin/event/list                       | List events (paginated)   |
+| GET    | /api/v1/admin/event/{id}                       | Get event by id           |
+| GET    | /api/v1/admin/event/title/{title}              | Get event by title        |
+| POST   | /api/v1/admin/event                            | Create event              |
+| PATCH  | /api/v1/admin/event/{id}/status/update         | Update event status       |
 
-- **Seat Already Booked** - When trying to book an already reserved seat
-- **Booking Expired** - When payment is not completed within the reservation window
-- **Insufficient Permissions** - When user tries to access admin-only resources
-- **Unauthorized Admin Access** - When admin endpoints are accessed without `X-Admin-User: true` header
-- **Missing User ID** - When user endpoints (except auth) are accessed without `X-User-ID` header
-- **Invalid User ID** - When user endpoints are accessed with invalid `X-User-ID` header format
-- **Validation Errors** - When required fields are missing or invalid
-- **Resource Not Found** - When requesting non-existent resources
+| Method | Path                                           | Description               |
+| ------ | ---------------------------------------------- | ------------------------- |
+| POST   | /api/v1/admin/show                             | Create show               |
+| GET    | /api/v1/admin/show/{id}                        | Get show by id            |
+| GET    | /api/v1/admin/show/venue/{venueId}/list        | List shows by venue       |
+| GET    | /api/v1/admin/show/event/{eventId}/list        | List shows by event       |
+| PATCH  | /api/v1/admin/show/{id}/status/update          | Update show status        |
 
-## Key Features
+| Method | Path                                           | Description               |
+| ------ | ---------------------------------------------- | ------------------------- |
+| GET    | /api/v1/admin/user/{id}                        | Get user by id            |
+| GET    | /api/v1/admin/user/email/{email}               | Get user by email         |
+| GET    | /api/v1/admin/user/name/{name}                 | Get user by name          |
+| GET    | /api/v1/admin/user/list                        | List users (paginated)    |
 
-### Booking Workflow
+| Method | Path                                           | Description               |
+| ------ | ---------------------------------------------- | ------------------------- |
+| GET    | /api/v1/admin/booking/{id}                     | Get booking by id         |
+| GET    | /api/v1/admin/booking/show/{showId}/list       | List bookings by show     |
+| GET    | /api/v1/admin/booking/event/{eventId}/list     | List bookings by event    |
+| GET    | /api/v1/admin/booking/venue/{venueId}/list     | List bookings by venue    |
+| GET    | /api/v1/admin/booking/user/{userId}/list       | List bookings by user     |
 
-1. **Seat Selection** - Users can view available seats for a show
-2. **Reservation** - Seats are temporarily reserved for 5 minutes
-3. **Payment** - Users must complete payment within the reservation window
-4. **Confirmation** - Successful payment confirms the booking
-5. **Cancellation** - Users can cancel bookings and receive refunds
+| Method | Path                                           | Description               |
+| ------ | ---------------------------------------------- | ------------------------- |
+| GET    | /api/v1/admin/ticket/{id}                      | Get ticket by id          |
+| GET    | /api/v1/admin/ticket/list                      | List tickets (paginated)  |
+| GET    | /api/v1/admin/ticket/booking/{bookingId}/list  | List tickets by booking   |
 
-### Email Notifications
+| Method | Path                                           | Description               |
+| ------ | ---------------------------------------------- | ------------------------- |
+| GET    | /api/v1/admin/payment/{id}                     | Get payment by id         |
+| GET    | /api/v1/admin/payment/list                     | List payments (paginated) |
+| GET    | /api/v1/admin/payment/booking/{bookingId}/list | List payments by booking  |
 
-- **Booking Confirmation** - Sent when booking is successfully created
-- **Cancellation Confirmation** - Sent when booking is cancelled
-- **Async Processing** - Emails are processed every 10 minutes
+| Method | Path                                           | Description               |
+| ------ | ---------------------------------------------- | ------------------------- |
+| GET    | /api/v1/admin/refund/{id}                      | Get refund by id          |
+| GET    | /api/v1/admin/refund/list                      | List refunds (paginated)  |
+| GET    | /api/v1/admin/refund/booking/{bookingId}/list  | List refunds by booking   |
 
-### Redis Integration
+### User Endpoints (incl. Auth)
 
-- **Distributed Locking** - Prevents double-booking of seats
-- **Reservation Management** - Temporary seat reservations
-- **Transaction Processing** - Atomic booking operations
+| Method | Path                                                   | Description                     |
+| ------ | ------------------------------------------------------ | ------------------------------- |
+| POST   | /api/v1/auth/signup                                    | Sign up                         |
+| POST   | /api/v1/auth/signin                                    | Sign in                         |
+| GET    | /api/v1/auth/user/{userId}                             | Get user profile                |
 
----
+| Method | Path                                                   | Description                     |
+| ------ | ------------------------------------------------------ | ------------------------------- |
+| GET    | /api/v1/user/venue/list                                | List venues                     |
+| GET    | /api/v1/user/venue/{id}                                | Get venue by id                 |
+| GET    | /api/v1/user/venue/name/{name}                         | Get venue by name               |
+| GET    | /api/v1/user/venue/{id}/seats                          | Get venue seat map              |
 
-_This API specification provides a high-level overview of the Evently platform. For detailed request/response schemas and specific implementation details, refer to `api-spec-detailed.md` file._
+| Method | Path                                                   | Description                     |
+| ------ | ------------------------------------------------------ | ------------------------------- |
+| GET    | /api/v1/user/event/list                                | List events (paginated)         |
+| GET    | /api/v1/user/event/{id}                                | Get event by id                 |
+| GET    | /api/v1/user/event/title/{title}                       | Get event by title              |
+
+| Method | Path                                                   | Description                     |
+| ------ | ------------------------------------------------------ | ------------------------------- |
+| GET    | /api/v1/user/show/{id}                                 | Get show by id                  |
+| GET    | /api/v1/user/show/venue/{venueId}/list                 | List shows by venue             |
+| GET    | /api/v1/user/show/event/{eventId}/list                 | List shows by event             |
+| GET    | /api/v1/user/show/venue/{venueId}/event/{eventId}/list | List shows by venue+event       |
+| GET    | /api/v1/user/show/{showId}/seats                       | Get show seat map with statuses |
+
+| Method | Path                                                   | Description                     |
+| ------ | ------------------------------------------------------ | ------------------------------- |
+| POST   | /api/v1/user/booking                                   | Create booking (reservation)    |
+| POST   | /api/v1/user/booking/payment                           | Process booking payment         |
+| GET    | /api/v1/user/booking/{id}                              | Get booking by id               |
+| GET    | /api/v1/user/booking/list                              | List user bookings (paginated)  |
+| DELETE | /api/v1/user/booking/cancel                            | Cancel booking                  |
+
+| Method | Path                                                   | Description                     |
+| ------ | ------------------------------------------------------ | ------------------------------- |
+| GET    | /api/v1/user/tickets/{id}                              | Get ticket by id                |
+| GET    | /api/v1/user/tickets/booking/{bookingId}               | List tickets by booking         |
+
+| Method | Path                                                   | Description                     |
+| ------ | ------------------------------------------------------ | ------------------------------- |
+| GET    | /api/v1/user/payment/{id}                              | Get payment by id               |
+| GET    | /api/v1/user/payment/list                              | List payments (paginated)       |
+| GET    | /api/v1/user/payment/show/{showId}/list                | List payments by show           |
+
+| Method | Path                                                   | Description                     |
+| ------ | ------------------------------------------------------ | ------------------------------- |
+| GET    | /api/v1/user/refund/{id}                               | Get refund by id                |
+| GET    | /api/v1/user/refund/list                               | List refunds (paginated)        |
+| GET    | /api/v1/user/refund/show/{showId}/list                 | List refunds by show            |

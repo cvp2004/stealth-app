@@ -378,6 +378,7 @@ public BookingPaymentResponse processPayment(BookingPaymentRequest request, Long
 
 - **Rejected**: Too complex for current requirements
 - **Reason**: Asynchronous processing adds complexity
+- **Better Use-Case**: In Real World Production Env. This Solution will have the best Performance comparatively
 
 ## 7. Monitoring and Observability
 
