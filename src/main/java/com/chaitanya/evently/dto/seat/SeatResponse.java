@@ -1,6 +1,5 @@
 package com.chaitanya.evently.dto.seat;
 
-import java.time.Instant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,16 +1,17 @@
 package com.chaitanya.evently.model;
 
 import com.chaitanya.evently.model.base.BaseEntity;
-import com.chaitanya.evently.model.status.BookingStatus;
+import com.chaitanya.evently.model.status.RefundStatus;
 import jakarta.persistence.*;
-import java.math.BigDecimal;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.math.BigDecimal;
+import java.time.Instant;
 
 @Getter
 @Setter
@@ -19,22 +20,25 @@ import lombok.Setter;
 @Builder
 @EqualsAndHashCode(callSuper = true)
 @Entity
-@Table(name = "bookings")
-public class Booking extends BaseEntity {
+@Table(name = "refunds")
+public class Refund extends BaseEntity {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @JoinColumn(name = "payment_id", nullable = false)
+    private Payment payment;
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    @JoinColumn(name = "show_id", nullable = false)
-    private Show show;
+    @JoinColumn(name = "booking_id", nullable = false)
+    private Booking booking;
+
+    @Column(name = "amount", nullable = false, precision = 10, scale = 2)
+    private BigDecimal amount;
 
     @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
-    private BookingStatus status = BookingStatus.CONFIRMED;
+    private RefundStatus status = RefundStatus.SUCCESS;
 
-    @Column(name = "total_amount", nullable = false, precision = 10, scale = 2)
-    private BigDecimal totalAmount;
+    @Column(name = "processed_at")
+    private Instant processedAt;
 }

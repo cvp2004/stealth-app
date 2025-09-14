@@ -6,7 +6,7 @@ import com.chaitanya.evently.model.status.PaymentStatus;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
-
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +16,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "payments")
@@ -29,7 +30,7 @@ public class Payment extends BaseEntity {
     private BigDecimal amount;
 
     @Enumerated(value = EnumType.STRING)
-    @Column(name = "staus", nullable = false)
+    @Column(name = "status", nullable = false)
     private PaymentStatus status;
 
 }

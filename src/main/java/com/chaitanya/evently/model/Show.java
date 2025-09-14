@@ -7,6 +7,7 @@ import com.chaitanya.evently.model.base.BaseEntity;
 import com.chaitanya.evently.model.status.ShowStatus;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "shows")
@@ -35,6 +37,7 @@ public class Show extends BaseEntity {
     @Column(name = "duration_minutes", nullable = false)
     private Integer durationMinutes;
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private ShowStatus status = ShowStatus.LIVE;

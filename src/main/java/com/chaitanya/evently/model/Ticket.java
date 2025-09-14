@@ -4,10 +4,9 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 import com.chaitanya.evently.model.base.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
-
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +16,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "tickets")
@@ -26,9 +26,14 @@ public class Ticket extends BaseEntity {
     @JoinColumn(name = "booking_id", nullable = false)
     private Booking booking;
 
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "show_id", nullable = false)
+    private Show show;
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "seat_id", nullable = false)
+    private Seat seat;
+
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;
-
-    @OneToOne(mappedBy = "ticket", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Attendee attendee;
 }
