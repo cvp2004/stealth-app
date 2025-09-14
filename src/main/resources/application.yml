@@ -3,28 +3,39 @@ spring:
     name: ${SPRING_APP_NAME:evently}
 
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:evently}?options=-c%20TimeZone%3DAsia/Kolkata
-    username: ${POSTGRES_USER:user}
-    password: ${POSTGRES_PASSWORD:pass}
+    # Only use DATABASE_URL (Render provides it, you can also set locally)
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/evently_db?options=-c%20TimeZone%3DAsia/Kolkata}
+    username: user
+    password: pass
     driver-class-name: org.postgresql.Driver
 
   redis:
-    host: ${REDIS_HOST:localhost}
-    port: ${REDIS_PORT:6379}
+    # Only use REDIS_URL (Render provides it, or set manually in local env)
+    url: ${REDIS_URL:redis://localhost:6379}
 
   flyway:
     enabled: ${FLYWAY_ENABLED:true}
     locations: classpath:db/migration
     baseline-on-migrate: ${FLYWAY_BASELINE_ON_MIGRATE:true}
     table: ${FLYWAY_TABLE:flyway_schema_history}
-    # Optional: set schema(s) if you don't use the default search_path
-    # Accepts comma-separated list
-    # schemas: ${FLYWAY_SCHEMAS:}
+    # schemas: ${FLYWAY_SCHEMAS:} # Optional if you use custom schemas
+
+  sql:
+    init:
+      mode: always
+      continue-on-error: false
+      platform: postgres
+
+  jpa:
+    format-sql: true
+    hibernate:
+      ddl-auto: none
 
 logging:
   level:
     org.flywaydb: ${FLYWAY_LOG_LEVEL:INFO}
     org.springframework: ${SPRING_LOG_LEVEL:INFO}
+    org.springframework.jdbc.datasource.init: DEBUG
 
 app:
   pagination:

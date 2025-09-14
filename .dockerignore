@@ -1,0 +1,19 @@
+# Docker build context exclusions
+.git
+.target
+node_modules
+.idea
+.vscode
+**/*.iml
+**/.DS_Store
+
+# Maven local/IDE caches
+.mvn/wrapper/maven-wrapper.jar
+.mvn/
+**/logs
+**/tmp
+**/build
+**/out
+
+# Exclude docs and diagrams from context (optional)
+docs/

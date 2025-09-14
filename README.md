@@ -256,7 +256,7 @@ spring:
     name: ${SPRING_APP_NAME:evently}
 
   datasource:
-    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:evently}?options=-c%20TimeZone%3DAsia/Kolkata
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:evently_db}?options=-c%20TimeZone%3DAsia/Kolkata
     username: ${POSTGRES_USER:user}
     password: ${POSTGRES_PASSWORD:pass}
     driver-class-name: org.postgresql.Driver
